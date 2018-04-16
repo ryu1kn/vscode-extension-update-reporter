@@ -1,0 +1,45 @@
+{
+  "name": "changelog-checker",
+  "displayName": "Changelog Checker",
+  "description": "Check changelogs of installed extensions and report their changes",
+  "version": "0.1.0",
+  "publisher": "ryu1kn",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "bugs": {
+    "url": "https://github.com/ryu1kn/vscode-changelog-checker/issues"
+  },
+  "homepage": "https://github.com/ryu1kn/vscode-changelog-checker/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryu1kn/vscode-changelog-checker.git"
+  },
+  "engines": {
+    "vscode": "^1.18.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "changelog"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./extension",
+  "contributes": {
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "prettier-eslint-cli": "^4.7.1",
+    "vscode": "^1.1.14"
+  }
+}

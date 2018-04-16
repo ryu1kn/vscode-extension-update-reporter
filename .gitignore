@@ -1,0 +1,8 @@
+.DS_Store
+/.idea
+/.vscode-test
+/.vscode/settings.json
+/.vsix
+node_modules
+yarn-error.log
+__*
