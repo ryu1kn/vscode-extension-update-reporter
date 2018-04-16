@@ -1,17 +1,37 @@
+const fs = require('fs')
 const vscode = require('vscode')
 
-commandList = []
-
 exports.activate = context => {
-  commandList.forEach(command => {
-    const cmd = commandFactory[command.factoryMethodName]()
-    const disposable = vscode.commands.registerCommand(
-      `changelogChecker.${command.name}`,
-      cmd.execute,
-      cmd
-    )
-    context.subscriptions.push(disposable)
-  })
+  const extensions = vscode.extensions.all.filter(
+    extension =>
+      !(
+        extension.isBuiltin ||
+        extension.id.startsWith('vscode.') ||
+        extension.id.startsWith('ms-vscode.')
+      )
+  )
+
+  Promise.all(
+    extensions
+      .map(extension => extension.extensionPath)
+      .map(
+        extensionPath =>
+          new Promise((resolve, reject) =>
+            fs.readdir(
+              extensionPath,
+              (err, data) => (err ? reject(err) : resolve(data))
+            )
+          )
+      )
+  ).then(results =>
+    results
+      .map(extensionToplevelFilenames =>
+        extensionToplevelFilenames.find(filename =>
+          /CHANGELOG\.(md|txt)/i.test(filename)
+        )
+      )
+      .map(changelog => console.log(changelog))
+  )
 }
 
 exports.deactivate = () => {}
