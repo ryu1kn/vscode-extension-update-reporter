@@ -15,6 +15,7 @@ install:
   - yarn install
 script:
   - yarn run lint
+  - yarn test
 notifications:
   email:
     on_success: change

@@ -26,11 +26,12 @@
     "*"
   ],
   "main": "./extension",
-  "contributes": {
-  },
+  "contributes": {},
   "scripts": {
+    "format": "prettier-eslint --write '*.js' 'lib/**/*.js' 'test/**/*.js'",
+    "lint": "eslint .",
     "postinstall": "node ./node_modules/vscode/bin/install",
-    "lint": "eslint ."
+    "test": "mocha --recursive test"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
@@ -39,7 +40,9 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^5.1.1",
     "prettier-eslint-cli": "^4.7.1",
+    "testdouble": "^3.7.0",
     "vscode": "^1.1.14"
   }
 }
