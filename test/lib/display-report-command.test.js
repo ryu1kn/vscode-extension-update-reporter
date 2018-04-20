@@ -1,9 +1,9 @@
 const assert = require('assert')
 const td = require('testdouble')
 
-const ChangeReportGenerator = require('../../lib/change-report-generator')
+const DisplayReportCommand = require('../../lib/display-report-command')
 
-describe('ChangeReportGenerator', () => {
+describe('DisplayReportCommand', () => {
   const vscExtensions = {
     all: [
       { extensionPath: 'EXT_PATH1', id: 'ID1' },
@@ -14,13 +14,13 @@ describe('ChangeReportGenerator', () => {
   td.when(changelogLoader.load('EXT_PATH1')).thenResolve('EXT_CHANGELOG1')
   td.when(changelogLoader.load('EXT_PATH2')).thenResolve('EXT_CHANGELOG2')
 
-  const changeReportGenerator = new ChangeReportGenerator({
+  const displayReportCommand = new DisplayReportCommand({
     changelogLoader,
     vscExtensions
   })
 
   it('finds changelogs', async () => {
-    const report = await changeReportGenerator.generate()
+    const report = await displayReportCommand.execute()
     assert.deepEqual(report, ['EXT_CHANGELOG1', 'EXT_CHANGELOG2'])
   })
 })
