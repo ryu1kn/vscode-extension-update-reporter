@@ -6,23 +6,21 @@ const ChangeReportGenerator = require('../../lib/change-report-generator')
 describe('ChangeReportGenerator', () => {
   const vscExtensions = {
     all: [
-      {
-        extensionPath: 'PATH',
-        id: 'ID'
-      }
+      { extensionPath: 'EXT_PATH1', id: 'ID1' },
+      { extensionPath: 'EXT_PATH2', id: 'ID2' }
     ]
   }
-  const fileSystem = td.object('readDirectory')
-
-  td.when(fileSystem.readDirectory('PATH')).thenResolve(['CHANGELOG.md'])
+  const changelogLoader = td.object('load')
+  td.when(changelogLoader.load('EXT_PATH1')).thenResolve('EXT_CHANGELOG1')
+  td.when(changelogLoader.load('EXT_PATH2')).thenResolve('EXT_CHANGELOG2')
 
   const changeReportGenerator = new ChangeReportGenerator({
-    fileSystem,
+    changelogLoader,
     vscExtensions
   })
 
-  it('finds a changelog', async () => {
+  it('finds changelogs', async () => {
     const report = await changeReportGenerator.generate()
-    assert.deepEqual(report, ['CHANGELOG.md'])
+    assert.deepEqual(report, ['EXT_CHANGELOG1', 'EXT_CHANGELOG2'])
   })
 })
