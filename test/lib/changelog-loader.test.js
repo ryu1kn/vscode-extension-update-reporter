@@ -9,12 +9,13 @@ describe('ChangelogLoader', () => {
     .when(fileSystem.readDirectory('EXTENSION_PATH'))
     .thenResolve(['CHANGELOG.md', 'package.json'])
   td
-    .when(fileSystem.readFile('EXTENSION_PATH/CHANGELOG.md'))
+    .when(fileSystem.readFile('EXTENSION_PATH/CHANGELOG.md', 'utf8'))
     .thenResolve('CHANGELOG_CONTENTS')
-  const changelogLoader = new ChangelogLoader({ fileSystem })
+  const changelogParser = { parse: text => `PARSED_${text}` }
+  const changelogLoader = new ChangelogLoader({ fileSystem, changelogParser })
 
   it('loads changelog', async () => {
     const changelog = await changelogLoader.load('EXTENSION_PATH')
-    assert.deepEqual(changelog, 'CHANGELOG_CONTENTS')
+    assert.deepEqual(changelog, 'PARSED_CHANGELOG_CONTENTS')
   })
 })
