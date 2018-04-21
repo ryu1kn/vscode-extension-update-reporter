@@ -33,6 +33,9 @@
     "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "mocha --recursive test"
   },
+  "dependencies": {
+    "multiline-string": "0.2.0"
+  },
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
