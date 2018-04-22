@@ -9,7 +9,7 @@ describe('ChangelogLoader', () => {
     .when(fileSystem.readDirectory('EXTENSION_PATH'))
     .thenResolve(['CHANGELOG.md', 'package.json'])
   td
-    .when(fileSystem.readFile('EXTENSION_PATH/CHANGELOG.md', 'utf8'))
+    .when(fileSystem.readFile('EXTENSION_PATH/CHANGELOG.md'))
     .thenResolve('CHANGELOG_CONTENTS')
   const changelogParser = { parse: text => `PARSED_${text}` }
   const changelogLoader = new ChangelogLoader({ fileSystem, changelogParser })

@@ -7,34 +7,27 @@ const multiline = require('multiline-string')()
 
 describe('ExtensionChangeDataBuilder', () => {
   const changelogParser = new ChangelogParser()
-  const rawExtension1 = { packageJSON: { displayName: 'EXT_NAME_1' } }
-  const changelog1 = changelogParser.parse(
-    multiline(`
-      ## [1.0.0] - 2018-04-21
-      ### Added
-      - foo
-      - bar
-      `)
-  )
-  const extension1 = new Extension({
-    raw: rawExtension1,
-    changelog: changelog1
-  })
-  const rawExtension2 = { packageJSON: { displayName: 'EXT_NAME_2' } }
-  const changelog2 = changelogParser.parse(
-    multiline(`
-      ## [0.1.0] - 2018-04-22
-      ### Removed
-      - baz
-      `)
-  )
-  const extension2 = new Extension({
-    raw: rawExtension2,
-    changelog: changelog2
-  })
+  const builder = new ExtensionChangeDataBuilder()
 
-  it('finds changelogs', async () => {
-    const builder = new ExtensionChangeDataBuilder()
+  it('creates an updates summary', () => {
+    const extension1 = createExtension({
+      displayName: 'EXT_NAME_1',
+      changelogText: multiline(`
+        ## [1.0.0] - 2018-04-21
+        ### Added
+        - foo
+        - bar
+        `)
+    })
+    const extension2 = createExtension({
+      displayName: 'EXT_NAME_2',
+      changelogText: multiline(`
+        ## [0.1.0] - 2018-04-22
+        ### Removed
+        - baz
+        `)
+    })
+
     assert.deepEqual(
       builder.build([extension1, extension2]),
       multiline(`
@@ -53,4 +46,30 @@ describe('ExtensionChangeDataBuilder', () => {
       `)
     )
   })
+
+  it('shows a message that changelog is not available', () => {
+    const extension = createExtension({
+      displayName: 'EXT_NAME_3',
+      changelogText: multiline(`
+        ### 1.3.0: 26 Jan 2018
+        * Update to work with new Code version
+        `)
+    })
+    assert.deepEqual(
+      builder.build([extension]),
+      multiline(`
+      # Extension Updates
+      
+      ## EXT_NAME_3
+      Changelog not found or cannot parsed as [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
+      `)
+    )
+  })
+
+  function createExtension ({ displayName, changelogText }) {
+    return new Extension({
+      raw: { packageJSON: { displayName } },
+      changelog: changelogParser.parse(changelogText)
+    })
+  }
 })

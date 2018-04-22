@@ -26,11 +26,11 @@ describe('Integration', () => {
   const fileSystem = td.object(['readDirectory', 'readFile'])
   td.when(fileSystem.readDirectory('PATH_1')).thenResolve(['CHANGELOG.md'])
   td
-    .when(fileSystem.readFile('PATH_1/CHANGELOG.md', 'utf8'))
+    .when(fileSystem.readFile('PATH_1/CHANGELOG.md'))
     .thenResolve(readFileSync('./sample-changelog-1.md'))
   td.when(fileSystem.readDirectory('PATH_2')).thenResolve(['CHANGELOG.md'])
   td
-    .when(fileSystem.readFile('PATH_2/CHANGELOG.md', 'utf8'))
+    .when(fileSystem.readFile('PATH_2/CHANGELOG.md'))
     .thenResolve(readFileSync('./sample-changelog-2.md'))
   const commandFactory = new CommandFactory({ fileSystem, vscode })
   const displayReportCommand = commandFactory.create()
