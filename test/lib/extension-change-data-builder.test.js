@@ -32,13 +32,13 @@ describe('ExtensionChangeDataBuilder', () => {
       builder.build([extension1, extension2]),
       multiline(`
       # Extension Updates
-      
+
       ## EXT_NAME_1
       ### [1.0.0]
       #### Added
       - foo
       - bar
-      
+
       ## EXT_NAME_2
       ### [0.1.0]
       #### Removed
@@ -59,9 +59,9 @@ describe('ExtensionChangeDataBuilder', () => {
       builder.build([extension]),
       multiline(`
       # Extension Updates
-      
+
       ## EXT_NAME_3
-      Changelog not found or cannot parsed as [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
+      Changelog not found or cannot be parsed as [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
       `)
     )
   })
