@@ -35,10 +35,8 @@ describe('ExtensionChangeDataBuilder', () => {
 
   it('finds changelogs', async () => {
     const builder = new ExtensionChangeDataBuilder()
-    builder.add(extension1)
-    builder.add(extension2)
     assert.deepEqual(
-      builder.build(),
+      builder.build([extension1, extension2]),
       multiline(`
       # Extension Updates
       
