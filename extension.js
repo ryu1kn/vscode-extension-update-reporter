@@ -7,10 +7,10 @@ const FileSystem = require('./lib/file-system')
 
 const fileSystem = new FileSystem({ fs })
 const commandFactory = new CommandFactory({ fileSystem, vscode })
-const displayReportCommand = commandFactory.create()
+const extensionUpdatesReportGenerator = commandFactory.create()
 
 exports.activate = async context => {
-  const contentProvider = new ContentProvider({ displayReportCommand })
+  const contentProvider = new ContentProvider({ extensionUpdatesReportGenerator })
   const disposable = vscode.workspace.registerTextDocumentContentProvider(
     EXTENSION_NAME,
     contentProvider

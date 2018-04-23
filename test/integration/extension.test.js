@@ -33,10 +33,10 @@ describe('Integration', () => {
     .when(fileSystem.readFile('PATH_2/CHANGELOG.md'))
     .thenResolve(readFileSync('./sample-changelog-2.md'))
   const commandFactory = new CommandFactory({ fileSystem, vscode })
-  const displayReportCommand = commandFactory.create()
+  const extensionUpdatesReportGenerator = commandFactory.create()
 
   it('generates a summary', async () => {
-    const result = await displayReportCommand.execute()
+    const result = await extensionUpdatesReportGenerator.generate()
     assert.deepEqual(result, readFileSync('./sample-report.md'))
   })
 

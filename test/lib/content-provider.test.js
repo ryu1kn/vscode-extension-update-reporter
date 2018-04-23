@@ -5,9 +5,9 @@ const ContentProvider = require('../../lib/content-provider')
 const multiline = require('multiline-string')()
 
 describe('ContentProvider', () => {
-  const displayReportCommand = td.object('execute')
-  td.when(displayReportCommand.execute()).thenResolve('MARKDOWN_STRING')
-  const contentProvider = new ContentProvider({ displayReportCommand })
+  const extensionUpdatesReportGenerator = td.object('generate')
+  td.when(extensionUpdatesReportGenerator.generate()).thenResolve('MARKDOWN_STRING')
+  const contentProvider = new ContentProvider({ extensionUpdatesReportGenerator })
 
   it('returns HTML with extension updates in it', async () => {
     const html = await contentProvider.provideTextDocumentContent()
