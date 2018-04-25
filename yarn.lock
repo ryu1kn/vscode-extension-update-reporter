@@ -1323,12 +1323,6 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-gitconfiglocal@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/gitconfiglocal/-/gitconfiglocal-2.0.1.tgz#b50092c90505d3977b4d99d764f9f599c980e774"
-  dependencies:
-    ini "^1.3.2"
-
 glob-base@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/glob-base/-/glob-base-0.3.0.tgz#dbb164f6221b1c0b1ccf82aea328b497df0ea3c4"
@@ -1695,10 +1689,6 @@ inflight@^1.0.4:
 inherits@2, inherits@^2.0.1, inherits@^2.0.3, inherits@~2.0.0, inherits@~2.0.1, inherits@~2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
-
-ini@^1.3.2:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
 
 inquirer@^3.0.6:
   version "3.3.0"
@@ -2083,14 +2073,6 @@ jsprim@^1.2.2:
     extsprintf "1.3.0"
     json-schema "0.2.3"
     verror "1.10.0"
-
-keep-a-changelog@0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/keep-a-changelog/-/keep-a-changelog-0.4.0.tgz#93fdec79b933de9656dec9c4a1d1fab4117b43c4"
-  dependencies:
-    gitconfiglocal "^2.0.1"
-    semver "^5.5.0"
-    yargs-parser "^9.0.2"
 
 kind-of@^1.1.0:
   version "1.1.0"
@@ -3222,7 +3204,7 @@ safer-buffer@^2.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 
-"semver@2 || 3 || 4 || 5", semver@^5.3.0, semver@^5.4.1, semver@^5.5.0:
+"semver@2 || 3 || 4 || 5", semver@^5.3.0, semver@^5.4.1:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
 

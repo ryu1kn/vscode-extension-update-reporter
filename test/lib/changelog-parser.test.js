@@ -15,7 +15,7 @@ describe('ChangelogParser', () => {
     
     ## [1.0.0] - 2018-04-21
     ### Added
-    - New "blah" functionality
+    - foo
 
     ## [0.0.1] - 2018-04-11
     ### Added
@@ -24,14 +24,15 @@ describe('ChangelogParser', () => {
   const CHANGELOG_NO_RELEASES = multiline(`
     # Change Log
 
+    The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+    
     ## Unreleased
     ### Added
     - New "blah" functionality
     `)
-  const CHANGELOG_NON_STANDARD = multiline(`
+  const CHANGELOG_LV2_HEADERS = multiline(`
     ## 1.0.0
-    - New "foo" functionality
-    - Removed "bar" configuration
+    - foo
     `)
 
   it('gives only the unchecked changelog', async () => {
@@ -43,16 +44,17 @@ describe('ChangelogParser', () => {
   it('gives the contents of the change', async () => {
     const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES)
     const changes = changelog.getUpdatesSince('0.0.1')
-    assert.deepEqual(changes[0].changes.added, ['New "blah" functionality'])
+    assert.deepEqual(changes[0].changeText, '#### Added\n- foo')
   })
 
   it('returns nothing if the changelog contains no releases', () => {
     const changelog = changelogParser.parse(CHANGELOG_NO_RELEASES)
-    assert.equal(typeof changelog, 'undefined')
+    assert.deepEqual(typeof changelog.versions, 'undefined')
   })
 
-  it('returns nothing if the changelog is not of the format of Keep a Changelog', () => {
-    const changelog = changelogParser.parse(CHANGELOG_NON_STANDARD)
-    assert.equal(typeof changelog, 'undefined')
+  it('parses the changelog of the format that each version have level 2 header', () => {
+    const changelog = changelogParser.parse(CHANGELOG_LV2_HEADERS, '1.0.0')
+    const changes = changelog.getUpdatesSince('0.0.1')
+    assert.deepEqual(changes[0].changeText, '- foo')
   })
 })

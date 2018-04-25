@@ -35,7 +35,6 @@
     "test": "mocha --recursive test"
   },
   "dependencies": {
-    "keep-a-changelog": "0.4.0",
     "markdown-it": "8.4.1",
     "multiline-string": "0.2.0"
   },

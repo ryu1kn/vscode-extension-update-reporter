@@ -17,6 +17,7 @@
 ### [1.0.0]
 #### Added
 - New "foo" functionality
+
 #### Removed
 - Configuration "bar"
 
