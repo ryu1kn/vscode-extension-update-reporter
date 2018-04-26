@@ -17,6 +17,6 @@ describe('Extension', () => {
     const rawExtension = {
       packageJSON: packageJson
     }
-    return new Extension({ raw: rawExtension })
+    return new Extension(rawExtension)
   }
 })

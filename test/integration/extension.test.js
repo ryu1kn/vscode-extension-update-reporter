@@ -12,12 +12,17 @@ describe('Integration', () => {
         {
           id: 'ID_1',
           extensionPath: 'PATH_1',
-          packageJSON: { displayName: 'My Extension 1' }
+          packageJSON: { displayName: 'My Extension 1', version: '1.0.0' }
         },
         {
           id: 'ID_2',
           extensionPath: 'PATH_2',
-          packageJSON: { displayName: 'My Extension 2' }
+          packageJSON: { displayName: 'My Extension 2', version: '1.0.0' }
+        },
+        {
+          id: 'ID_3',
+          extensionPath: 'PATH_3',
+          packageJSON: { displayName: 'My Extension 3', version: '0.12.1' }
         }
       ]
     },
@@ -27,7 +32,8 @@ describe('Integration', () => {
           get: key =>
             key === 'extensionVersions' && {
               ID_1: '0.8.0',
-              ID_2: '0.1.0'
+              ID_2: '0.1.0',
+              ID_3: '0.1.0'
             }
         }
     }
@@ -42,6 +48,10 @@ describe('Integration', () => {
   td
     .when(fileSystem.readFile('PATH_2/CHANGELOG.md'))
     .thenResolve(readFileSync('./sample-changelog-2.md'))
+  td.when(fileSystem.readDirectory('PATH_3')).thenResolve(['CHANGELOG.md'])
+  td
+    .when(fileSystem.readFile('PATH_3/CHANGELOG.md'))
+    .thenResolve(readFileSync('./sample-changelog-lv2-heading.md'))
   const commandFactory = new CommandFactory({ fileSystem, vscode })
   const extensionUpdatesReportGenerator = commandFactory.create()
 

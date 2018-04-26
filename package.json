@@ -32,6 +32,7 @@
     "format": "prettier-eslint --write '*.js' 'lib/**/*.js' 'test/**/*.js'",
     "lint": "eslint .",
     "postinstall": "node ./node_modules/vscode/bin/install",
+    "prep": "yarn run format && yarn run lint && yarn test",
     "test": "mocha --recursive test"
   },
   "dependencies": {

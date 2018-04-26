@@ -19,7 +19,12 @@ exports.activate = async context => {
   )
   context.subscriptions.push(disposable)
   const uri = vscode.Uri.parse(`${EXTENSION_NAME}:show-updates-summary`)
-  await vscode.commands.executeCommand('vscode.previewHtml', uri)
+  await vscode.commands.executeCommand(
+    'vscode.previewHtml',
+    uri,
+    undefined,
+    'Exntension Update Report'
+  )
 }
 
 exports.deactivate = () => {}

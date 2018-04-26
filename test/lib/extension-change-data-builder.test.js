@@ -97,9 +97,8 @@ describe('ExtensionChangeDataBuilder', () => {
   })
 
   function createExtension ({ id, displayName, changelogText, knownVerion }) {
-    return new Extension({
-      raw: { id, packageJSON: { displayName } },
-      changelog: changelogParser.parse(changelogText, knownVerion)
-    })
+    const extension = new Extension({ id, packageJSON: { displayName } })
+    extension.changelog = changelogParser.parse(changelogText, knownVerion)
+    return extension
   }
 })

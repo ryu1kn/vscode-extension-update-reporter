@@ -16,3 +16,10 @@
 
 #### Removed
 - Configuration "bar"
+
+## My Extension 3
+### [0.12.1]
+- foo
+
+### [0.12.0]
+- bar
