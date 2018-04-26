@@ -1,7 +1,7 @@
 {
   "name": "changelog-checker",
-  "displayName": "Changelog Checker",
-  "description": "Check changelogs of installed extensions and report their changes",
+  "displayName": "Extension Update Reporter",
+  "description": "Check changelogs of installed extensions and report their updates",
   "version": "0.1.0",
   "publisher": "ryu1kn",
   "license": "SEE LICENSE IN LICENSE.txt",

@@ -20,6 +20,16 @@ describe('Integration', () => {
           packageJSON: { displayName: 'My Extension 2' }
         }
       ]
+    },
+    workspace: {
+      getConfiguration: key =>
+        key === 'changelogChecker' && {
+          get: key =>
+            key === 'extensionVersions' && {
+              ID_1: '0.8.0',
+              ID_2: '0.1.0'
+            }
+        }
     }
   }
 

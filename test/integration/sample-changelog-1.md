@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Introduced "foo" option
 
+## [0.8.0] - 2018-04-14
+### Added
+- Introduced "baz" option
+
 ## [0.0.1] - 2018-04-11
 ### Added
 - Initial release of My Extension 1
