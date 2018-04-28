@@ -1,13 +1,13 @@
-import * as assert from 'assert'
+import * as assert from 'assert';
 
-import ExtensionChangeDataBuilder from '../../lib/extension-change-data-builder'
-import Extension from '../../lib/entities/extension'
-import ChangelogParser from '../../lib/changelog-parser'
-const multiline = require('multiline-string')()
+import ExtensionChangeDataBuilder from '../../lib/extension-change-data-builder';
+import Extension from '../../lib/entities/extension';
+import ChangelogParser from '../../lib/changelog-parser';
+const multiline = require('multiline-string')();
 
 describe('ExtensionChangeDataBuilder', () => {
-  const changelogParser = new ChangelogParser()
-  const builder = new ExtensionChangeDataBuilder()
+  const changelogParser = new ChangelogParser();
+  const builder = new ExtensionChangeDataBuilder();
 
   it('creates an updates summary', () => {
     const extension1 = createExtension({
@@ -29,7 +29,7 @@ describe('ExtensionChangeDataBuilder', () => {
         ### Added
         - baz
         `)
-    })
+    });
     const extension2 = createExtension({
       id: 'EXT2',
       displayName: 'EXT_NAME_2',
@@ -44,11 +44,11 @@ describe('ExtensionChangeDataBuilder', () => {
         ### Removed
         - foo
         `)
-    })
+    });
     const extensionVersions = {
       EXT1: '0.8.0',
       EXT2: '0.0.9'
-    }
+    };
 
     assert.deepEqual(
       builder.build([extension1, extension2], extensionVersions),
@@ -70,8 +70,8 @@ describe('ExtensionChangeDataBuilder', () => {
       #### Removed
       - baz
       `)
-    )
-  })
+    );
+  });
 
   it('shows a message that changelog is not available', () => {
     const extension = createExtension({
@@ -82,8 +82,8 @@ describe('ExtensionChangeDataBuilder', () => {
         ### 26 Jan 2018 - 1.3.0
         * Update to work with new Code version
         `)
-    })
-    const extensionVersions = { EXT3: '0.0.1' }
+    });
+    const extensionVersions = { EXT3: '0.0.1' };
 
     assert.deepEqual(
       builder.build([extension], extensionVersions),
@@ -93,12 +93,12 @@ describe('ExtensionChangeDataBuilder', () => {
       ## EXT_NAME_3
       Changelog not found or cannot be parsed as [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
       `)
-    )
-  })
+    );
+  });
 
   function createExtension ({ id, displayName, changelogText, knownVerion }: any) {
-    const extension = new Extension({ id, packageJSON: { displayName } })
-    extension.changelog = changelogParser.parse(changelogText, knownVerion)
-    return extension
+    const extension = new Extension({ id, packageJSON: { displayName } });
+    extension.changelog = changelogParser.parse(changelogText, knownVerion);
+    return extension;
   }
-})
+});

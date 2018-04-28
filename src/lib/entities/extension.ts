@@ -1,22 +1,22 @@
 class Extension {
-  private _raw: any
-  private _changelog: any
+  private _raw: any;
+  private _changelog: any;
 
   constructor (raw: any) {
-    this._raw = raw
+    this._raw = raw;
   }
 
   get id () {
-    return this._raw.id
+    return this._raw.id;
   }
 
   get displayName () {
-    const packageJson = this._raw.packageJSON
-    return packageJson.displayName || packageJson.name
+    const packageJson = this._raw.packageJSON;
+    return packageJson.displayName || packageJson.name;
   }
 
   get version () {
-    return this._raw.packageJSON.version
+    return this._raw.packageJSON.version;
   }
 
   get isVscodeBundled () {
@@ -24,24 +24,24 @@ class Extension {
       this._raw.isBuiltin ||
       this.id.startsWith('vscode.') ||
       this.id.startsWith('ms-vscode.')
-    )
+    );
   }
 
   shouldReportUpdate (extensionVersions: any) {
-    return this.version !== extensionVersions[this.id]
+    return this.version !== extensionVersions[this.id];
   }
 
   get extensionPath () {
-    return this._raw.extensionPath
+    return this._raw.extensionPath;
   }
 
   get changelog () {
-    return this._changelog
+    return this._changelog;
   }
 
   set changelog (changelog) {
-    this._changelog = changelog
+    this._changelog = changelog;
   }
 }
 
-export default Extension
+export default Extension;

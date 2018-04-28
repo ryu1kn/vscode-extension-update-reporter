@@ -1,4 +1,4 @@
-const multiline = require('multiline-string')()
+const multiline = require('multiline-string')();
 
 class ExtensionChangeDataBuilder {
   build (extensions: any, extensionVersions: any) {
@@ -6,7 +6,7 @@ class ExtensionChangeDataBuilder {
       # Extension Updates
 
       ${this._buildExtension(extensions, extensionVersions)}
-      `)
+      `);
   }
 
   _buildExtension (extensions: any, extensionVersions: any) {
@@ -19,13 +19,13 @@ class ExtensionChangeDataBuilder {
     extensionVersions[extension.id]
   )}`)
       )
-      .join('\n\n')
+      .join('\n\n');
   }
 
   _buildChangelog (changelog: any, extensionVersion: any) {
     return changelog
       ? this._buildVersion(changelog.getUpdatesSince(extensionVersion))
-      : 'Changelog not found or cannot be parsed as [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).'
+      : 'Changelog not found or cannot be parsed as [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).';
   }
 
   _buildVersion (releases: any) {
@@ -35,8 +35,8 @@ class ExtensionChangeDataBuilder {
       ### [${release.version}]
       ${release.changeText}`)
       )
-      .join('\n\n')
+      .join('\n\n');
   }
 }
 
-export default ExtensionChangeDataBuilder
+export default ExtensionChangeDataBuilder;

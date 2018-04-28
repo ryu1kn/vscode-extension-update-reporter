@@ -1,7 +1,7 @@
-import * as assert from 'assert'
-import * as td from 'testdouble'
+import * as assert from 'assert';
+import * as td from 'testdouble';
 
-import CommandFactory from '../../lib/command-factory'
+import CommandFactory from '../../lib/command-factory';
 // const fs = require('fs')
 // const { join } = require('path')
 
@@ -45,32 +45,32 @@ describe.skip('Integration', () => {
     },
     commands: { executeCommand: () => {} },
     Uri: { parse: () => {} }
-  }
+  };
 
-  const fileSystem = td.object(['readDirectory', 'readFile'])
-  td.when(fileSystem.readDirectory('PATH_1')).thenResolve(['CHANGELOG.md'])
+  const fileSystem = td.object(['readDirectory', 'readFile']);
+  td.when(fileSystem.readDirectory('PATH_1')).thenResolve(['CHANGELOG.md']);
   td
     .when(fileSystem.readFile('PATH_1/CHANGELOG.md'))
-    .thenResolve(readFileSync('./sample-changelog-1.md'))
-  td.when(fileSystem.readDirectory('PATH_2')).thenResolve(['CHANGELOG.md'])
+    .thenResolve(readFileSync('./sample-changelog-1.md'));
+  td.when(fileSystem.readDirectory('PATH_2')).thenResolve(['CHANGELOG.md']);
   td
     .when(fileSystem.readFile('PATH_2/CHANGELOG.md'))
-    .thenResolve(readFileSync('./sample-changelog-2.md'))
-  td.when(fileSystem.readDirectory('PATH_3')).thenResolve(['CHANGELOG.md'])
+    .thenResolve(readFileSync('./sample-changelog-2.md'));
+  td.when(fileSystem.readDirectory('PATH_3')).thenResolve(['CHANGELOG.md']);
   td
     .when(fileSystem.readFile('PATH_3/CHANGELOG.md'))
-    .thenResolve(readFileSync('./sample-changelog-lv2-heading.md'))
-  const commandFactory = new CommandFactory({ fileSystem, vscode })
-  const extensionUpdatesReportGenerator = commandFactory.createReportGenerator()
-  const main = commandFactory.createMain()
+    .thenResolve(readFileSync('./sample-changelog-lv2-heading.md'));
+  const commandFactory = new CommandFactory({ fileSystem, vscode });
+  const extensionUpdatesReportGenerator = commandFactory.createReportGenerator();
+  const main = commandFactory.createMain();
 
   it('generates a summary', async () => {
-    await main.run()
-    const result = await extensionUpdatesReportGenerator.generate()
-    assert.deepEqual(result, readFileSync('./sample-report.md'))
-  })
+    await main.run();
+    const result = await extensionUpdatesReportGenerator.generate();
+    assert.deepEqual(result, readFileSync('./sample-report.md'));
+  });
 
   function readFileSync (path: string) {
     // return fs.readFileSync(join(__dirname, path), 'utf8')
   }
-})
+});

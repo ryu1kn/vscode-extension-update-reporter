@@ -1,17 +1,17 @@
 class ExtensionStore {
-  private _storage: any
+  private _storage: any;
 
   constructor () {
-    this._storage = []
+    this._storage = [];
   }
 
   set (extensions: any) {
-    this._storage = extensions
+    this._storage = extensions;
   }
 
   getAll (extensions: any) {
-    return this._storage
+    return this._storage;
   }
 }
 
-export default ExtensionStore
+export default ExtensionStore;

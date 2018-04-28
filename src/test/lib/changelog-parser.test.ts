@@ -1,10 +1,10 @@
-import * as assert from 'assert'
+import * as assert from 'assert';
 
-import ChangelogParser from '../../lib/changelog-parser'
-const multiline = require('multiline-string')()
+import ChangelogParser from '../../lib/changelog-parser';
+const multiline = require('multiline-string')();
 
 describe('ChangelogParser', () => {
-  const changelogParser = new ChangelogParser()
+  const changelogParser = new ChangelogParser();
   const CHANGELOG_WITH_RELEASES = multiline(`
     # Change Log
 
@@ -20,7 +20,7 @@ describe('ChangelogParser', () => {
     ## [0.0.1] - 2018-04-11
     ### Added
     * Initial release of My Extension
-    `)
+    `);
   const CHANGELOG_NO_RELEASES = multiline(`
     # Change Log
 
@@ -29,32 +29,32 @@ describe('ChangelogParser', () => {
     ## Unreleased
     ### Added
     - New "blah" functionality
-    `)
+    `);
   const CHANGELOG_LV2_HEADERS = multiline(`
     ## 1.0.0
     - foo
-    `)
+    `);
 
   it('gives only the unchecked changelog', async () => {
-    const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, 'dummy')
-    const changes = changelog.getUpdatesSince('0.0.1')
-    assert.deepEqual(changes[0].version, '1.0.0')
-  })
+    const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, 'dummy');
+    const changes = changelog.getUpdatesSince('0.0.1');
+    assert.deepEqual(changes[0].version, '1.0.0');
+  });
 
   it('gives the contents of the change', async () => {
-    const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, 'dummy')
-    const changes = changelog.getUpdatesSince('0.0.1')
-    assert.deepEqual(changes[0].changeText, '#### Added\n- foo')
-  })
+    const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, 'dummy');
+    const changes = changelog.getUpdatesSince('0.0.1');
+    assert.deepEqual(changes[0].changeText, '#### Added\n- foo');
+  });
 
   it('returns nothing if the changelog contains no releases', () => {
-    const changelog = changelogParser.parse(CHANGELOG_NO_RELEASES, 'dummy')
-    assert.deepEqual(typeof changelog.versions, 'undefined')
-  })
+    const changelog = changelogParser.parse(CHANGELOG_NO_RELEASES, 'dummy');
+    assert.deepEqual(typeof changelog.versions, 'undefined');
+  });
 
   it('parses the changelog of the format that each version have level 2 header', () => {
-    const changelog = changelogParser.parse(CHANGELOG_LV2_HEADERS, '1.0.0')
-    const changes = changelog.getUpdatesSince('0.0.1')
-    assert.deepEqual(changes[0].changeText, '- foo')
-  })
-})
+    const changelog = changelogParser.parse(CHANGELOG_LV2_HEADERS, '1.0.0');
+    const changes = changelog.getUpdatesSince('0.0.1');
+    assert.deepEqual(changes[0].changeText, '- foo');
+  });
+});
