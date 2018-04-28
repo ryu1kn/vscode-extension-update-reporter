@@ -59,7 +59,7 @@ describe('Integration', () => {
     .when(fileSystem.readFile('PATH_3/CHANGELOG.md'))
     .thenResolve(readFileSync('./sample-changelog-lv2-heading.md'))
   const commandFactory = new CommandFactory({ fileSystem, vscode })
-  const extensionUpdatesReportGenerator = commandFactory.create()
+  const extensionUpdatesReportGenerator = commandFactory.createReportGenerator()
 
   it('generates a summary', async () => {
     const result = await extensionUpdatesReportGenerator.generate()
