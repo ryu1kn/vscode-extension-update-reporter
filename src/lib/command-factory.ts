@@ -7,57 +7,57 @@ import Main from './main';
 import FileSystem from "./file-system";
 
 class CommandFactory {
-  private _fileSystem: FileSystem;
-  private _vscode: any;
-  private _cache: Map<string, any>;
+  private fileSystem: FileSystem;
+  private vscode: any;
+  private cache: Map<string, any>;
 
   constructor (params: any) {
-    this._fileSystem = params.fileSystem;
-    this._vscode = params.vscode;
+    this.fileSystem = params.fileSystem;
+    this.vscode = params.vscode;
 
-    this._cache = new Map();
+    this.cache = new Map();
   }
 
   createReportGenerator () {
     const changelogParser = new ChangelogParser();
     const changelogLoader = new ChangelogLoader({
       changelogParser,
-      fileSystem: this._fileSystem
+      fileSystem: this.fileSystem
     });
     return new ExtensionUpdatesReportGenerator({
       changelogLoader,
-      configStore: this._getConfigStore(),
-      extensionStore: this._getExtensionStore()
+      configStore: this.getConfigStore(),
+      extensionStore: this.getExtensionStore()
     });
   }
 
   createMain () {
     return new Main({
-      vscode: this._vscode,
-      configStore: this._getConfigStore(),
-      extensionStore: this._getExtensionStore()
+      vscode: this.vscode,
+      configStore: this.getConfigStore(),
+      extensionStore: this.getExtensionStore()
     });
   }
 
-  private _getConfigStore () {
-    return this._getCached(
+  private getConfigStore () {
+    return this.getCached(
       'configStore',
       () =>
         new ConfigStore({
-          vscWorkspace: this._vscode.workspace
+          vscWorkspace: this.vscode.workspace
         })
     );
   }
 
-  private _getExtensionStore () {
-    return this._getCached('extensionStore', () => new ExtensionStore());
+  private getExtensionStore () {
+    return this.getCached('extensionStore', () => new ExtensionStore());
   }
 
-  private _getCached (key: string, createFunction: any) {
-    if (!this._cache.has(key)) {
-      this._cache.set(key, createFunction());
+  private getCached (key: string, createFunction: any) {
+    if (!this.cache.has(key)) {
+      this.cache.set(key, createFunction());
     }
-    return this._cache.get(key);
+    return this.cache.get(key);
   }
 }
 

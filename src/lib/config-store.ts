@@ -2,18 +2,18 @@ import { EXTENSION_ID } from './const';
 const EXTENSION_VERSION_MAP = 'extensionVersions';
 
 class ConfigStore {
-  private _vscWorkspace: any;
+  private vscWorkspace: any;
 
   constructor (params: any) {
-    this._vscWorkspace = params.vscWorkspace;
+    this.vscWorkspace = params.vscWorkspace;
   }
 
   get extensionVersions () {
-    return this._extensionConfig.get(EXTENSION_VERSION_MAP);
+    return this.extensionConfig.get(EXTENSION_VERSION_MAP);
   }
 
-  get _extensionConfig () {
-    return this._vscWorkspace.getConfiguration(EXTENSION_ID);
+  private get extensionConfig () {
+    return this.vscWorkspace.getConfiguration(EXTENSION_ID);
   }
 
   registerAllExtensions (extensionVersions: any) {
@@ -33,7 +33,7 @@ class ConfigStore {
       registeredVersions,
       newExtensionsMap
     );
-    return this._extensionConfig.update(
+    return this.extensionConfig.update(
       EXTENSION_VERSION_MAP,
       newRegisteredVersions,
       true

@@ -7,19 +7,19 @@ class DefaultChangelogParser implements ChangelogParser {
   }
 
   parse (changelog: string, knownVersion: string) {
-    const heading = this._findVersionHeading(changelog, knownVersion);
+    const heading = this.findVersionHeading(changelog, knownVersion);
     if (!heading) { return; }
 
-    const rawVersions = this._splitIntoVersions(changelog, heading);
+    const rawVersions = this.splitIntoVersions(changelog, heading);
     return new Changelog({ versions: rawVersions });
   }
 
-  private _findVersionHeading (changelog: string, knownVersion: string) {
+  private findVersionHeading (changelog: string, knownVersion: string) {
     const match = changelog.match(new RegExp(`^(#+ *)${knownVersion}`, 'm'));
     return match && match[1];
   }
 
-  private _splitIntoVersions (changelog: string, versionHeading: string): Change[] {
+  private splitIntoVersions (changelog: string, versionHeading: string): Change[] {
     const versionHeadingPattern = new RegExp(`^${versionHeading}(.*)`, 'm');
     const [, ...match] = changelog.split(versionHeadingPattern);
     const changes = [];

@@ -7,23 +7,23 @@ class KeepAChangelogParser implements ChangelogParser {
   }
 
   parse (changelog: string, _knownVersion: string) {
-    return new Changelog({ versions: this._splitIntoVersions(changelog) });
+    return new Changelog({ versions: this.splitIntoVersions(changelog) });
   }
 
-  private _splitIntoVersions (changelog: string): Change[] {
+  private splitIntoVersions (changelog: string): Change[] {
     const versionHeadingPattern = /^## \[(\d+\.\d+\.\d+)\].*/m;
     const [, ...match] = changelog.split(versionHeadingPattern);
     const changes = [];
     for (let i = 0 ; i < match.length; i += 2) {
       changes.push({
         version: match[i],
-        changeText: this._reviseHeadingLevel(match[i+1].trim())
+        changeText: this.reviseHeadingLevel(match[i+1].trim())
       });
     }
     return changes;
   }
 
-  private _reviseHeadingLevel (contents: string) {
+  private reviseHeadingLevel (contents: string) {
     return contents.replace(/^(#{3,} )/gm, '#$1');
   }
 }

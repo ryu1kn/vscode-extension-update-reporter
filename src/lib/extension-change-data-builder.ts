@@ -8,27 +8,27 @@ class ExtensionChangeDataBuilder {
     return multiline(`
       # Extension Updates
 
-      ${this._buildExtension(extensions, extensionVersions)}
+      ${this.buildExtension(extensions, extensionVersions)}
       `);
   }
 
-  private _buildExtension (extensions: Extension[], extensionVersions: any) {
+  private buildExtension (extensions: Extension[], extensionVersions: any) {
     return extensions
       .map(extension =>
         multiline(`
         ## ${extension.displayName}
-        ${this._buildChangelog( extension, extensionVersions[extension.id] )}`)
+        ${this.buildChangelog( extension, extensionVersions[extension.id] )}`)
       )
       .join('\n\n');
   }
 
-  private _buildChangelog (extension: Extension, extensionVersion: any) {
+  private buildChangelog (extension: Extension, extensionVersion: any) {
     return extension.changelog
-      ? this._buildVersion(extension.changelog.getUpdatesSince(extensionVersion))
+      ? this.buildVersion(extension.changelog.getUpdatesSince(extensionVersion))
       : 'Changelog not found or cannot be parsed as [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).';
   }
 
-  private _buildVersion (releases: Change[]) {
+  private buildVersion (releases: Change[]) {
     return releases
       .map(release =>
         multiline(`

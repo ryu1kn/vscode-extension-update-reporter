@@ -4,23 +4,23 @@ import FileSystem from "./file-system";
 import Changelog from "./entities/changelog";
 
 class ChangelogLoader {
-  private _fileSystem: FileSystem;
-  private _changelogParser: ChangelogParser;
+  private fileSystem: FileSystem;
+  private changelogParser: ChangelogParser;
 
   constructor (params: any) {
-    this._fileSystem = params.fileSystem;
-    this._changelogParser = params.changelogParser;
+    this.fileSystem = params.fileSystem;
+    this.changelogParser = params.changelogParser;
   }
 
   async load (extensionPath: string, knownVersion: string): Promise<Changelog|undefined> {
-    const files = await this._fileSystem.readDirectory(extensionPath);
+    const files = await this.fileSystem.readDirectory(extensionPath);
     const changelog = files.find(file => file === 'CHANGELOG.md');
     if (!changelog) { return; }
 
-    const changelogContents = await this._fileSystem.readFile(
+    const changelogContents = await this.fileSystem.readFile(
       join(extensionPath, changelog)
     );
-    return this._changelogParser.parse(changelogContents, knownVersion);
+    return this.changelogParser.parse(changelogContents, knownVersion);
   }
 }
 

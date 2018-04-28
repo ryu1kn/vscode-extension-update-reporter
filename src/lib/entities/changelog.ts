@@ -1,14 +1,14 @@
 import {Change} from "../changelog-parsers/changelog-parser";
 
 class Changelog {
-  private _raw: {versions: Change[]};
+  private raw: {versions: Change[]};
 
   constructor (raw: {versions: Change[]}) {
-    this._raw = raw;
+    this.raw = raw;
   }
 
   getUpdatesSince (baseVersion: string): Change[] {
-    return this._raw.versions.filter(
+    return this.raw.versions.filter(
       version => version.version > baseVersion
     );
   }

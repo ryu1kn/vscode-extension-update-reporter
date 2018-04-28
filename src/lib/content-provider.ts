@@ -3,14 +3,14 @@ import ExtensionUpdatesReportGenerator from "./extension-updates-report-generato
 const htmlReportGenerator = new HtmlReportGenerator();
 
 class ContentProvider {
-  private _extensionUpdatesReportGenerator: ExtensionUpdatesReportGenerator;
+  private extensionUpdatesReportGenerator: ExtensionUpdatesReportGenerator;
 
   constructor (params: any) {
-    this._extensionUpdatesReportGenerator = params.extensionUpdatesReportGenerator;
+    this.extensionUpdatesReportGenerator = params.extensionUpdatesReportGenerator;
   }
 
   async provideTextDocumentContent (): Promise<string> {
-    const markdownChangelog = await this._extensionUpdatesReportGenerator.generate();
+    const markdownChangelog = await this.extensionUpdatesReportGenerator.generate();
     return htmlReportGenerator.generate(markdownChangelog);
   }
 }

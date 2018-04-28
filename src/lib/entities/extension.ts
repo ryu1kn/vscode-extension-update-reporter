@@ -2,24 +2,24 @@ import * as vscode from 'vscode';
 import Changelog from "./changelog";
 
 class Extension {
-  private _raw: vscode.Extension<any>;
+  private raw: vscode.Extension<any>;
   private _changelog?: Changelog;
 
   constructor (raw: vscode.Extension<any>) {
-    this._raw = raw;
+    this.raw = raw;
   }
 
   get id () {
-    return this._raw.id;
+    return this.raw.id;
   }
 
   get displayName () {
-    const packageJson = this._raw.packageJSON;
+    const packageJson = this.raw.packageJSON;
     return packageJson.displayName || packageJson.name;
   }
 
   get version () {
-    return this._raw.packageJSON.version;
+    return this.raw.packageJSON.version;
   }
 
   get isVscodeBundled () {
@@ -34,7 +34,7 @@ class Extension {
   }
 
   get extensionPath () {
-    return this._raw.extensionPath;
+    return this.raw.extensionPath;
   }
 
   get changelog () {

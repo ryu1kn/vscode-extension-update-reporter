@@ -1,18 +1,18 @@
 import Extension from "./entities/extension";
 
 class ExtensionStore {
-  private _storage: Extension[];
+  private storage: Extension[];
 
   constructor () {
-    this._storage = [];
+    this.storage = [];
   }
 
   set (extensions: Extension[]): void {
-    this._storage = extensions;
+    this.storage = extensions;
   }
 
   getAll (): Extension[] {
-    return this._storage;
+    return this.storage;
   }
 }
 

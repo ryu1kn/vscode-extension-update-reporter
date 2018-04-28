@@ -1,19 +1,19 @@
 class FileSystem {
-  private _fs: any;
+  private fs: any;
 
   constructor (params: any) {
-    this._fs = params.fs;
+    this.fs = params.fs;
   }
 
   readDirectory (path: string): Promise<string[]> {
     return new Promise((resolve, reject) =>
-      this._fs.readdir(path, (err: Error, data: any) => (err ? reject(err) : resolve(data)))
+      this.fs.readdir(path, (err: Error, data: any) => (err ? reject(err) : resolve(data)))
     );
   }
 
   readFile (path: string): Promise<string> {
     return new Promise((resolve, reject) =>
-      this._fs.readFile(
+      this.fs.readFile(
         path,
         'utf8',
         (err: Error, data: any) => (err ? reject(err) : resolve(data))

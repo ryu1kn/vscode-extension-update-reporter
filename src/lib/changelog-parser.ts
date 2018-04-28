@@ -4,19 +4,19 @@ import KeepAChangelogParser from './changelog-parsers/keep-a-changelog';
 import Changelog from "./entities/changelog";
 
 class ChangelogParser {
-  private _parsers: Parser[];
+  private parsers: Parser[];
 
   constructor () {
-    this._parsers = [new KeepAChangelogParser(), new DefaultChangelogParser()];
+    this.parsers = [new KeepAChangelogParser(), new DefaultChangelogParser()];
   }
 
   parse (changelog: string, knownVersion: string): Changelog|undefined {
-    const parser = this._chooseParser(changelog);
+    const parser = this.chooseParser(changelog);
     return parser && parser.parse(changelog, knownVersion);
   }
 
-  private _chooseParser (changelog: string) {
-    return this._parsers.find(parser => parser.isOfType(changelog));
+  private chooseParser (changelog: string) {
+    return this.parsers.find(parser => parser.isOfType(changelog));
   }
 }
 
