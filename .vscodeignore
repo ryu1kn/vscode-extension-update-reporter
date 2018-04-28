@@ -1,8 +1,6 @@
 __*
 .DS_Store
 /.editorconfig
-/.eslintignore
-/.eslintrc.yaml
 /.git
 /.gitignore
 /.idea
@@ -16,8 +14,13 @@ __*
 /TODO.md
 /coverage
 /images
+/out/test/**
+/out/**/*.map
+/src
 /tag-release.sh
-/yarn.lock
 /test
+/tslint.json
+/yarn.lock
 jsconfig.json
+tsconfig.json
 yarn-error.log

@@ -25,7 +25,7 @@
   "activationEvents": [
     "*"
   ],
-  "main": "./extension",
+  "main": "./out/extension",
   "contributes": {
     "configuration": {
       "type": "object",
@@ -40,28 +40,26 @@
     }
   },
   "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
     "coverage": "nyc yarn test",
-    "format": "prettier-eslint --write '*.js' 'lib/**/*.js' 'test/**/*.js'",
-    "lint": "eslint .",
+    "lint": "tslint -p tslint.json",
+    "watch": "tsc -watch -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
-    "prep": "yarn run format && yarn run lint && yarn test",
-    "test": "mocha --recursive test"
+    "test": "yarn run compile && mocha --recursive out/test"
   },
   "dependencies": {
     "markdown-it": "8.4.1",
     "multiline-string": "0.2.0"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.0.1",
     "mocha": "^5.1.1",
     "nyc": "^11.7.1",
-    "prettier-eslint-cli": "^4.7.1",
     "testdouble": "^3.7.0",
-    "vscode": "^1.1.14"
+    "vscode": "^1.1.16",
+    "typescript": "^2.8.3",
+    "tslint": "^5.8.0",
+    "@types/node": "^7.0.43",
+    "@types/mocha": "^5.2.0"
   }
 }
