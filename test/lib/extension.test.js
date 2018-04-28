@@ -1,6 +1,6 @@
 const assert = require('assert')
 
-const Extension = require('../../lib/extension')
+const Extension = require('../../lib/entities/extension')
 
 describe('Extension', () => {
   it('uses displayName as its name', async () => {

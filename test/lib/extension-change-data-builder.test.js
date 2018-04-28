@@ -1,7 +1,7 @@
 const assert = require('assert')
 
 const ExtensionChangeDataBuilder = require('../../lib/extension-change-data-builder')
-const Extension = require('../../lib/extension')
+const Extension = require('../../lib/entities/extension')
 const ChangelogParser = require('../../lib/changelog-parser')
 const multiline = require('multiline-string')()
 
@@ -15,7 +15,7 @@ describe('ExtensionChangeDataBuilder', () => {
       displayName: 'EXT_NAME_1',
       changelogText: multiline(`
         The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-        
+
         ## [1.0.0] - 2018-04-21
         ### Added
         - foo2
@@ -24,7 +24,7 @@ describe('ExtensionChangeDataBuilder', () => {
         ## [0.9.0] - 2018-04-20
         ### Added
         - foo
-        
+
         ## [0.8.0] - 2018-04-19
         ### Added
         - baz
@@ -35,11 +35,11 @@ describe('ExtensionChangeDataBuilder', () => {
       displayName: 'EXT_NAME_2',
       changelogText: multiline(`
         The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-        
+
         ## [0.1.0] - 2018-04-22
         ### Removed
         - baz
-        
+
         ## [0.0.9] - 2018-04-21
         ### Removed
         - foo
@@ -64,7 +64,7 @@ describe('ExtensionChangeDataBuilder', () => {
       ### [0.9.0]
       #### Added
       - foo
-      
+
       ## EXT_NAME_2
       ### [0.1.0]
       #### Removed
