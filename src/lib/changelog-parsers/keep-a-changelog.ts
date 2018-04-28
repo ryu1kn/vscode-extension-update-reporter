@@ -1,5 +1,6 @@
 import Changelog from '../entities/changelog';
-import { ChangelogParser, Change } from './changelog-parser';
+import { ChangelogParser } from './changelog-parser';
+import { Change } from '../types';
 
 export default class KeepAChangelogParser implements ChangelogParser {
   isOfType (changelog: string) {

@@ -1,4 +1,5 @@
-import { ChangelogParser, Change } from './changelog-parser';
+import { ChangelogParser } from './changelog-parser';
+import { Change } from '../types';
 import Changelog from '../entities/changelog';
 
 export default class DefaultChangelogParser implements ChangelogParser {

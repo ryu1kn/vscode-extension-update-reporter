@@ -1,11 +1,13 @@
 import Extension from './entities/extension';
 import * as vscode from "vscode";
 import { EXTENSION_NAME } from './const';
+import ConfigStore, { ExtensionVersionMap } from './config-store';
+import ExtensionStore from './extension-store';
 
 export default class Main {
   private vscode: any;
-  private configStore: any;
-  private extensionStore: any;
+  private configStore: ConfigStore;
+  private extensionStore: ExtensionStore;
 
   constructor (params: any) {
     this.vscode = params.vscode;
@@ -35,9 +37,9 @@ export default class Main {
     }
   }
 
-  private getExtensionVersionMap (extensions: Extension[]) {
+  private getExtensionVersionMap (extensions: Extension[]): ExtensionVersionMap {
     return extensions.reduce(
-      (map: any, extension) =>
+      (map, extension) =>
         Object.assign({}, map, { [extension.id]: extension.version }),
       {}
     );

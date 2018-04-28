@@ -5,7 +5,3 @@ export interface ChangelogParser {
   parse (changelog: string, knownVersion: string): Changelog|undefined;
 }
 
-export type Change = {
-  version: string;
-  changeText: string;
-};

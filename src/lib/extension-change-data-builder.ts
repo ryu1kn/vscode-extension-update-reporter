@@ -1,10 +1,11 @@
 import Extension from "./entities/extension";
-import {Change} from "./changelog-parsers/changelog-parser";
+import { Change } from './types';
+import { ExtensionVersionMap } from "./config-store";
 
 const multiline = require('multiline-string')();
 
 export default class ExtensionChangeDataBuilder {
-  build (extensions: Extension[], extensionVersions: any): string {
+  build (extensions: Extension[], extensionVersions: ExtensionVersionMap): string {
     return multiline(`
       # Extension Updates
 
@@ -12,7 +13,7 @@ export default class ExtensionChangeDataBuilder {
       `);
   }
 
-  private buildExtension (extensions: Extension[], extensionVersions: any) {
+  private buildExtension (extensions: Extension[], extensionVersions: ExtensionVersionMap) {
     return extensions
       .map(extension =>
         multiline(`
@@ -22,7 +23,7 @@ export default class ExtensionChangeDataBuilder {
       .join('\n\n');
   }
 
-  private buildChangelog (extension: Extension, extensionVersion: any) {
+  private buildChangelog (extension: Extension, extensionVersion: string) {
     return extension.changelog
       ? this.buildVersion(extension.changelog.getUpdatesSince(extensionVersion))
       : 'Changelog not found or cannot be parsed as [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).';

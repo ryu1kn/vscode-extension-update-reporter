@@ -10,7 +10,7 @@ const commandFactory = new CommandFactory({ fileSystem, vscode });
 const extensionUpdatesReportGenerator = commandFactory.createReportGenerator();
 const main = commandFactory.createMain();
 
-exports.activate = async (context: any) => {
+exports.activate = async (context: vscode.ExtensionContext) => {
   const contentProvider = new ContentProvider({
     extensionUpdatesReportGenerator
   });

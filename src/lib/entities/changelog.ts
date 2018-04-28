@@ -1,4 +1,4 @@
-import {Change} from "../changelog-parsers/changelog-parser";
+import { Change } from '../types';
 
 export default class Changelog {
   private raw: {versions: Change[]};

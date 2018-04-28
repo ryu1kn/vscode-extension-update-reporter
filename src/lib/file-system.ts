@@ -7,7 +7,7 @@ export default class FileSystem {
 
   readDirectory (path: string): Promise<string[]> {
     return new Promise((resolve, reject) =>
-      this.fs.readdir(path, (err: Error, data: any) => (err ? reject(err) : resolve(data)))
+      this.fs.readdir(path, (err: Error, data: string[]) => (err ? reject(err) : resolve(data)))
     );
   }
 
@@ -16,7 +16,7 @@ export default class FileSystem {
       this.fs.readFile(
         path,
         'utf8',
-        (err: Error, data: any) => (err ? reject(err) : resolve(data))
+        (err: Error, data: string) => (err ? reject(err) : resolve(data))
       )
     );
   }

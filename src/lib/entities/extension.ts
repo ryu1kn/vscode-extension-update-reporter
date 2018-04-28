@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import Changelog from "./changelog";
+import { ExtensionVersionMap } from '../config-store';
 
 export default class Extension {
   private raw: vscode.Extension<any>;
@@ -29,7 +30,7 @@ export default class Extension {
     );
   }
 
-  shouldReportUpdate (extensionVersions: any) {
+  shouldReportUpdate (extensionVersions: ExtensionVersionMap) {
     return this.version !== extensionVersions[this.id];
   }
 
