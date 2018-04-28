@@ -11,7 +11,7 @@ describe('ChangelogLoader', () => {
   td
     .when(fileSystem.readFile('EXTENSION_PATH/CHANGELOG.md'))
     .thenResolve('CHANGELOG_CONTENTS');
-  const changelogParser = { parse: (text: any) => `PARSED_${text}` };
+  const changelogParser = { parse: (text: string) => `PARSED_${text}` };
   const changelogLoader = new ChangelogLoader({ fileSystem, changelogParser });
 
   it('loads changelog', async () => {

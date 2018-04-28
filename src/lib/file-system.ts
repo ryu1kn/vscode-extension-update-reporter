@@ -5,13 +5,13 @@ class FileSystem {
     this._fs = params.fs;
   }
 
-  readDirectory (path: string) {
+  readDirectory (path: string): Promise<string[]> {
     return new Promise((resolve, reject) =>
       this._fs.readdir(path, (err: Error, data: any) => (err ? reject(err) : resolve(data)))
     );
   }
 
-  readFile (path: string) {
+  readFile (path: string): Promise<string> {
     return new Promise((resolve, reject) =>
       this._fs.readFile(
         path,

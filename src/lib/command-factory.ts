@@ -4,11 +4,12 @@ import ConfigStore from './config-store';
 import ExtensionStore from './extension-store';
 import ExtensionUpdatesReportGenerator from './extension-updates-report-generator';
 import Main from './main';
+import FileSystem from "./file-system";
 
 class CommandFactory {
-  private _fileSystem: any;
+  private _fileSystem: FileSystem;
   private _vscode: any;
-  private _cache: any;
+  private _cache: Map<string, any>;
 
   constructor (params: any) {
     this._fileSystem = params.fileSystem;
@@ -38,7 +39,7 @@ class CommandFactory {
     });
   }
 
-  _getConfigStore () {
+  private _getConfigStore () {
     return this._getCached(
       'configStore',
       () =>
@@ -48,11 +49,11 @@ class CommandFactory {
     );
   }
 
-  _getExtensionStore () {
+  private _getExtensionStore () {
     return this._getCached('extensionStore', () => new ExtensionStore());
   }
 
-  _getCached (key: string, createFunction: any) {
+  private _getCached (key: string, createFunction: any) {
     if (!this._cache.has(key)) {
       this._cache.set(key, createFunction());
     }

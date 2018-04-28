@@ -1,35 +1,29 @@
 import Changelog from '../entities/changelog';
+import { ChangelogParser, Change } from './changelog-parser';
 
-class KeepAChangelogParser {
+class KeepAChangelogParser implements ChangelogParser {
   isOfType (changelog: string) {
     return changelog.includes('://keepachangelog.com');
   }
 
   parse (changelog: string, _knownVersion: string) {
-    const rawVersions = this._splitIntoVersions(changelog);
-    const versions = rawVersions.map((rawVersion: any) => ({
-      version: rawVersion.version,
-      changeText: this._reviseHeadingLevel(rawVersion.contents)
-    }));
-    return new Changelog({ versions });
+    return new Changelog({ versions: this._splitIntoVersions(changelog) });
   }
 
-  _splitIntoVersions (changelog: string) {
+  private _splitIntoVersions (changelog: string): Change[] {
     const versionHeadingPattern = /^## \[(\d+\.\d+\.\d+)\].*/m;
     const [, ...match] = changelog.split(versionHeadingPattern);
-    return match.reduce((accumulated: any, value, index) => {
-      const isHeading = index % 2 === 0;
-      if (isHeading) {
-        return [...accumulated, { version: value }];
-      }
-      return [
-        ...accumulated.slice(0, -1),
-        Object.assign({}, accumulated.slice(-1)[0], { contents: value.trim() })
-      ];
-    }, []);
+    const changes = []
+    for (let i = 0 ; i < match.length; i += 2) {
+      changes.push({
+        version: match[i],
+        changeText: this._reviseHeadingLevel(match[i+1].trim())
+      });
+    }
+    return changes;
   }
 
-  _reviseHeadingLevel (contents: string) {
+  private _reviseHeadingLevel (contents: string) {
     return contents.replace(/^(#{3,} )/gm, '#$1');
   }
 }

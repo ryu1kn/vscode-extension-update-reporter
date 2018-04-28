@@ -1,15 +1,16 @@
-class Changelog {
-  private _raw: any;
+import {Change} from "../changelog-parsers/changelog-parser";
 
-  constructor (raw: any) {
+class Changelog {
+  private _raw: {versions: Change[]};
+
+  constructor (raw: {versions: Change[]}) {
     this._raw = raw;
   }
 
-  getUpdatesSince (baseVersion: string) {
-    const newerVersions = this._raw.versions.filter(
-      (version: any) => version.version > baseVersion
+  getUpdatesSince (baseVersion: string): Change[] {
+    return this._raw.versions.filter(
+      version => version.version > baseVersion
     );
-    return newerVersions;
   }
 }
 

@@ -1,14 +1,16 @@
 import * as td from 'testdouble';
 
 import ConfigStore from '../../lib/config-store';
+import * as vscode from "vscode";
 
 describe('ConfigStore', () => {
-  let configSection: any;
-  let configStore: any;
+  const any = td.matchers.anything;
+  let configSection: vscode.WorkspaceConfiguration;
+  let configStore: ConfigStore;
 
   beforeEach(() => {
     const workspace: any = td.object('getConfiguration');
-    configSection = td.object(['get', 'update']);
+    configSection = td.object(['get', 'update']) as vscode.WorkspaceConfiguration;
     td
       .when(configSection.get('extensionVersions'))
       .thenReturn({ EXT_1: '0.1.0' });
@@ -38,6 +40,6 @@ describe('ConfigStore', () => {
       EXT_1: '0.2.0'
     });
 
-    td.verify(configSection.update(), { times: 0, ignoreExtraArgs: true });
+    td.verify(configSection.update(any(), any(), any()), { times: 0 });
   });
 });

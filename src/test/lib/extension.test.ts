@@ -1,6 +1,7 @@
 import * as assert from 'assert';
 
 import Extension from '../../lib/entities/extension';
+import * as vscode from "vscode";
 
 describe('Extension', () => {
   it('uses displayName as its name', async () => {
@@ -13,10 +14,10 @@ describe('Extension', () => {
     assert.deepEqual(extension.displayName, 'bar');
   });
 
-  function createExtension (packageJson: any) {
+  function createExtension (packageJson: {name: string, displayName?: string}) {
     const rawExtension = {
       packageJSON: packageJson
     };
-    return new Extension(rawExtension);
+    return new Extension(rawExtension as vscode.Extension<any>);
   }
 });

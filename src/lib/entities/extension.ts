@@ -1,8 +1,11 @@
-class Extension {
-  private _raw: any;
-  private _changelog: any;
+import * as vscode from 'vscode';
+import Changelog from "./changelog";
 
-  constructor (raw: any) {
+class Extension {
+  private _raw: vscode.Extension<any>;
+  private _changelog?: Changelog;
+
+  constructor (raw: vscode.Extension<any>) {
     this._raw = raw;
   }
 
@@ -21,7 +24,6 @@ class Extension {
 
   get isVscodeBundled () {
     return (
-      this._raw.isBuiltin ||
       this.id.startsWith('vscode.') ||
       this.id.startsWith('ms-vscode.')
     );

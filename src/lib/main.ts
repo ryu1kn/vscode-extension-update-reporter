@@ -1,4 +1,5 @@
 import Extension from './entities/extension';
+import * as vscode from "vscode";
 const { EXTENSION_NAME } = require('./const');
 
 class Main {
@@ -12,7 +13,7 @@ class Main {
     this._extensionStore = params.extensionStore;
   }
 
-  async run () {
+  async run (): Promise<void> {
     const uri = this._vscode.Uri.parse(`${EXTENSION_NAME}:show-updates-summary`);
     const extensions = this._getExtensions();
     await this._configStore.registerAllExtensions(
@@ -20,7 +21,7 @@ class Main {
     );
 
     const newExtensionVerions = this._configStore.extensionVersions;
-    const updatedExtensions = extensions.filter((extension: any) =>
+    const updatedExtensions = extensions.filter(extension =>
       extension.shouldReportUpdate(newExtensionVerions)
     );
     if (updatedExtensions.length > 0) {
@@ -34,18 +35,18 @@ class Main {
     }
   }
 
-  _getExtensionVersionMap (extensions: any) {
+  private _getExtensionVersionMap (extensions: Extension[]) {
     return extensions.reduce(
-      (map: any, extension: any) =>
+      (map: any, extension) =>
         Object.assign({}, map, { [extension.id]: extension.version }),
       {}
     );
   }
 
-  _getExtensions () {
+  private _getExtensions (): Extension[] {
     return this._vscode.extensions.all
-      .map((extension: any) => new Extension(extension))
-      .filter((extension: any) => !extension.isVscodeBundled);
+      .map((extension: vscode.Extension<any>) => new Extension(extension))
+      .filter((extension: Extension) => !extension.isVscodeBundled);
   }
 }
 

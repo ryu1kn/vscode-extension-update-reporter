@@ -1,40 +1,35 @@
+import { ChangelogParser, Change } from './changelog-parser';
 import Changelog from '../entities/changelog';
 
-class DefaultChangelogParser {
+class DefaultChangelogParser implements ChangelogParser {
   isOfType (changelog: string) {
     return true;
   }
 
   parse (changelog: string, knownVersion: string) {
     const heading = this._findVersionHeading(changelog, knownVersion);
-    if (!heading) { return null; }
+    if (!heading) { return; }
 
     const rawVersions = this._splitIntoVersions(changelog, heading);
-    const versions = rawVersions.map((rawVersion: any) => ({
-      version: rawVersion.version,
-      changeText: rawVersion.contents
-    }));
-    return new Changelog({ versions });
+    return new Changelog({ versions: rawVersions });
   }
 
-  _findVersionHeading (changelog: string, knownVersion: string) {
+  private _findVersionHeading (changelog: string, knownVersion: string) {
     const match = changelog.match(new RegExp(`^(#+ *)${knownVersion}`, 'm'));
     return match && match[1];
   }
 
-  _splitIntoVersions (changelog: string, versionHeading: string) {
+  private _splitIntoVersions (changelog: string, versionHeading: string): Change[] {
     const versionHeadingPattern = new RegExp(`^${versionHeading}(.*)`, 'm');
     const [, ...match] = changelog.split(versionHeadingPattern);
-    return match.reduce((accumulated: any, value, index) => {
-      const isHeading = index % 2 === 0;
-      if (isHeading) {
-        return [...accumulated, { version: value }];
-      }
-      return [
-        ...accumulated.slice(0, -1),
-        Object.assign({}, accumulated.slice(-1)[0], { contents: value.trim() })
-      ];
-    }, []);
+    const changes = []
+    for (let i = 0 ; i < match.length; i += 2) {
+      changes.push({
+        version: match[i],
+        changeText: match[i+1].trim()
+      });
+    }
+    return changes;
   }
 }
 

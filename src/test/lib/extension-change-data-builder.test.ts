@@ -3,6 +3,7 @@ import * as assert from 'assert';
 import ExtensionChangeDataBuilder from '../../lib/extension-change-data-builder';
 import Extension from '../../lib/entities/extension';
 import ChangelogParser from '../../lib/changelog-parser';
+import * as vscode from "vscode";
 const multiline = require('multiline-string')();
 
 describe('ExtensionChangeDataBuilder', () => {
@@ -97,7 +98,7 @@ describe('ExtensionChangeDataBuilder', () => {
   });
 
   function createExtension ({ id, displayName, changelogText, knownVerion }: any) {
-    const extension = new Extension({ id, packageJSON: { displayName } });
+    const extension = new Extension({ id, packageJSON: { displayName } } as vscode.Extension<any>);
     extension.changelog = changelogParser.parse(changelogText, knownVerion);
     return extension;
   }

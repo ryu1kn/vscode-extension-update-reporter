@@ -1,9 +1,12 @@
 import ExtensionChangeDataBuilder from './extension-change-data-builder';
+import ConfigStore from "./config-store";
+import ChangelogLoader from "./changelog-loader";
+import ExtensionStore from "./extension-store";
 
 class ExtensionUpdatesReportGenerator {
-  private _configStore: any;
-  private _changelogLoader: any;
-  private _extensionStore: any;
+  private _configStore: ConfigStore;
+  private _changelogLoader: ChangelogLoader;
+  private _extensionStore: ExtensionStore;
 
   constructor (params: any) {
     this._configStore = params.configStore;
@@ -11,10 +14,10 @@ class ExtensionUpdatesReportGenerator {
     this._extensionStore = params.extensionStore;
   }
 
-  async generate () {
+  async generate (): Promise<string> {
     const builder = new ExtensionChangeDataBuilder();
     const extensions = await Promise.all(
-      this._extensionStore.getAll().map(async (extension: any) => {
+      this._extensionStore.getAll().map(async extension => {
         extension.changelog = await this._changelogLoader.load(
           extension.extensionPath,
           extension.version
