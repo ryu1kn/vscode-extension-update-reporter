@@ -1,6 +1,6 @@
 import Extension from './entities/extension';
 import * as vscode from "vscode";
-const { EXTENSION_NAME } = require('./const');
+import { EXTENSION_NAME } from './const';
 
 class Main {
   private _vscode: any;

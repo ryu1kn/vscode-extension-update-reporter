@@ -1,4 +1,4 @@
-const { EXTENSION_ID } = require('./const');
+import { EXTENSION_ID } from './const';
 const EXTENSION_VERSION_MAP = 'extensionVersions';
 
 class ConfigStore {

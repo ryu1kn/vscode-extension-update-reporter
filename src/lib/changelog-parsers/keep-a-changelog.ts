@@ -13,7 +13,7 @@ class KeepAChangelogParser implements ChangelogParser {
   private _splitIntoVersions (changelog: string): Change[] {
     const versionHeadingPattern = /^## \[(\d+\.\d+\.\d+)\].*/m;
     const [, ...match] = changelog.split(versionHeadingPattern);
-    const changes = []
+    const changes = [];
     for (let i = 0 ; i < match.length; i += 2) {
       changes.push({
         version: match[i],

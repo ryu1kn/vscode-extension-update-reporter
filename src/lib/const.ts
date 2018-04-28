@@ -1,4 +1,4 @@
-module.exports = {
-  EXTENSION_ID: 'changelogChecker',
-  EXTENSION_NAME: 'changelog-checker'
-};
+
+export const EXTENSION_ID = 'changelogChecker';
+
+export const EXTENSION_NAME = 'changelog-checker';

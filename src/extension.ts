@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import CommandFactory from './lib/command-factory';
 import ContentProvider from './lib/content-provider';
 import FileSystem from './lib/file-system';
-const { EXTENSION_NAME } = require('./lib/const');
+import { EXTENSION_NAME } from './lib/const';
 
 const fileSystem = new FileSystem({ fs });
 const commandFactory = new CommandFactory({ fileSystem, vscode });

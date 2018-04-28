@@ -22,7 +22,7 @@ class DefaultChangelogParser implements ChangelogParser {
   private _splitIntoVersions (changelog: string, versionHeading: string): Change[] {
     const versionHeadingPattern = new RegExp(`^${versionHeading}(.*)`, 'm');
     const [, ...match] = changelog.split(versionHeadingPattern);
-    const changes = []
+    const changes = [];
     for (let i = 0 ; i < match.length; i += 2) {
       changes.push({
         version: match[i],
