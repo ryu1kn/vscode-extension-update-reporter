@@ -42,7 +42,9 @@ describe('Integration', () => {
               ID_4: '1.0.0'
             }
         }
-    }
+    },
+    commands: { executeCommand: () => {} },
+    Uri: { parse: () => {} }
   }
 
   const fileSystem = td.object(['readDirectory', 'readFile'])
@@ -60,8 +62,10 @@ describe('Integration', () => {
     .thenResolve(readFileSync('./sample-changelog-lv2-heading.md'))
   const commandFactory = new CommandFactory({ fileSystem, vscode })
   const extensionUpdatesReportGenerator = commandFactory.createReportGenerator()
+  const main = commandFactory.createMain()
 
   it('generates a summary', async () => {
+    await main.run()
     const result = await extensionUpdatesReportGenerator.generate()
     assert.deepEqual(result, readFileSync('./sample-report.md'))
   })
