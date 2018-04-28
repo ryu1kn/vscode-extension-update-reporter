@@ -13,6 +13,7 @@ __*
 /.vscode
 /.vscode-test
 /.vsix
+/TODO.md
 /coverage
 /images
 /tag-release.sh
