@@ -1,7 +1,7 @@
 import { EXTENSION_ID } from './const';
 const EXTENSION_VERSION_MAP = 'extensionVersions';
 
-class ConfigStore {
+export default class ConfigStore {
   private vscWorkspace: any;
 
   constructor (params: any) {
@@ -40,5 +40,3 @@ class ConfigStore {
     );
   }
 }
-
-export default ConfigStore;

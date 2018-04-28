@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import Changelog from "./changelog";
 
-class Extension {
+export default class Extension {
   private raw: vscode.Extension<any>;
   private _changelog?: Changelog;
 
@@ -45,5 +45,3 @@ class Extension {
     this._changelog = changelog;
   }
 }
-
-export default Extension;

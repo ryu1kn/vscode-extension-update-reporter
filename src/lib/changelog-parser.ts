@@ -3,7 +3,7 @@ import DefaultChangelogParser from './changelog-parsers/default';
 import KeepAChangelogParser from './changelog-parsers/keep-a-changelog';
 import Changelog from "./entities/changelog";
 
-class ChangelogParser {
+export default class ChangelogParser {
   private parsers: Parser[];
 
   constructor () {
@@ -19,5 +19,3 @@ class ChangelogParser {
     return this.parsers.find(parser => parser.isOfType(changelog));
   }
 }
-
-export default ChangelogParser;

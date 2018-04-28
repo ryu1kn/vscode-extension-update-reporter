@@ -1,7 +1,7 @@
 import Changelog from '../entities/changelog';
 import { ChangelogParser, Change } from './changelog-parser';
 
-class KeepAChangelogParser implements ChangelogParser {
+export default class KeepAChangelogParser implements ChangelogParser {
   isOfType (changelog: string) {
     return changelog.includes('://keepachangelog.com');
   }
@@ -27,5 +27,3 @@ class KeepAChangelogParser implements ChangelogParser {
     return contents.replace(/^(#{3,} )/gm, '#$1');
   }
 }
-
-export default KeepAChangelogParser;

@@ -3,7 +3,7 @@ import ConfigStore from "./config-store";
 import ChangelogLoader from "./changelog-loader";
 import ExtensionStore from "./extension-store";
 
-class ExtensionUpdatesReportGenerator {
+export default class ExtensionUpdatesReportGenerator {
   private configStore: ConfigStore;
   private changelogLoader: ChangelogLoader;
   private extensionStore: ExtensionStore;
@@ -28,5 +28,3 @@ class ExtensionUpdatesReportGenerator {
     return builder.build(extensions, this.configStore.extensionVersions);
   }
 }
-
-export default ExtensionUpdatesReportGenerator;

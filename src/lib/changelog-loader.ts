@@ -3,7 +3,7 @@ import {ChangelogParser} from "./changelog-parsers/changelog-parser";
 import FileSystem from "./file-system";
 import Changelog from "./entities/changelog";
 
-class ChangelogLoader {
+export default class ChangelogLoader {
   private fileSystem: FileSystem;
   private changelogParser: ChangelogParser;
 
@@ -23,5 +23,3 @@ class ChangelogLoader {
     return this.changelogParser.parse(changelogContents, knownVersion);
   }
 }
-
-export default ChangelogLoader;

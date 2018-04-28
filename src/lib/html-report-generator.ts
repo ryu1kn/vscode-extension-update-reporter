@@ -1,7 +1,7 @@
 const md = require('markdown-it')();
 const multiline = require('multiline-string')();
 
-class HtmlReportGenerator {
+export default class HtmlReportGenerator {
   generate (markdownReport: string): string {
     return multiline(`
       <html>
@@ -16,5 +16,3 @@ class HtmlReportGenerator {
       </html>`);
   }
 }
-
-export default HtmlReportGenerator;

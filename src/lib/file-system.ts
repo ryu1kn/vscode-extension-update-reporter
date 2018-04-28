@@ -1,4 +1,4 @@
-class FileSystem {
+export default class FileSystem {
   private fs: any;
 
   constructor (params: any) {
@@ -21,5 +21,3 @@ class FileSystem {
     );
   }
 }
-
-export default FileSystem;

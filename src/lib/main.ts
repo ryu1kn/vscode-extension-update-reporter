@@ -2,7 +2,7 @@ import Extension from './entities/extension';
 import * as vscode from "vscode";
 import { EXTENSION_NAME } from './const';
 
-class Main {
+export default class Main {
   private vscode: any;
   private configStore: any;
   private extensionStore: any;
@@ -49,5 +49,3 @@ class Main {
       .filter((extension: Extension) => !extension.isVscodeBundled);
   }
 }
-
-export default Main;

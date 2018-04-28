@@ -2,7 +2,7 @@ import HtmlReportGenerator from './html-report-generator';
 import ExtensionUpdatesReportGenerator from "./extension-updates-report-generator";
 const htmlReportGenerator = new HtmlReportGenerator();
 
-class ContentProvider {
+export default class ContentProvider {
   private extensionUpdatesReportGenerator: ExtensionUpdatesReportGenerator;
 
   constructor (params: any) {
@@ -14,5 +14,3 @@ class ContentProvider {
     return htmlReportGenerator.generate(markdownChangelog);
   }
 }
-
-export default ContentProvider;

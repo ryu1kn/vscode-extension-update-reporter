@@ -6,7 +6,7 @@ import ExtensionUpdatesReportGenerator from './extension-updates-report-generato
 import Main from './main';
 import FileSystem from "./file-system";
 
-class CommandFactory {
+export default class CommandFactory {
   private fileSystem: FileSystem;
   private vscode: any;
   private cache: Map<string, any>;
@@ -60,5 +60,3 @@ class CommandFactory {
     return this.cache.get(key);
   }
 }
-
-export default CommandFactory;

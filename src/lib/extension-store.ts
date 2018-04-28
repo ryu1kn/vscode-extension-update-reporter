@@ -1,6 +1,6 @@
 import Extension from "./entities/extension";
 
-class ExtensionStore {
+export default class ExtensionStore {
   private storage: Extension[];
 
   constructor () {
@@ -15,5 +15,3 @@ class ExtensionStore {
     return this.storage;
   }
 }
-
-export default ExtensionStore;

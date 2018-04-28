@@ -3,7 +3,7 @@ import {Change} from "./changelog-parsers/changelog-parser";
 
 const multiline = require('multiline-string')();
 
-class ExtensionChangeDataBuilder {
+export default class ExtensionChangeDataBuilder {
   build (extensions: Extension[], extensionVersions: any): string {
     return multiline(`
       # Extension Updates
@@ -38,5 +38,3 @@ class ExtensionChangeDataBuilder {
       .join('\n\n');
   }
 }
-
-export default ExtensionChangeDataBuilder;

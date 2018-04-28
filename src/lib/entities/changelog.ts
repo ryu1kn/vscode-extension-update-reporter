@@ -1,6 +1,6 @@
 import {Change} from "../changelog-parsers/changelog-parser";
 
-class Changelog {
+export default class Changelog {
   private raw: {versions: Change[]};
 
   constructor (raw: {versions: Change[]}) {
@@ -13,5 +13,3 @@ class Changelog {
     );
   }
 }
-
-export default Changelog;

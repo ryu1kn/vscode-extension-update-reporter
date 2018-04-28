@@ -1,7 +1,7 @@
 import { ChangelogParser, Change } from './changelog-parser';
 import Changelog from '../entities/changelog';
 
-class DefaultChangelogParser implements ChangelogParser {
+export default class DefaultChangelogParser implements ChangelogParser {
   isOfType (changelog: string) {
     return true;
   }
@@ -32,5 +32,3 @@ class DefaultChangelogParser implements ChangelogParser {
     return changes;
   }
 }
-
-export default DefaultChangelogParser;
