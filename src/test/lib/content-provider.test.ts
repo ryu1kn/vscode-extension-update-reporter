@@ -5,7 +5,7 @@ import ContentProvider from '../../lib/content-provider';
 const multiline = require('multiline-string')();
 
 describe('ContentProvider', () => {
-  const extensionUpdatesReportGenerator = td.object('generate');
+  const extensionUpdatesReportGenerator = td.object('convert');
   td
     .when(extensionUpdatesReportGenerator.generate())
     .thenResolve('MARKDOWN_STRING');

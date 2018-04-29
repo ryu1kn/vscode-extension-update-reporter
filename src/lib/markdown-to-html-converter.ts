@@ -1,8 +1,8 @@
 const md = require('markdown-it')();
 const multiline = require('multiline-string')();
 
-export default class HtmlReportGenerator {
-  generate (markdownReport: string): string {
+export default class MarkdownToHtmlConverter {
+  convert (markdownReport: string): string {
     return multiline(`
       <html>
         <head>
