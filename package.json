@@ -53,13 +53,14 @@
     "multiline-string": "0.2.0"
   },
   "devDependencies": {
+    "@types/mocha": "^5.2.0",
+    "@types/node": "^7.0.43",
     "mocha": "^5.1.1",
     "nyc": "^11.7.1",
     "testdouble": "^3.7.0",
-    "vscode": "^1.1.16",
-    "typescript": "^2.8.3",
+    "ts-node": "^6.0.1",
     "tslint": "^5.8.0",
-    "@types/node": "^7.0.43",
-    "@types/mocha": "^5.2.0"
+    "typescript": "^2.8.3",
+    "vscode": "^1.1.16"
   }
 }
