@@ -18,23 +18,23 @@ export default class Main {
   async run (): Promise<void> {
     const uri = this.vscode.Uri.parse(`${EXTENSION_NAME}:show-updates-summary`);
     const extensions = this.getExtensions();
-    await this.configStore.registerAllExtensions(
-      this.getExtensionVersionMap(extensions)
-    );
+    const latestVersions = this.getExtensionVersionMap(extensions);
+    await this.configStore.registerAllExtensions(latestVersions);
 
     const newExtensionVerions = this.configStore.extensionVersions;
     const updatedExtensions = extensions.filter(extension =>
       extension.shouldReportUpdate(newExtensionVerions)
     );
-    if (updatedExtensions.length > 0) {
-      this.extensionStore.set(updatedExtensions);
-      await this.vscode.commands.executeCommand(
-        'vscode.previewHtml',
-        uri,
-        undefined,
-        'Exntension Update Report'
-      );
-    }
+    if (updatedExtensions.length === 0) return;
+
+    this.extensionStore.set(updatedExtensions);
+    await this.vscode.commands.executeCommand(
+      'vscode.previewHtml',
+      uri,
+      undefined,
+      'Exntension Update Report'
+    );
+    await this.configStore.updateAllExtensionVersions(latestVersions);
   }
 
   private getExtensionVersionMap (extensions: ExtensionMeta[]): ExtensionVersionMap {

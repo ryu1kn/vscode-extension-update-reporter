@@ -1,6 +1,6 @@
 - [ ] Update UI
 - [X] Save the current version into configuration if none is saved
-- [ ] Update the last checked versions after showing the report
+- [X] Update the last checked versions after showing the report
 - [ ] Fix the logic of comparing extension versions
 - [ ] Revise extension name
 - [ ] Revise extension config name

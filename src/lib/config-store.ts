@@ -35,4 +35,8 @@ export default class ConfigStore {
     const newRegisteredVersions = Object.assign({}, registeredVersions, newExtensionsMap);
     return this.extensionConfig.update(EXTENSION_VERSION_MAP, newRegisteredVersions, true);
   }
+
+  updateAllExtensionVersions(latestVersions: ExtensionVersionMap) {
+    return this.extensionConfig.update(EXTENSION_VERSION_MAP, latestVersions, true);
+  }
 }

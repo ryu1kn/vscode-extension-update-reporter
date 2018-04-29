@@ -41,7 +41,8 @@ describe('Integration', () => {
               ID_2: '0.1.0',
               ID_3: '0.1.0',
               ID_4: '1.0.0'
-            }
+            },
+          update: () => {}
         }
     },
     commands: { executeCommand: () => {} },
