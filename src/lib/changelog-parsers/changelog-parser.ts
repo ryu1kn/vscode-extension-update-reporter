@@ -1,4 +1,4 @@
-import Changelog from "../entities/changelog";
+import Changelog from '../entities/changelog';
 
 export interface ChangelogParser {
   isOfType (changelog: string): boolean;

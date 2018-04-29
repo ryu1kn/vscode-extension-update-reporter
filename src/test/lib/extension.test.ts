@@ -1,7 +1,7 @@
 import * as assert from 'assert';
 
 import { Extension } from '../../lib/entities/extension';
-import * as vscode from "vscode";
+import * as vscode from 'vscode';
 
 describe('Extension', () => {
   it('uses displayName as its name', async () => {

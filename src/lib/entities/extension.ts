@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import Changelog from "./changelog";
+import Changelog from './changelog';
 import { ExtensionVersionMap } from '../config-store';
 
 export class ExtensionMeta {

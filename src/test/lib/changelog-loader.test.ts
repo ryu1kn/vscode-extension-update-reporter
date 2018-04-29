@@ -2,7 +2,7 @@ import * as assert from 'assert';
 const td = require('testdouble');
 
 import ChangelogLoader from '../../lib/changelog-loader';
-import ChangelogParser from "../../lib/changelog-parser";
+import ChangelogParser from '../../lib/changelog-parser';
 
 describe('ChangelogLoader', () => {
   const fileSystem = td.object(['readDirectory', 'readFile']);

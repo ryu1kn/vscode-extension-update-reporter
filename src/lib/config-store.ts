@@ -1,5 +1,5 @@
 import { EXTENSION_ID } from './const';
-import * as vscode from "vscode";
+import * as vscode from 'vscode';
 const EXTENSION_VERSION_MAP = 'extensionVersions';
 
 export type ExtensionVersionMap = {

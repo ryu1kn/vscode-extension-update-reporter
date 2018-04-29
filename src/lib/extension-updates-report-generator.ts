@@ -1,7 +1,7 @@
 import ExtensionChangeDataBuilder from './extension-change-data-builder';
-import ConfigStore from "./config-store";
-import ChangelogLoader from "./changelog-loader";
-import ExtensionStore from "./extension-store";
+import ConfigStore from './config-store';
+import ChangelogLoader from './changelog-loader';
+import ExtensionStore from './extension-store';
 
 export default class ExtensionUpdatesReportGenerator {
   private configStore: ConfigStore;

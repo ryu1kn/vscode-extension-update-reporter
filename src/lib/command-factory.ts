@@ -4,7 +4,7 @@ import ConfigStore from './config-store';
 import ExtensionStore from './extension-store';
 import ExtensionUpdatesReportGenerator from './extension-updates-report-generator';
 import Main from './main';
-import FileSystem from "./file-system";
+import FileSystem from './file-system';
 
 export default class CommandFactory {
   private fileSystem: FileSystem;

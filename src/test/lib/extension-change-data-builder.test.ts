@@ -3,7 +3,7 @@ import * as assert from 'assert';
 import ExtensionChangeDataBuilder from '../../lib/extension-change-data-builder';
 import { Extension } from '../../lib/entities/extension';
 import ChangelogParser from '../../lib/changelog-parser';
-import * as vscode from "vscode";
+import * as vscode from 'vscode';
 const multiline = require('multiline-string')();
 
 describe('ExtensionChangeDataBuilder', () => {

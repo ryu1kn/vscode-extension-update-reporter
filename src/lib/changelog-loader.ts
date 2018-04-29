@@ -1,7 +1,7 @@
 import { join } from 'path';
-import ChangelogParser from "./changelog-parser";
-import FileSystem from "./file-system";
-import Changelog from "./entities/changelog";
+import ChangelogParser from './changelog-parser';
+import FileSystem from './file-system';
+import Changelog from './entities/changelog';
 
 export default class ChangelogLoader {
   private fileSystem: FileSystem;

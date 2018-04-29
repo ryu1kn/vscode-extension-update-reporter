@@ -1,4 +1,4 @@
-import { ExtensionMeta } from "./entities/extension";
+import { ExtensionMeta } from './entities/extension';
 
 export default class ExtensionStore {
   private storage: ExtensionMeta[] = [];

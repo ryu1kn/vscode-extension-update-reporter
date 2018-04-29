@@ -1,7 +1,7 @@
 import * as td from 'testdouble';
 
 import ConfigStore from '../../lib/config-store';
-import * as vscode from "vscode";
+import * as vscode from 'vscode';
 
 describe('ConfigStore', () => {
   const any = td.matchers.anything;

@@ -1,6 +1,6 @@
 import DefaultChangelogParser from './changelog-parsers/default';
 import KeepAChangelogParser from './changelog-parsers/keep-a-changelog';
-import Changelog from "./entities/changelog";
+import Changelog from './entities/changelog';
 
 export default class ChangelogParser {
   private parsers = [new KeepAChangelogParser(), new DefaultChangelogParser()];

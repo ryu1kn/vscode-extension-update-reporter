@@ -1,5 +1,5 @@
 import { ExtensionMeta } from './entities/extension';
-import * as vscode from "vscode";
+import * as vscode from 'vscode';
 import { EXTENSION_NAME } from './const';
 import ConfigStore, { ExtensionVersionMap } from './config-store';
 import ExtensionStore from './extension-store';

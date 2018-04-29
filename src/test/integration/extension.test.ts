@@ -2,7 +2,7 @@ import * as assert from 'assert';
 import * as td from 'testdouble';
 
 import CommandFactory from '../../lib/command-factory';
-import FileSystem from "../../lib/file-system";
+import FileSystem from '../../lib/file-system';
 import { readFileSync as fsReadFileSync } from 'fs';
 import { join } from 'path';
 
