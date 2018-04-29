@@ -3,10 +3,10 @@ import * as td from 'testdouble';
 
 import CommandFactory from '../../lib/command-factory';
 import FileSystem from "../../lib/file-system";
-// const fs = require('fs')
-// const { join } = require('path')
+import { readFileSync as fsReadFileSync } from 'fs';
+import { join } from 'path';
 
-describe.skip('Integration', () => {
+describe('Integration', () => {
   const vscode = {
     extensions: {
       all: [
@@ -71,7 +71,7 @@ describe.skip('Integration', () => {
     assert.deepEqual(result, readFileSync('./sample-report.md'));
   });
 
-  function readFileSync (path: string) {
-    // return fs.readFileSync(join(__dirname, path), 'utf8')
+  function readFileSync (path: string): string {
+    return fsReadFileSync(join('test-data', 'integration', path), 'utf8');
   }
 });

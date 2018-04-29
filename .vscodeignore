@@ -19,6 +19,7 @@ __*
 /src
 /tag-release.sh
 /test
+/test-data
 /tslint.json
 /yarn.lock
 jsconfig.json
