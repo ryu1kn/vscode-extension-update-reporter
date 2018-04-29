@@ -1,8 +1,8 @@
 export default class FileSystem {
   private fs: any;
 
-  constructor (params: any) {
-    this.fs = params.fs;
+  constructor (fs: any) {
+    this.fs = fs;
   }
 
   readDirectory (path: string): Promise<string[]> {

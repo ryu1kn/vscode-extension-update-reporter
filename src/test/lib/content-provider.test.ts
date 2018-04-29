@@ -9,9 +9,7 @@ describe('ContentProvider', () => {
   td
     .when(extensionUpdatesReportGenerator.generate())
     .thenResolve('MARKDOWN_STRING');
-  const contentProvider = new ContentProvider({
-    extensionUpdatesReportGenerator
-  });
+  const contentProvider = new ContentProvider(extensionUpdatesReportGenerator);
 
   it('returns HTML with extension updates in it', async () => {
     const html = await contentProvider.provideTextDocumentContent();

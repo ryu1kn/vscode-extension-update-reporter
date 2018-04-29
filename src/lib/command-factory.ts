@@ -11,41 +11,27 @@ export default class CommandFactory {
   private vscode: any;
   private cache: Map<string, any>;
 
-  constructor (params: any) {
-    this.fileSystem = params.fileSystem;
-    this.vscode = params.vscode;
+  constructor (fs: FileSystem, vscode: any) {
+    this.fileSystem = fs;
+    this.vscode = vscode;
 
     this.cache = new Map();
   }
 
   createReportGenerator () {
     const changelogParser = new ChangelogParser();
-    const changelogLoader = new ChangelogLoader({
-      changelogParser,
-      fileSystem: this.fileSystem
-    });
-    return new ExtensionUpdatesReportGenerator({
-      changelogLoader,
-      configStore: this.getConfigStore(),
-      extensionStore: this.getExtensionStore()
-    });
+    const changelogLoader = new ChangelogLoader(this.fileSystem, changelogParser);
+    return new ExtensionUpdatesReportGenerator(this.getConfigStore(), changelogLoader, this.getExtensionStore());
   }
 
   createMain () {
-    return new Main({
-      vscode: this.vscode,
-      configStore: this.getConfigStore(),
-      extensionStore: this.getExtensionStore()
-    });
+    return new Main(this.getConfigStore(), this.getExtensionStore(), this.vscode);
   }
 
   private getConfigStore () {
     return this.getCached(
       'configStore',
-      () =>
-        new ConfigStore({
-          vscWorkspace: this.vscode.workspace
-        })
+      () => new ConfigStore(this.vscode.workspace)
     );
   }
 

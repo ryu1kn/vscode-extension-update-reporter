@@ -17,7 +17,7 @@ describe('ConfigStore', () => {
     td
       .when(workspace.getConfiguration('changelogChecker'))
       .thenReturn(configSection);
-    configStore = new ConfigStore({ vscWorkspace: workspace });
+    configStore = new ConfigStore(workspace);
   });
 
   it('saves the current version of an extension if not saved yet', async () => {

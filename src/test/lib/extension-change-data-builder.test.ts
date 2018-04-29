@@ -98,7 +98,7 @@ describe('ExtensionChangeDataBuilder', () => {
   });
 
   function createExtension ({ id, displayName, changelogText, knownVerion }: any) {
-    const extensionRaw = { id, packageJSON: { displayName } } as vscode.Extension<any>
+    const extensionRaw = { id, packageJSON: { displayName } } as vscode.Extension<any>;
     const changelog = changelogParser.parse(changelogText, knownVerion);
     return new Extension(extensionRaw, changelog);
   }

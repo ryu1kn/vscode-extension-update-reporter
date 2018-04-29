@@ -1,11 +1,7 @@
 import { ExtensionMeta } from "./entities/extension";
 
 export default class ExtensionStore {
-  private storage: ExtensionMeta[];
-
-  constructor () {
-    this.storage = [];
-  }
+  private storage: ExtensionMeta[] = [];
 
   set (extensions: ExtensionMeta[]): void {
     this.storage = extensions;

@@ -9,8 +9,8 @@ export type ExtensionVersionMap = {
 export default class ConfigStore {
   private vscWorkspace: any;
 
-  constructor (params: any) {
-    this.vscWorkspace = params.vscWorkspace;
+  constructor (vscWorkspace: any) {
+    this.vscWorkspace = vscWorkspace;
   }
 
   get extensionVersions (): ExtensionVersionMap {

@@ -9,10 +9,10 @@ export default class Main {
   private configStore: ConfigStore;
   private extensionStore: ExtensionStore;
 
-  constructor (params: any) {
-    this.vscode = params.vscode;
-    this.configStore = params.configStore;
-    this.extensionStore = params.extensionStore;
+  constructor (configStore: ConfigStore, extensionStore: ExtensionStore, vscode: any) {
+    this.vscode = vscode;
+    this.configStore = configStore;
+    this.extensionStore = extensionStore;
   }
 
   async run (): Promise<void> {

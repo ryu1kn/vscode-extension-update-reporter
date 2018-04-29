@@ -9,10 +9,10 @@ export default class ExtensionUpdatesReportGenerator {
   private extensionStore: ExtensionStore;
   private builder = new ExtensionChangeDataBuilder();
 
-  constructor (params: any) {
-    this.configStore = params.configStore;
-    this.changelogLoader = params.changelogLoader;
-    this.extensionStore = params.extensionStore;
+  constructor (config: ConfigStore, changelogLoader: ChangelogLoader, extensionStore: ExtensionStore) {
+    this.configStore = config;
+    this.changelogLoader = changelogLoader;
+    this.extensionStore = extensionStore;
   }
 
   async generate (): Promise<string> {

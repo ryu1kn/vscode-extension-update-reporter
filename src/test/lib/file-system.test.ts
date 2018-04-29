@@ -7,7 +7,7 @@ describe('FileSystem', () => {
   const fs = td.object(['readdir', 'readFile']);
   td.when(fs.readdir('DIR_PATH')).thenCallback(null, ['FILE1', 'FILE2']);
   td.when(fs.readFile('FILE_PATH', 'utf8')).thenCallback(null, 'FILE_CONTENTS');
-  const fileSystem = new FileSystem({ fs });
+  const fileSystem = new FileSystem(fs);
 
   it('gets file names in the directory', async () => {
     const files = await fileSystem.readDirectory('DIR_PATH');

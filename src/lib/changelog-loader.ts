@@ -1,5 +1,5 @@
 import { join } from 'path';
-import {ChangelogParser} from "./changelog-parsers/changelog-parser";
+import ChangelogParser from "./changelog-parser";
 import FileSystem from "./file-system";
 import Changelog from "./entities/changelog";
 
@@ -7,9 +7,9 @@ export default class ChangelogLoader {
   private fileSystem: FileSystem;
   private changelogParser: ChangelogParser;
 
-  constructor (params: any) {
-    this.fileSystem = params.fileSystem;
-    this.changelogParser = params.changelogParser;
+  constructor (fs: FileSystem, parser: ChangelogParser) {
+    this.fileSystem = fs;
+    this.changelogParser = parser;
   }
 
   async load (extensionPath: string, knownVersion: string): Promise<Changelog|undefined> {

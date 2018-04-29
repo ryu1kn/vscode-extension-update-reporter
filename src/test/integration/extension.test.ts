@@ -2,6 +2,7 @@ import * as assert from 'assert';
 import * as td from 'testdouble';
 
 import CommandFactory from '../../lib/command-factory';
+import FileSystem from "../../lib/file-system";
 // const fs = require('fs')
 // const { join } = require('path')
 
@@ -47,7 +48,7 @@ describe.skip('Integration', () => {
     Uri: { parse: () => {} }
   };
 
-  const fileSystem = td.object(['readDirectory', 'readFile']);
+  const fileSystem = td.object(['readDirectory', 'readFile']) as FileSystem;
   td.when(fileSystem.readDirectory('PATH_1')).thenResolve(['CHANGELOG.md']);
   td
     .when(fileSystem.readFile('PATH_1/CHANGELOG.md'))
@@ -60,7 +61,7 @@ describe.skip('Integration', () => {
   td
     .when(fileSystem.readFile('PATH_3/CHANGELOG.md'))
     .thenResolve(readFileSync('./sample-changelog-lv2-heading.md'));
-  const commandFactory = new CommandFactory({ fileSystem, vscode });
+  const commandFactory = new CommandFactory(fileSystem, vscode);
   const extensionUpdatesReportGenerator = commandFactory.createReportGenerator();
   const main = commandFactory.createMain();
 

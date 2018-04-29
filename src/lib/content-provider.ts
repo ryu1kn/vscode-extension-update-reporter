@@ -4,14 +4,14 @@ import * as vscode from "vscode";
 const htmlReportGenerator = new HtmlReportGenerator();
 
 export default class ContentProvider implements vscode.TextDocumentContentProvider {
-  private extensionUpdatesReportGenerator: ExtensionUpdatesReportGenerator;
+  private generator: ExtensionUpdatesReportGenerator;
 
-  constructor (params: any) {
-    this.extensionUpdatesReportGenerator = params.extensionUpdatesReportGenerator;
+  constructor (generator: ExtensionUpdatesReportGenerator) {
+    this.generator = generator;
   }
 
   async provideTextDocumentContent () {
-    const markdownChangelog = await this.extensionUpdatesReportGenerator.generate();
+    const markdownChangelog = await this.generator.generate();
     return htmlReportGenerator.generate(markdownChangelog);
   }
 }
