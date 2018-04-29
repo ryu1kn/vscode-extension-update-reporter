@@ -1,4 +1,4 @@
-import Extension from "./entities/extension";
+import { Extension } from "./entities/extension";
 import { Change } from './types';
 import { ExtensionVersionMap } from "./config-store";
 

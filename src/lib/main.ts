@@ -1,4 +1,4 @@
-import Extension from './entities/extension';
+import { ExtensionMeta } from './entities/extension';
 import * as vscode from "vscode";
 import { EXTENSION_NAME } from './const';
 import ConfigStore, { ExtensionVersionMap } from './config-store';
@@ -37,7 +37,7 @@ export default class Main {
     }
   }
 
-  private getExtensionVersionMap (extensions: Extension[]): ExtensionVersionMap {
+  private getExtensionVersionMap (extensions: ExtensionMeta[]): ExtensionVersionMap {
     return extensions.reduce(
       (map, extension) =>
         Object.assign({}, map, { [extension.id]: extension.version }),
@@ -45,9 +45,9 @@ export default class Main {
     );
   }
 
-  private getExtensions (): Extension[] {
+  private getExtensions (): ExtensionMeta[] {
     return this.vscode.extensions.all
-      .map((extension: vscode.Extension<any>) => new Extension(extension))
-      .filter((extension: Extension) => !extension.isVscodeBundled);
+      .map((extension: vscode.Extension<any>) => new ExtensionMeta(extension))
+      .filter((extension: ExtensionMeta) => !extension.isVscodeBundled);
   }
 }

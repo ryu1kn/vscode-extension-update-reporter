@@ -7,6 +7,7 @@ export default class ExtensionUpdatesReportGenerator {
   private configStore: ConfigStore;
   private changelogLoader: ChangelogLoader;
   private extensionStore: ExtensionStore;
+  private builder = new ExtensionChangeDataBuilder();
 
   constructor (params: any) {
     this.configStore = params.configStore;
@@ -15,16 +16,15 @@ export default class ExtensionUpdatesReportGenerator {
   }
 
   async generate (): Promise<string> {
-    const builder = new ExtensionChangeDataBuilder();
     const extensions = await Promise.all(
       this.extensionStore.getAll().map(async extension => {
-        extension.changelog = await this.changelogLoader.load(
+        const changelog = await this.changelogLoader.load(
           extension.extensionPath,
           extension.version
         );
-        return extension;
+        return extension.withExtension(changelog);
       })
     );
-    return builder.build(extensions, this.configStore.extensionVersions);
+    return this.builder.build(extensions, this.configStore.extensionVersions);
   }
 }

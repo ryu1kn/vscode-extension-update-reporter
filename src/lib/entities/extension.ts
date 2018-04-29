@@ -2,9 +2,8 @@ import * as vscode from 'vscode';
 import Changelog from "./changelog";
 import { ExtensionVersionMap } from '../config-store';
 
-export default class Extension {
+export class ExtensionMeta {
   private raw: vscode.Extension<any>;
-  private _changelog?: Changelog;
 
   constructor (raw: vscode.Extension<any>) {
     this.raw = raw;
@@ -38,11 +37,20 @@ export default class Extension {
     return this.raw.extensionPath;
   }
 
-  get changelog () {
-    return this._changelog;
+  withExtension (changelog?: Changelog): Extension {
+    return new Extension(this.raw, changelog);
+  }
+}
+
+export class Extension extends ExtensionMeta {
+  private _changelog?: Changelog;
+
+  constructor (raw: vscode.Extension<any>, changelog?: Changelog) {
+    super(raw);
+    this._changelog = changelog;
   }
 
-  set changelog (changelog) {
-    this._changelog = changelog;
+  get changelog () {
+    return this._changelog;
   }
 }

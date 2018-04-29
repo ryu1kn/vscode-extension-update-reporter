@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 
-import Extension from '../../lib/entities/extension';
+import { Extension } from '../../lib/entities/extension';
 import * as vscode from "vscode";
 
 describe('Extension', () => {
