@@ -1,9 +1,11 @@
 import { EXTENSION_ID } from './const';
 import * as vscode from 'vscode';
+import {parseVersion, Version} from './entities/version';
+import {mapObject} from './utils';
 const EXTENSION_VERSION_MAP = 'extensionVersions';
 
 export type ExtensionVersionMap = {
-  [extensionId: string]: string
+  [extensionId: string]: Version
 };
 
 export default class ConfigStore {
@@ -14,7 +16,8 @@ export default class ConfigStore {
   }
 
   get extensionVersions (): ExtensionVersionMap {
-    return this.extensionConfig.get(EXTENSION_VERSION_MAP) || {};
+    const rawExtensionVersions = this.extensionConfig.get(EXTENSION_VERSION_MAP) || {};
+    return mapObject(rawExtensionVersions, parseVersion);
   }
 
   private get extensionConfig (): vscode.WorkspaceConfiguration {
@@ -33,10 +36,14 @@ export default class ConfigStore {
       {}
     );
     const newRegisteredVersions = Object.assign({}, registeredVersions, newExtensionsMap);
-    return this.extensionConfig.update(EXTENSION_VERSION_MAP, newRegisteredVersions, true);
+    return this.extensionConfig.update(EXTENSION_VERSION_MAP, this.stringifyVersions(newRegisteredVersions), true);
   }
 
   updateAllExtensionVersions(latestVersions: ExtensionVersionMap) {
-    return this.extensionConfig.update(EXTENSION_VERSION_MAP, latestVersions, true);
+    return this.extensionConfig.update(EXTENSION_VERSION_MAP, this.stringifyVersions(latestVersions), true);
+  }
+
+  private stringifyVersions (versionMap: ExtensionVersionMap): {[extensionId: string]: string} {
+    return mapObject(versionMap, value => value.toString());
   }
 }

@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import Changelog from './changelog';
-import { ExtensionVersionMap } from '../config-store';
+import {parseVersion, Version} from './version';
 
 export class ExtensionMeta {
   private raw: vscode.Extension<any>;
@@ -18,8 +18,8 @@ export class ExtensionMeta {
     return packageJson.displayName || packageJson.name;
   }
 
-  get version () {
-    return this.raw.packageJSON.version;
+  get version (): Version {
+    return parseVersion(this.raw.packageJSON.version);
   }
 
   get isVscodeBundled () {
@@ -29,8 +29,8 @@ export class ExtensionMeta {
     );
   }
 
-  shouldReportUpdate (extensionVersions: ExtensionVersionMap) {
-    return this.version !== extensionVersions[this.id];
+  isNewerThan (version: Version) {
+    return this.version.isHigherThan(version);
   }
 
   get extensionPath () {

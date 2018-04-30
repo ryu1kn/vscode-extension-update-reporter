@@ -4,6 +4,8 @@ import ExtensionChangeDataBuilder from '../../lib/extension-change-data-builder'
 import { Extension } from '../../lib/entities/extension';
 import ChangelogParser from '../../lib/changelog-parser';
 import * as vscode from 'vscode';
+import {Version} from '../../lib/entities/version';
+
 const multiline = require('multiline-string')();
 
 describe('ExtensionChangeDataBuilder', () => {
@@ -47,8 +49,8 @@ describe('ExtensionChangeDataBuilder', () => {
         `)
     });
     const extensionVersions = {
-      EXT1: '0.8.0',
-      EXT2: '0.0.9'
+      EXT1: new Version(0, 8, 0),
+      EXT2: new Version(0, 0, 9)
     };
 
     assert.deepEqual(
@@ -78,13 +80,13 @@ describe('ExtensionChangeDataBuilder', () => {
     const extension = createExtension({
       id: 'EXT3',
       displayName: 'EXT_NAME_3',
-      knownVerion: '1.3.0',
+      knownVerion: new Version(1, 3, 0),
       changelogText: multiline(`
         ### 26 Jan 2018 - 1.3.0
         * Update to work with new Code version
         `)
     });
-    const extensionVersions = { EXT3: '0.0.1' };
+    const extensionVersions = { EXT3: new Version(0, 0, 1) };
 
     assert.deepEqual(
       builder.build([extension], extensionVersions),

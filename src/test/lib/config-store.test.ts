@@ -2,6 +2,7 @@ import * as td from 'testdouble';
 
 import ConfigStore from '../../lib/config-store';
 import * as vscode from 'vscode';
+import {Version} from '../../lib/entities/version';
 
 describe('ConfigStore', () => {
   const any = td.matchers.anything;
@@ -22,8 +23,8 @@ describe('ConfigStore', () => {
 
   it('saves the current version of an extension if not saved yet', async () => {
     await configStore.registerAllExtensions({
-      EXT_1: '0.1.0',
-      EXT_2: '0.2.0'
+      EXT_1: new Version(0, 1, 0),
+      EXT_2: new Version(0, 2, 0)
     });
 
     td.verify(
@@ -37,7 +38,7 @@ describe('ConfigStore', () => {
 
   it("doesn't update the extension version", async () => {
     await configStore.registerAllExtensions({
-      EXT_1: '0.2.0'
+      EXT_1: new Version(0, 2, 0)
     });
 
     td.verify(configSection.update(any(), any(), any()), { times: 0 });

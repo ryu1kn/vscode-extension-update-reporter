@@ -23,7 +23,7 @@ export default class Main {
 
     const newExtensionVerions = this.configStore.extensionVersions;
     const updatedExtensions = extensions.filter(extension =>
-      extension.shouldReportUpdate(newExtensionVerions)
+      extension.isNewerThan(newExtensionVerions[extension.id])
     );
     if (updatedExtensions.length === 0) return;
 

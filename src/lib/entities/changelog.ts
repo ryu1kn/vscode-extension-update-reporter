@@ -1,4 +1,5 @@
 import { Change } from '../types';
+import {Version} from './version';
 
 export default class Changelog {
   private raw: {versions: Change[]};
@@ -7,9 +8,9 @@ export default class Changelog {
     this.raw = raw;
   }
 
-  getUpdatesSince (baseVersion: string): Change[] {
+  getUpdatesSince (baseVersion: Version): Change[] {
     return this.raw.versions.filter(
-      version => version.version > baseVersion
+      version => version.version.isHigherThan(baseVersion)
     );
   }
 }

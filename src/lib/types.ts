@@ -1,5 +1,6 @@
+import {Version} from './entities/version';
 
 export type Change = {
-  version: string;
+  version: Version;
   changeText: string;
 };

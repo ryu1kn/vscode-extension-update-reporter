@@ -1,13 +1,14 @@
 import Changelog from '../entities/changelog';
 import { ChangelogParser } from './changelog-parser';
 import { Change } from '../types';
+import {parseVersion, Version} from '../entities/version';
 
 export default class KeepAChangelogParser implements ChangelogParser {
   isOfType (changelog: string) {
     return changelog.includes('://keepachangelog.com');
   }
 
-  parse (changelog: string, _knownVersion: string) {
+  parse (changelog: string, _knownVersion: Version) {
     return new Changelog({ versions: this.splitIntoVersions(changelog) });
   }
 
@@ -17,7 +18,7 @@ export default class KeepAChangelogParser implements ChangelogParser {
     const changes = [];
     for (let i = 0 ; i < match.length; i += 2) {
       changes.push({
-        version: match[i],
+        version: parseVersion(match[i]),
         changeText: this.reviseHeadingLevel(match[i+1].trim())
       });
     }

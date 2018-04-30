@@ -1,6 +1,7 @@
 import { Extension } from './entities/extension';
 import { Change } from './types';
 import { ExtensionVersionMap } from './config-store';
+import {Version} from './entities/version';
 
 const multiline = require('multiline-string')();
 
@@ -23,7 +24,7 @@ export default class ExtensionChangeDataBuilder {
       .join('\n\n');
   }
 
-  private buildChangelog (extension: Extension, extensionVersion: string) {
+  private buildChangelog (extension: Extension, extensionVersion: Version) {
     return extension.changelog
       ? this.buildVersion(extension.changelog.getUpdatesSince(extensionVersion))
       : 'Changelog not found or cannot be parsed as [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).';
