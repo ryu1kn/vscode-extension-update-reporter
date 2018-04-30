@@ -8,3 +8,11 @@ export function mapObject(object: ObjectMap, callback: (value: any) => any): Obj
     {}
   );
 }
+
+export function toTuples<T>(list: T[]): [T, T][] {
+  const tuples: [T, T][] = [];
+  for (let i = 0; i < list.length; i += 2) {
+    tuples.push([list[i], list[i+1]]);
+  }
+  return tuples;
+}

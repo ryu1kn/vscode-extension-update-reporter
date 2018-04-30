@@ -26,3 +26,7 @@ export function parseVersion (version: string): Version {
   if (!match) throw new Error('Version malformed');
   return new Version(parseInt(match[1]), parseInt(match[2]), parseInt(match[3]));
 }
+
+export function isValidVersion (version: string): boolean {
+  return /(\d+)\.(\d+)\.(\d+)/.test(version);
+}

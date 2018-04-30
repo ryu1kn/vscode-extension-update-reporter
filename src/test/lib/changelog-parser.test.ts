@@ -28,6 +28,12 @@ describe('ChangelogParser', () => {
     ## 1.0.0
     - foo
     `);
+  const CHANGELOG_WRONG_SUBSECTION_LEVEL = multiline(`
+    ### 1.0.0
+
+    ### Fixes:
+    - foo
+    `);
 
   it('gives only the unchecked changelog', async () => {
     const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, dummyVer);
@@ -45,5 +51,12 @@ describe('ChangelogParser', () => {
     const changelog = changelogParser.parse(CHANGELOG_LV2_HEADERS, new Version(1, 0, 0));
     const changes = changelog!.getUpdatesSince(new Version(0, 0, 1));
     assert.deepEqual(changes[0].changeText, '- foo');
+  });
+
+  it('treats as if it were just a normal text if version is malformed', () => {
+    const changelog = changelogParser.parse(CHANGELOG_WRONG_SUBSECTION_LEVEL, new Version(1, 0, 0));
+    const changes = changelog!.getUpdatesSince(new Version(0, 0, 1));
+    assert.deepEqual(changes[0].version.toString(), '1.0.0');
+    assert.deepEqual(changes[0].changeText, '### Fixes:\n- foo');
   });
 });
