@@ -1,6 +1,6 @@
 import { Extension } from './entities/extension';
 import { Change } from './types';
-import { ExtensionVersionMap } from './config-store';
+import { ExtensionVersionMap } from './extension-store';
 import {Version} from './entities/version';
 import {Changelog} from './entities/changelog';
 

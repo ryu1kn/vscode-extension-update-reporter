@@ -21,11 +21,11 @@ export default class CommandFactory {
   createReportGenerator () {
     const changelogParser = new ChangelogParser();
     const changelogLoader = new ChangelogLoader(this.fileSystem, changelogParser);
-    return new ExtensionUpdatesReportGenerator(this.getConfigStore(), changelogLoader, this.getExtensionStore());
+    return new ExtensionUpdatesReportGenerator(changelogLoader, this.getExtensionStore());
   }
 
   createMain () {
-    return new Main(this.getConfigStore(), this.getExtensionStore(), this.vscode);
+    return new Main(this.getExtensionStore(), this.vscode);
   }
 
   private getConfigStore () {
@@ -36,7 +36,10 @@ export default class CommandFactory {
   }
 
   private getExtensionStore () {
-    return this.getCached('extensionStore', () => new ExtensionStore());
+    return this.getCached(
+      'extensionStore',
+      () => new ExtensionStore(this.getConfigStore())
+    );
   }
 
   private getCached (key: string, createFunction: any) {
