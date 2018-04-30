@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import Changelog from './changelog';
+import {Changelog} from './changelog';
 import {parseVersion, Version} from './version';
 
 export class ExtensionMeta {
@@ -37,15 +37,15 @@ export class ExtensionMeta {
     return this.raw.extensionPath;
   }
 
-  withExtension (changelog?: Changelog): Extension {
+  withChangelog (changelog: Changelog): Extension {
     return new Extension(this.raw, changelog);
   }
 }
 
 export class Extension extends ExtensionMeta {
-  private _changelog?: Changelog;
+  private _changelog: Changelog;
 
-  constructor (raw: vscode.Extension<any>, changelog?: Changelog) {
+  constructor (raw: vscode.Extension<any>, changelog: Changelog) {
     super(raw);
     this._changelog = changelog;
   }

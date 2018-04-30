@@ -1,6 +1,6 @@
 import { ChangelogParser } from './changelog-parser';
 import { Change } from '../types';
-import Changelog from '../entities/changelog';
+import {DefaultChangelog, NullChangelog} from '../entities/changelog';
 import {isValidVersion, parseVersion, Version} from '../entities/version';
 import {toTuples} from '../utils';
 
@@ -11,10 +11,10 @@ export default class DefaultChangelogParser implements ChangelogParser {
 
   parse (changelog: string, knownVersion: Version) {
     const heading = this.findVersionHeading(changelog, knownVersion);
-    if (!heading) { return; }
+    if (!heading) { return new NullChangelog(); }
 
     const rawVersions = this.splitIntoVersions(changelog, heading);
-    return new Changelog({ versions: rawVersions });
+    return new DefaultChangelog({ versions: rawVersions });
   }
 
   private findVersionHeading (changelog: string, knownVersion: Version) {

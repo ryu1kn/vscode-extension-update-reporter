@@ -1,4 +1,4 @@
-import Changelog from '../entities/changelog';
+import {DefaultChangelog} from '../entities/changelog';
 import { ChangelogParser } from './changelog-parser';
 import { Change } from '../types';
 import {parseVersion, Version} from '../entities/version';
@@ -9,7 +9,7 @@ export default class KeepAChangelogParser implements ChangelogParser {
   }
 
   parse (changelog: string, _knownVersion: Version) {
-    return new Changelog({ versions: this.splitIntoVersions(changelog) });
+    return new DefaultChangelog({ versions: this.splitIntoVersions(changelog) });
   }
 
   private splitIntoVersions (changelog: string): Change[] {

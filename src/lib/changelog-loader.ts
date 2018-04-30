@@ -1,7 +1,7 @@
 import { join } from 'path';
 import ChangelogParser from './changelog-parser';
 import FileSystem from './file-system';
-import Changelog from './entities/changelog';
+import {Changelog, NullChangelog} from './entities/changelog';
 import {Version} from './entities/version';
 
 export default class ChangelogLoader {
@@ -13,10 +13,10 @@ export default class ChangelogLoader {
     this.changelogParser = parser;
   }
 
-  async load (extensionPath: string, knownVersion: Version): Promise<Changelog|undefined> {
+  async load (extensionPath: string, knownVersion: Version): Promise<Changelog> {
     const files = await this.fileSystem.readDirectory(extensionPath);
     const changelog = files.find(file => file === 'CHANGELOG.md');
-    if (!changelog) { return; }
+    if (!changelog) { return new NullChangelog(); }
 
     const changelogContents = await this.fileSystem.readFile(
       join(extensionPath, changelog)

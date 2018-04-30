@@ -1,7 +1,12 @@
 import { Change } from '../types';
 import {Version} from './version';
 
-export default class Changelog {
+export interface Changelog {
+  getUpdatesSince (baseVersion: Version): Change[];
+  isValid: boolean;
+}
+
+export class DefaultChangelog implements Changelog {
   private raw: {versions: Change[]};
 
   constructor (raw: {versions: Change[]}) {
@@ -13,4 +18,14 @@ export default class Changelog {
       version => version.version.isHigherThan(baseVersion)
     );
   }
+
+  get isValid() { return true; }
+}
+
+export class NullChangelog implements Changelog {
+  getUpdatesSince (baseVersion: Version): Change[] {
+    return [];
+  }
+
+  get isValid() { return false; }
 }

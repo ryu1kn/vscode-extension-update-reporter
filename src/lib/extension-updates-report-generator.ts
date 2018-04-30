@@ -22,7 +22,7 @@ export default class ExtensionUpdatesReportGenerator {
           extension.extensionPath,
           extension.version
         );
-        return extension.withExtension(changelog);
+        return extension.withChangelog(changelog);
       })
     );
     return this.builder.build(extensions, this.configStore.extensionVersions);

@@ -94,7 +94,7 @@ describe('ExtensionChangeDataBuilder', () => {
       # Extension Updates
 
       ## EXT_NAME_3
-      Changelog not found or cannot be parsed as [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
+      Changelog not found or cannot be parsed.
       `)
     );
   });
