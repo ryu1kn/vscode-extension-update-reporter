@@ -17,9 +17,8 @@ export default class ContentProvider implements vscode.TextDocumentContentProvid
   }
 
   async provideTextDocumentContent () {
-    const lastRecordedVersions = this.extensionStore.extensionVersions;
     const updatedExtensions = this.extensionStore.getUpdatedExtensions();
-    const extensions = await this.changelogAssigner.assign(updatedExtensions, lastRecordedVersions);
+    const extensions = await this.changelogAssigner.assign(updatedExtensions);
     const markdownReport = markdownReportBuilder.build(extensions);
     const htmlReport = htmlReportGenerator.convert(markdownReport);
     await this.extensionStore.persistLoadedExtensions();

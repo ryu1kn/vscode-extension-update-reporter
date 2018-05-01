@@ -1,4 +1,4 @@
-import { ExtensionMeta } from './entities/extension';
+import {PreloadedExtension, RawExtension} from './entities/extension';
 import * as vscode from 'vscode';
 import { EXTENSION_NAME } from './const';
 import ExtensionStore from './extension-store';
@@ -25,9 +25,9 @@ export default class Main {
     );
   }
 
-  private getExtensions (): ExtensionMeta[] {
+  private getExtensions (): RawExtension[] {
     return this.vscode.extensions.all
-      .map((extension: vscode.Extension<any>) => new ExtensionMeta(extension))
-      .filter((extension: ExtensionMeta) => !extension.isVscodeBundled);
+      .map((extension: vscode.Extension<any>) => new RawExtension(extension))
+      .filter((extension: PreloadedExtension) => !extension.isVscodeBundled);
   }
 }

@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 
-import { ExtensionMeta } from '../../lib/entities/extension';
+import {RawExtension} from '../../lib/entities/extension';
 import * as vscode from 'vscode';
 
 describe('Extension', () => {
@@ -18,6 +18,6 @@ describe('Extension', () => {
     const rawExtension = {
       packageJSON: packageJson
     };
-    return new ExtensionMeta(rawExtension as vscode.Extension<any>);
+    return new RawExtension(rawExtension as vscode.Extension<any>);
   }
 });

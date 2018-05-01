@@ -1,4 +1,4 @@
-import {ExtensionMeta} from './entities/extension';
+import {PreloadedExtension, RawExtension} from './entities/extension';
 import {parseVersion, Version} from './entities/version';
 import {mapObject, ObjectMap} from './utils';
 import ConfigStore from './config-store';
@@ -9,29 +9,29 @@ export type ExtensionVersionMap = {
 
 export default class ExtensionStore {
   private configStore: ConfigStore;
-  private loadedExtensions: ExtensionMeta[] = [];
+  private loadedExtensions: PreloadedExtension[] = [];
 
   constructor(configStore: ConfigStore) {
     this.configStore = configStore;
   }
 
-  get extensionVersions (): ExtensionVersionMap {
+  private get extensionVersions (): ExtensionVersionMap {
     return mapObject(this.configStore.extensionVersions, parseVersion);
   }
 
-  memoLoadedExtensions (extensions: ExtensionMeta[]): void {
-    this.loadedExtensions = extensions;
+  memoLoadedExtensions (extensions: RawExtension[]): void {
+    const versionMap = this.extensionVersions;
+    this.loadedExtensions = extensions.map(
+      extension => extension.withPrevInstalledVersion(versionMap[extension.id])
+    );
   }
 
   hasUpdatedExtensions () {
     return this.getUpdatedExtensions().length !== 0;
   }
 
-  getUpdatedExtensions (): ExtensionMeta[] {
-    const versionMap = this.extensionVersions;
-    return this.loadedExtensions.filter(extension =>
-      extension.isNewerThan(versionMap[extension.id])
-    );
+  getUpdatedExtensions (): PreloadedExtension[] {
+    return this.loadedExtensions.filter(extension => extension.hasBeenUpdated());
   }
 
   async persistLoadedExtensions(): Promise<void> {
@@ -39,7 +39,7 @@ export default class ExtensionStore {
     await this.configStore.updateExtensionVersions(versionMap);
   }
 
-  private getExtensionVersionMap (extensions: ExtensionMeta[]): ObjectMap {
+  private getExtensionVersionMap (extensions: PreloadedExtension[]): ObjectMap {
     return extensions.reduce(
       (map, extension) =>
         Object.assign({}, map, { [extension.id]: extension.version.toString() }),

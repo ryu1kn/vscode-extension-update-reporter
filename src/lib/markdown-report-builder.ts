@@ -1,10 +1,10 @@
-import { Extension } from './entities/extension';
+import { LoadedExtension } from './entities/extension';
 import { Change } from './types';
 
 const multiline = require('multiline-string')();
 
 export default class MarkdownReportBuilder {
-  build (extensions: Extension[]): string {
+  build (extensions: LoadedExtension[]): string {
     return multiline(`
       # Extension Updates
 
@@ -12,7 +12,7 @@ export default class MarkdownReportBuilder {
       `);
   }
 
-  private buildExtension (extensions: Extension[]) {
+  private buildExtension (extensions: LoadedExtension[]) {
     return extensions
       .map(extension =>
         multiline(`
@@ -22,7 +22,7 @@ export default class MarkdownReportBuilder {
       .join('\n\n');
   }
 
-  private buildChangelog (extension: Extension) {
+  private buildChangelog (extension: LoadedExtension) {
     const changes = extension.getUpdates();
     return changes.length > 0 ? this.buildVersion(changes) : 'Changelog not found or cannot be parsed.';
   }

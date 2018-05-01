@@ -1,7 +1,7 @@
 import * as assert from 'assert';
 
 import MarkdownReportBuilder from '../../lib/markdown-report-builder';
-import { Extension } from '../../lib/entities/extension';
+import { LoadedExtension } from '../../lib/entities/extension';
 import ChangelogParser from '../../lib/changelog-parser';
 import * as vscode from 'vscode';
 import {Version} from '../../lib/entities/version';
@@ -100,6 +100,6 @@ describe('MarkdownReportBuilder', () => {
   function createExtension ({ id, displayName, changelogText, knownVerion, lastRecordedVersion }: any) {
     const extensionRaw = { id, packageJSON: { displayName } } as vscode.Extension<any>;
     const changelog = changelogParser.parse(changelogText, knownVerion);
-    return new Extension(extensionRaw, changelog, lastRecordedVersion);
+    return new LoadedExtension(extensionRaw, lastRecordedVersion, changelog);
   }
 });
