@@ -6,12 +6,12 @@
   "publisher": "ryu1kn",
   "license": "SEE LICENSE IN LICENSE.txt",
   "bugs": {
-    "url": "https://github.com/ryu1kn/vscode-changelog-checker/issues"
+    "url": "https://github.com/ryu1kn/vscode-extension-update-reporter/issues"
   },
-  "homepage": "https://github.com/ryu1kn/vscode-changelog-checker/blob/master/README.md",
+  "homepage": "https://github.com/ryu1kn/vscode-extension-update-reporter/blob/master/README.md",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ryu1kn/vscode-changelog-checker.git"
+    "url": "https://github.com/ryu1kn/vscode-extension-update-reporter.git"
   },
   "engines": {
     "vscode": "^1.18.0"

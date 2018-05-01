@@ -1,13 +1,13 @@
-[![Build Status](https://travis-ci.org/ryu1kn/vscode-changelog-checker.svg?branch=master)](https://travis-ci.org/ryu1kn/vscode-changelog-checker)
+[![Build Status](https://travis-ci.org/ryu1kn/vscode-extension-update-reporter.svg?branch=master)](https://travis-ci.org/ryu1kn/vscode-extension-update-reporter)
 
-# Changelog Checker
+# Extension Update Reporter
 
 Check changelogs of installed extensions and report their changes
 
 ## Request Features or Report Bugs
 
-* https://github.com/ryu1kn/vscode-changelog-checker/issues
+* https://github.com/ryu1kn/vscode-extension-update-reporter/issues
 
 ## Changelog
 
-* https://github.com/ryu1kn/vscode-changelog-checker/blob/master/CHANGELOG.md
+* https://github.com/ryu1kn/vscode-extension-update-reporter/blob/master/CHANGELOG.md
