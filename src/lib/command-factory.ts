@@ -2,7 +2,7 @@ import ChangelogLoader from './changelog-loader';
 import ChangelogParser from './changelog-parser';
 import ConfigStore from './config-store';
 import ExtensionStore from './extension-store';
-import ExtensionUpdatesReportGenerator from './extension-updates-report-generator';
+import ChangelogAssigner from './changelog-assigner';
 import Main from './main';
 import FileSystem from './file-system';
 import ContentProvider from './content-provider';
@@ -26,21 +26,14 @@ export default class CommandFactory {
   createContentProvider () {
     const changelogParser = new ChangelogParser();
     const changelogLoader = new ChangelogLoader(this.fileSystem, changelogParser);
-    const updateReportGenerator = new ExtensionUpdatesReportGenerator(changelogLoader, this.getExtensionStore());
-    return new ContentProvider(updateReportGenerator, this.getExtensionStore());
-  }
-
-  private getConfigStore () {
-    return this.getCached(
-      'configStore',
-      () => new ConfigStore(this.vscode.workspace)
-    );
+    const changelogAssigner = new ChangelogAssigner(changelogLoader);
+    return new ContentProvider(changelogAssigner, this.getExtensionStore());
   }
 
   private getExtensionStore () {
     return this.getCached(
       'extensionStore',
-      () => new ExtensionStore(this.getConfigStore())
+      () => new ExtensionStore(new ConfigStore(this.vscode.workspace))
     );
   }
 

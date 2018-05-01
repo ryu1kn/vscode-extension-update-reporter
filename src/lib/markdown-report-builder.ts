@@ -3,7 +3,7 @@ import { Change } from './types';
 
 const multiline = require('multiline-string')();
 
-export default class ExtensionChangeDataBuilder {
+export default class MarkdownReportBuilder {
   build (extensions: Extension[]): string {
     return multiline(`
       # Extension Updates

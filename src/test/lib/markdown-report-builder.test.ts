@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 
-import ExtensionChangeDataBuilder from '../../lib/extension-change-data-builder';
+import MarkdownReportBuilder from '../../lib/markdown-report-builder';
 import { Extension } from '../../lib/entities/extension';
 import ChangelogParser from '../../lib/changelog-parser';
 import * as vscode from 'vscode';
@@ -8,9 +8,9 @@ import {Version} from '../../lib/entities/version';
 
 const multiline = require('multiline-string')();
 
-describe('ExtensionChangeDataBuilder', () => {
+describe('MarkdownReportBuilder', () => {
   const changelogParser = new ChangelogParser();
-  const builder = new ExtensionChangeDataBuilder();
+  const builder = new MarkdownReportBuilder();
 
   it('creates an updates summary', () => {
     const extension1 = createExtension({
