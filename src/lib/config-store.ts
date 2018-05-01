@@ -2,7 +2,7 @@ import {EXTENSION_ID} from './const';
 import * as vscode from 'vscode';
 import {ObjectMap} from './utils';
 
-const EXTENSION_VERSION_MAP = 'extensionVersions';
+const EXTENSION_VERSION_MAP = 'lastCheckedVersions';
 
 export default class ConfigStore {
   private vscWorkspace: any;
@@ -11,7 +11,7 @@ export default class ConfigStore {
     this.vscWorkspace = vscWorkspace;
   }
 
-  get extensionVersions(): ObjectMap {
+  get lastCheckedVersions(): ObjectMap {
     return this.extensionConfig.get(EXTENSION_VERSION_MAP) || {};
   }
 
@@ -19,7 +19,7 @@ export default class ConfigStore {
     return this.vscWorkspace.getConfiguration(EXTENSION_ID);
   }
 
-  async updateExtensionVersions(extensionVersions: ObjectMap) {
-    return this.extensionConfig.update(EXTENSION_VERSION_MAP, extensionVersions, true);
+  async updateLastCheckedVersions(lastCheckedVersions: ObjectMap) {
+    return this.extensionConfig.update(EXTENSION_VERSION_MAP, lastCheckedVersions, true);
   }
 }

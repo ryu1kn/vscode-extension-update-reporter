@@ -29,9 +29,9 @@ describe.skip('Integration', () => {
     },
     workspace: {
       getConfiguration: (key: string) =>
-        key === 'changelogChecker' && {
+        key === 'extensionUpdateReporter' && {
           get: (key: string) =>
-            key === 'extensionVersions' && {
+            key === 'lastCheckedVersions' && {
               ID_1: '0.8.0',
               ID_2: '0.1.0',
               ID_3: '0.1.0'

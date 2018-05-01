@@ -1,5 +1,5 @@
 {
-  "name": "changelog-checker",
+  "name": "extension-update-reporter",
   "displayName": "Extension Update Reporter",
   "description": "Check changelogs of installed extensions and report their updates",
   "version": "0.1.0",
@@ -31,7 +31,7 @@
       "type": "object",
       "title": "Extension Update Reporter configurations",
       "properties": {
-        "changelogChecker.extensionVersions": {
+        "extensionUpdateReporter.lastCheckedVersions": {
           "description": "Last checked version of installed extensions",
           "type": "object",
           "default": {}

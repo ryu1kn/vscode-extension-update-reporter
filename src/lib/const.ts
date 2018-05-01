@@ -1,4 +1,4 @@
 
-export const EXTENSION_ID = 'changelogChecker';
+export const EXTENSION_ID = 'extensionUpdateReporter';
 
-export const EXTENSION_NAME = 'changelog-checker';
+export const EXTENSION_NAME = 'extension-update-reporter';

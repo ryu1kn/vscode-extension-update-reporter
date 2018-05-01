@@ -2,10 +2,10 @@
 - [X] Save the current version into configuration if none is saved
 - [X] Update the last checked versions after showing the report
 - [X] Fix the logic of comparing extension versions
-- [ ] Revise extension name
-- [ ] Revise extension config name
+- [X] Revise extension name
+- [X] Revise extension config name
 - [ ] Update README
 - [ ] Create the extension icon
 - [ ] Disable JS on `previewHtml`
-- [ ] Revise the message displayed when changelog parsing failed
+- [X] Revise the message displayed when changelog parsing failed
 - [X] Convert the project language from js to TypeScript

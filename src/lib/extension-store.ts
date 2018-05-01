@@ -15,12 +15,12 @@ export default class ExtensionStore {
     this.configStore = configStore;
   }
 
-  private get extensionVersions (): ExtensionVersionMap {
-    return mapObject(this.configStore.extensionVersions, parseVersion);
+  private get lastCheckedVersions (): ExtensionVersionMap {
+    return mapObject(this.configStore.lastCheckedVersions, parseVersion);
   }
 
   memoLoadedExtensions (extensions: RawExtension[]): void {
-    const versionMap = this.extensionVersions;
+    const versionMap = this.lastCheckedVersions;
     this.loadedExtensions = extensions.map(
       extension => extension.withPrevInstalledVersion(versionMap[extension.id])
     );
@@ -36,7 +36,7 @@ export default class ExtensionStore {
 
   async persistLoadedExtensions(): Promise<void> {
     const versionMap = this.getExtensionVersionMap(this.loadedExtensions);
-    await this.configStore.updateExtensionVersions(versionMap);
+    await this.configStore.updateLastCheckedVersions(versionMap);
   }
 
   private getExtensionVersionMap (extensions: PreloadedExtension[]): ObjectMap {
