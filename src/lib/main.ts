@@ -23,7 +23,6 @@ export default class Main {
       undefined,
       'Exntension Update Report'
     );
-    await this.extensionStore.persistLoadedExtensions();
   }
 
   private getExtensions (): ExtensionMeta[] {

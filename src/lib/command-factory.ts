@@ -5,6 +5,7 @@ import ExtensionStore from './extension-store';
 import ExtensionUpdatesReportGenerator from './extension-updates-report-generator';
 import Main from './main';
 import FileSystem from './file-system';
+import ContentProvider from './content-provider';
 
 export default class CommandFactory {
   private fileSystem: FileSystem;
@@ -18,14 +19,15 @@ export default class CommandFactory {
     this.cache = new Map();
   }
 
-  createReportGenerator () {
-    const changelogParser = new ChangelogParser();
-    const changelogLoader = new ChangelogLoader(this.fileSystem, changelogParser);
-    return new ExtensionUpdatesReportGenerator(changelogLoader, this.getExtensionStore());
-  }
-
   createMain () {
     return new Main(this.getExtensionStore(), this.vscode);
+  }
+
+  createContentProvider () {
+    const changelogParser = new ChangelogParser();
+    const changelogLoader = new ChangelogLoader(this.fileSystem, changelogParser);
+    const updateReportGenerator = new ExtensionUpdatesReportGenerator(changelogLoader, this.getExtensionStore());
+    return new ContentProvider(updateReportGenerator, this.getExtensionStore());
   }
 
   private getConfigStore () {

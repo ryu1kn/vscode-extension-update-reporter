@@ -57,12 +57,11 @@ describe.skip('Integration', () => {
     .when(fileSystem.readFile('PATH_3/CHANGELOG.md'))
     .thenResolve(readFileSync('./sample-changelog-lv2-heading.md'));
   const commandFactory = new CommandFactory(fileSystem, vscode);
-  const extensionUpdatesReportGenerator = commandFactory.createReportGenerator();
   const main = commandFactory.createMain();
 
   it('generates a summary', async () => {
     await main.run();
-    const result = await extensionUpdatesReportGenerator.generate();
+    const result = '';
     assert.deepEqual(result, readFileSync('./sample-report.md'));
   });
 

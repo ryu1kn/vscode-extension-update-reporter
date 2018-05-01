@@ -2,14 +2,16 @@ import * as assert from 'assert';
 const td = require('testdouble');
 
 import ContentProvider from '../../lib/content-provider';
+import ExtensionStore from '../../lib/extension-store';
 const multiline = require('multiline-string')();
 
 describe('ContentProvider', () => {
+  const extensionStore = td.object('persistLoadedExtensions') as ExtensionStore;
   const extensionUpdatesReportGenerator = td.object('convert');
   td
     .when(extensionUpdatesReportGenerator.generate())
     .thenResolve('MARKDOWN_STRING');
-  const contentProvider = new ContentProvider(extensionUpdatesReportGenerator);
+  const contentProvider = new ContentProvider(extensionUpdatesReportGenerator, extensionStore);
 
   it('returns HTML with extension updates in it', async () => {
     const html = await contentProvider.provideTextDocumentContent();
