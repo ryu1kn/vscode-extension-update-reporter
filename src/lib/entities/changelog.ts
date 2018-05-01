@@ -3,7 +3,6 @@ import {Version} from './version';
 
 export interface Changelog {
   getUpdatesSince (baseVersion: Version): Change[];
-  isValid: boolean;
 }
 
 export class DefaultChangelog implements Changelog {
@@ -18,14 +17,10 @@ export class DefaultChangelog implements Changelog {
       version => version.version.isHigherThan(baseVersion)
     );
   }
-
-  get isValid() { return true; }
 }
 
 export class NullChangelog implements Changelog {
   getUpdatesSince (baseVersion: Version): Change[] {
     return [];
   }
-
-  get isValid() { return false; }
 }

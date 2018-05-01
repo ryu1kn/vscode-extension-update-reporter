@@ -13,15 +13,16 @@ export default class ExtensionUpdatesReportGenerator {
   }
 
   async generate (): Promise<string> {
+    const lastRecordedVersions = this.extensionStore.extensionVersions;
     const extensions = await Promise.all(
       this.extensionStore.getUpdatedExtensions().map(async extension => {
         const changelog = await this.changelogLoader.load(
           extension.extensionPath,
           extension.version
         );
-        return extension.withChangelog(changelog);
+        return extension.withHistory(changelog, lastRecordedVersions[extension.id]);
       })
     );
-    return this.builder.build(extensions, this.extensionStore.extensionVersions);
+    return this.builder.build(extensions);
   }
 }

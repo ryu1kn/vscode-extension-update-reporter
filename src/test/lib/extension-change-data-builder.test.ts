@@ -16,6 +16,7 @@ describe('ExtensionChangeDataBuilder', () => {
     const extension1 = createExtension({
       id: 'EXT1',
       displayName: 'EXT_NAME_1',
+      lastRecordedVersion: new Version(0, 8, 0),
       changelogText: multiline(`
         The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
@@ -36,6 +37,7 @@ describe('ExtensionChangeDataBuilder', () => {
     const extension2 = createExtension({
       id: 'EXT2',
       displayName: 'EXT_NAME_2',
+      lastRecordedVersion: new Version(0, 0, 9),
       changelogText: multiline(`
         The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
@@ -48,13 +50,9 @@ describe('ExtensionChangeDataBuilder', () => {
         - foo
         `)
     });
-    const extensionVersions = {
-      EXT1: new Version(0, 8, 0),
-      EXT2: new Version(0, 0, 9)
-    };
 
     assert.deepEqual(
-      builder.build([extension1, extension2], extensionVersions),
+      builder.build([extension1, extension2]),
       multiline(`
       # Extension Updates
 
@@ -81,15 +79,15 @@ describe('ExtensionChangeDataBuilder', () => {
       id: 'EXT3',
       displayName: 'EXT_NAME_3',
       knownVerion: new Version(1, 3, 0),
+      lastRecordedVersion: new Version(0, 0, 1),
       changelogText: multiline(`
         ### 26 Jan 2018 - 1.3.0
         * Update to work with new Code version
         `)
     });
-    const extensionVersions = { EXT3: new Version(0, 0, 1) };
 
     assert.deepEqual(
-      builder.build([extension], extensionVersions),
+      builder.build([extension]),
       multiline(`
       # Extension Updates
 
@@ -99,9 +97,9 @@ describe('ExtensionChangeDataBuilder', () => {
     );
   });
 
-  function createExtension ({ id, displayName, changelogText, knownVerion }: any) {
+  function createExtension ({ id, displayName, changelogText, knownVerion, lastRecordedVersion }: any) {
     const extensionRaw = { id, packageJSON: { displayName } } as vscode.Extension<any>;
     const changelog = changelogParser.parse(changelogText, knownVerion);
-    return new Extension(extensionRaw, changelog);
+    return new Extension(extensionRaw, changelog, lastRecordedVersion);
   }
 });

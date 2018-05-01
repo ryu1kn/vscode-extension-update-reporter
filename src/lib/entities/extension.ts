@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import {Changelog} from './changelog';
 import {parseVersion, Version} from './version';
+import {Change} from '../types';
 
 export class ExtensionMeta {
   private raw: vscode.Extension<any>;
@@ -37,20 +38,22 @@ export class ExtensionMeta {
     return this.raw.extensionPath;
   }
 
-  withChangelog (changelog: Changelog): Extension {
-    return new Extension(this.raw, changelog);
+  withHistory (changelog: Changelog, lastRecordedVersion: Version): Extension {
+    return new Extension(this.raw, changelog, lastRecordedVersion);
   }
 }
 
 export class Extension extends ExtensionMeta {
-  private _changelog: Changelog;
+  private changelog: Changelog;
+  private lastRecordedVersion: Version;
 
-  constructor (raw: vscode.Extension<any>, changelog: Changelog) {
+  constructor (raw: vscode.Extension<any>, changelog: Changelog, lastRecordedVersion: Version) {
     super(raw);
-    this._changelog = changelog;
+    this.changelog = changelog;
+    this.lastRecordedVersion = lastRecordedVersion;
   }
 
-  get changelog () {
-    return this._changelog;
+  getUpdates(): Change[] {
+    return this.changelog.getUpdatesSince(this.lastRecordedVersion);
   }
 }
