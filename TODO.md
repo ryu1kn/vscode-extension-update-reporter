@@ -1,4 +1,4 @@
-- [ ] Update UI
+- [X] Update UI
 - [X] Save the current version into configuration if none is saved
 - [X] Update the last checked versions after showing the report
 - [X] Fix the logic of comparing extension versions
