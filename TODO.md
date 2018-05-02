@@ -6,6 +6,6 @@
 - [X] Revise extension config name
 - [ ] Update README
 - [ ] Create the extension icon
-- [ ] Disable JS on `previewHtml`
+- [X] Disable JS on `previewHtml`
 - [X] Revise the message displayed when changelog parsing failed
 - [X] Convert the project language from js to TypeScript

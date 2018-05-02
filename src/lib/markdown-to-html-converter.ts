@@ -4,8 +4,10 @@ const multiline = require('multiline-string')();
 export default class MarkdownToHtmlConverter {
   convert (markdownReport: string): string {
     return multiline(`
-      <html>
+      <html lang="en">
         <head>
+          <meta http-equiv="Content-Security-Policy"
+              content="default-src 'none'; img-src *; style-src 'sha256-WfeEgJ1vUKDPEVQf8Wp4SY90PGXZ3IJBfeBANM0l2QE='; script-src 'none';">
           <style>
             html {
               font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
