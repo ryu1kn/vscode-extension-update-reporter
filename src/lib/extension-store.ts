@@ -1,5 +1,6 @@
 import {PreloadedExtension, RawExtension} from './entities/extension';
 import ConfigStore from './config-store';
+import {createNullVersion} from "./entities/version";
 
 export default class ExtensionStore {
   private configStore: ConfigStore;
@@ -12,7 +13,7 @@ export default class ExtensionStore {
   memoLoadedExtensions (extensions: RawExtension[]): void {
     const versionMap = this.configStore.lastCheckedVersions;
     this.loadedExtensions = extensions.map(
-      extension => extension.withPrevInstalledVersion(versionMap[extension.id])
+      extension => extension.withPrevInstalledVersion(versionMap.get(extension.id, createNullVersion()))
     );
   }
 

@@ -1,12 +1,12 @@
 import * as assert from 'assert';
-const td = require('testdouble');
-
 import ChangelogLoader from '../../lib/changelog-loader';
 import ChangelogParser from '../../lib/changelog-parser';
-import {Version} from '../../lib/entities/version';
+import {parseVersion} from '../../lib/entities/version';
+
+const td = require('testdouble');
 
 describe('ChangelogLoader', () => {
-  const dummyVer = new Version(0, 0, 0);
+  const dummyVer = parseVersion('0.0.0');
   const fileSystem = td.object(['readDirectory', 'readFile']);
   td
     .when(fileSystem.readDirectory('EXTENSION_PATH'))

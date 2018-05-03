@@ -1,14 +1,10 @@
 import {EXTENSION_ID} from './const';
 import * as vscode from 'vscode';
-import {mapObject, ObjectMap} from './utils';
+import {mapObject, ObjectMap, PowerMap} from './utils';
 import {parseVersion, Version} from './entities/version';
 import {PreloadedExtension} from './entities/extension';
 
 const EXTENSION_VERSION_MAP = 'lastCheckedVersions';
-
-export type ExtensionVersionMap = {
-  [extensionId: string]: Version
-};
 
 export default class ConfigStore {
   private vscWorkspace: any;
@@ -17,9 +13,9 @@ export default class ConfigStore {
     this.vscWorkspace = vscWorkspace;
   }
 
-  get lastCheckedVersions(): ExtensionVersionMap {
+  get lastCheckedVersions(): PowerMap<Version> {
     const versionMap = this.extensionConfig.get(EXTENSION_VERSION_MAP) || {};
-    return mapObject(versionMap, parseVersion);
+    return new PowerMap(mapObject(versionMap as {[key: string]: string}, parseVersion));
   }
 
   private get extensionConfig(): vscode.WorkspaceConfiguration {
@@ -31,7 +27,7 @@ export default class ConfigStore {
     return this.extensionConfig.update(EXTENSION_VERSION_MAP, versionMap, true);
   }
 
-  private getExtensionVersionMap (extensions: PreloadedExtension[]): ObjectMap {
+  private getExtensionVersionMap (extensions: PreloadedExtension[]): ObjectMap<string> {
     return extensions.reduce(
       (map, extension) =>
         Object.assign({}, map, { [extension.id]: extension.version.toString() }),

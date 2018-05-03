@@ -1,9 +1,29 @@
-export type ObjectMap = {
-  [key: string]: any
+export type ObjectMap<T> = {
+  [key: string]: T
 };
 
-export function mapObject(object: ObjectMap, callback: (value: any) => any): ObjectMap {
-  return Object.entries(object).reduce((previous: ObjectMap, [key, value]) =>
+export class PowerMap<T> {
+  private map: Map<string, T>;
+
+  constructor (object: ObjectMap<T>) {
+    this.map = toMap(object);
+  }
+
+  get (key: string, defaultValue: T): T {
+    return this.map.get(key) || defaultValue;
+  }
+}
+
+function toMap<T>(object: ObjectMap<T>): Map<string, T> {
+  const tuples = Object.entries(object).reduce(
+    (previous: [string, T][], currentValue) => [...previous, currentValue],
+    []
+  );
+  return new Map(tuples);
+}
+
+export function mapObject<T, S>(object: ObjectMap<T>, callback: (value: T) => S): ObjectMap<S> {
+  return Object.entries(object).reduce((previous: ObjectMap<T>, [key, value]) =>
     Object.assign({}, previous, {[key]: callback(value)}),
     {}
   );

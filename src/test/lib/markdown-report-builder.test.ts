@@ -4,7 +4,7 @@ import MarkdownReportBuilder from '../../lib/markdown-report-builder';
 import { LoadedExtension } from '../../lib/entities/extension';
 import ChangelogParser from '../../lib/changelog-parser';
 import * as vscode from 'vscode';
-import {Version} from '../../lib/entities/version';
+import {parseVersion} from '../../lib/entities/version';
 
 const multiline = require('multiline-string')();
 
@@ -16,7 +16,7 @@ describe('MarkdownReportBuilder', () => {
     const extension1 = createExtension({
       id: 'EXT1',
       displayName: 'EXT_NAME_1',
-      lastRecordedVersion: new Version(0, 8, 0),
+      lastRecordedVersion: parseVersion('0.8.0'),
       changelogText: multiline(`
         The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
@@ -37,7 +37,7 @@ describe('MarkdownReportBuilder', () => {
     const extension2 = createExtension({
       id: 'EXT2',
       displayName: 'EXT_NAME_2',
-      lastRecordedVersion: new Version(0, 0, 9),
+      lastRecordedVersion: parseVersion('0.0.9'),
       changelogText: multiline(`
         The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
@@ -78,8 +78,8 @@ describe('MarkdownReportBuilder', () => {
     const extension = createExtension({
       id: 'EXT3',
       displayName: 'EXT_NAME_3',
-      knownVerion: new Version(1, 3, 0),
-      lastRecordedVersion: new Version(0, 0, 1),
+      knownVerion: parseVersion('1.3.0'),
+      lastRecordedVersion: parseVersion('0.0.1'),
       changelogText: multiline(`
         ### 26 Jan 2018 - 1.3.0
         * Update to work with new Code version

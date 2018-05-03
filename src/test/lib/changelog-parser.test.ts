@@ -1,12 +1,12 @@
 import * as assert from 'assert';
 
 import ChangelogParser from '../../lib/changelog-parser';
-import {Version} from '../../lib/entities/version';
+import {parseVersion} from '../../lib/entities/version';
 
 const multiline = require('multiline-string')();
 
 describe('ChangelogParser', () => {
-  const dummyVer = new Version(0, 0, 0);
+  const dummyVer = parseVersion('0.0.0');
   const changelogParser = new ChangelogParser();
   const CHANGELOG_WITH_RELEASES = multiline(`
     # Change Log
@@ -37,25 +37,25 @@ describe('ChangelogParser', () => {
 
   it('gives only the unchecked changelog', async () => {
     const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, dummyVer);
-    const changes = changelog!.getUpdatesSince(new Version(0, 0, 1));
+    const changes = changelog!.getUpdatesSince(parseVersion('0.0.1'));
     assert.deepEqual(changes[0].version.toString(), '1.0.0');
   });
 
   it('gives the contents of the change', async () => {
     const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, dummyVer);
-    const changes = changelog.getUpdatesSince(new Version(0, 0, 1));
+    const changes = changelog.getUpdatesSince(parseVersion('0.0.1'));
     assert.deepEqual(changes[0].changeText, '#### Added\n- foo');
   });
 
   it('parses the changelog of the format that each version have level 2 header', () => {
-    const changelog = changelogParser.parse(CHANGELOG_LV2_HEADERS, new Version(1, 0, 0));
-    const changes = changelog.getUpdatesSince(new Version(0, 0, 1));
+    const changelog = changelogParser.parse(CHANGELOG_LV2_HEADERS, parseVersion('1.0.0'));
+    const changes = changelog.getUpdatesSince(parseVersion('0.0.1'));
     assert.deepEqual(changes[0].changeText, '- foo');
   });
 
   it('treats as if it were just a normal text if version is malformed', () => {
-    const changelog = changelogParser.parse(CHANGELOG_WRONG_SUBSECTION_LEVEL, new Version(1, 0, 0));
-    const changes = changelog.getUpdatesSince(new Version(0, 0, 1));
+    const changelog = changelogParser.parse(CHANGELOG_WRONG_SUBSECTION_LEVEL, parseVersion('1.0.0'));
+    const changes = changelog.getUpdatesSince(parseVersion('0.0.1'));
     assert.deepEqual(changes[0].version.toString(), '1.0.0');
     assert.deepEqual(changes[0].changeText, '### Fixes:\n- foo');
   });

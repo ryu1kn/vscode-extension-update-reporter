@@ -1,5 +1,9 @@
 
-export class Version {
+export interface Version {
+  isHigherThan (other: Version): boolean;
+}
+
+class ValidVersion implements Version {
   private major: number;
   private minor: number;
   private patch: number;
@@ -10,10 +14,13 @@ export class Version {
     this.patch = patch;
   }
 
-  isHigherThan (other: Version) {
-    return this.major > other.major
-      || (this.major === other.major && this.minor > other.minor)
-      || (this.major === other.major && this.minor === other.minor && this.patch > other.patch);
+  isHigherThan (other: Version): boolean {
+    if (other instanceof ValidVersion) {
+      return this.major > other.major
+        || (this.major === other.major && this.minor > other.minor)
+        || (this.major === other.major && this.minor === other.minor && this.patch > other.patch);
+    }
+    return false;
   }
 
   toString (): string {
@@ -21,10 +28,20 @@ export class Version {
   }
 }
 
+class NullVersion implements Version {
+  isHigherThan(other: Version) {
+    return false;
+  }
+}
+
+export function createNullVersion (): NullVersion {
+  return new NullVersion();
+}
+
 export function parseVersion (version: string): Version {
   const match = /(\d+)\.(\d+)\.(\d+)/.exec(version);
-  if (!match) throw new Error('Version malformed');
-  return new Version(parseInt(match[1]), parseInt(match[2]), parseInt(match[3]));
+  if (!match) return createNullVersion();
+  return new ValidVersion(parseInt(match[1]), parseInt(match[2]), parseInt(match[3]));
 }
 
 export function isValidVersion (version: string): boolean {
