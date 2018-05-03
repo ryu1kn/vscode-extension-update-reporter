@@ -4,8 +4,9 @@
 - [X] Fix the logic of comparing extension versions
 - [X] Revise extension name
 - [X] Revise extension config name
-- [ ] Update README
-- [ ] Create the extension icon
+- [X] Update README
+- [X] Create the extension icon
+- [X] Create the animation to show how this extension work
 - [X] Disable JS on `previewHtml`
 - [X] Revise the message displayed when changelog parsing failed
 - [X] Convert the project language from js to TypeScript
