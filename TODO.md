@@ -10,4 +10,4 @@
 - [X] Disable JS on `previewHtml`
 - [X] Revise the message displayed when changelog parsing failed
 - [X] Convert the project language from js to TypeScript
-- [ ] Fix the problem that config is not updated if there is no updates in recorded extensions
+- [X] Fix the problem that config is not updated if there is no updates in recorded extensions

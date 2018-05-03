@@ -15,8 +15,9 @@ export default class Main {
   async run (): Promise<void> {
     this.extensionStore.memoLoadedExtensions(this.getExtensions());
 
-    if (!this.extensionStore.hasUpdatedExtensions()) return;
-
+    if (!this.extensionStore.hasUpdatedExtensions()) {
+      return this.extensionStore.persistLoadedExtensions();
+    }
     await this.vscode.commands.executeCommand(
       'vscode.previewHtml',
       this.vscode.Uri.parse(`${EXTENSION_NAME}:show-updates-summary`),
