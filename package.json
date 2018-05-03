@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "publisher": "ryu1kn",
   "license": "SEE LICENSE IN LICENSE.txt",
+  "icon": "images/logo.png",
   "bugs": {
     "url": "https://github.com/ryu1kn/vscode-extension-update-reporter/issues"
   },
