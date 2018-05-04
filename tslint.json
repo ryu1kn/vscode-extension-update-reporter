@@ -12,5 +12,5 @@
 		"quotemark": [true, "single", "avoid-escape"],
 		"triple-equals": true
 	},
-	"defaultSeverity": "warning"
+	"defaultSeverity": "error"
 }

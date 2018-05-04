@@ -1,6 +1,6 @@
 import {PreloadedExtension, RawExtension} from './entities/extension';
 import ConfigStore from './config-store';
-import {createNullVersion} from "./entities/version";
+import {createNullVersion} from './entities/version';
 
 export default class ExtensionStore {
   private configStore: ConfigStore;
