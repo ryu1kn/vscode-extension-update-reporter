@@ -82,7 +82,7 @@ describe('MarkdownReportBuilder', () => {
       lastRecordedVersion: parseVersion('0.0.1'),
       changelogText: multiline(`
         ### 26 Jan 2018 - 1.3.0
-        * Update to work with new Code version
+        * foo
         `)
     });
 
@@ -92,7 +92,8 @@ describe('MarkdownReportBuilder', () => {
       # Extension Updates
 
       ## EXT_NAME_3
-      Changelog not found or cannot be parsed.
+      ### [1.3.0]
+      * foo
       `)
     );
   });

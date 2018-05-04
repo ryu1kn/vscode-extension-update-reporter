@@ -59,4 +59,38 @@ describe('ChangelogParser', () => {
     assert.deepEqual(changes[0].version.toString(), '1.0.0');
     assert.deepEqual(changes[0].changeText, '### Fixes:\n- foo');
   });
+
+  it('parses the changelog with version section not starting with version number', () => {
+    const changelogText = multiline(`
+        ## Release 1.3.0
+        
+        * foo
+        * bar
+        
+        ## Release 1.2.0
+        
+        * baz
+        `);
+    const changelog = changelogParser.parse(changelogText, parseVersion('1.2.0'));
+    const changes = changelog.getUpdatesSince(parseVersion('1.2.0'));
+    assert.deepEqual(changes[0].version.toString(), '1.3.0');
+    assert.deepEqual(changes[0].changeText, '* foo\n* bar');
+  });
+
+  it('parses Keep-a-changelog like changelog without reference to it', () => {
+    const changelogText = multiline(`
+        ## [1.3.0]
+        
+        * foo
+        * bar
+        
+        ## [1.2.0]
+        
+        * baz
+        `);
+    const changelog = changelogParser.parse(changelogText, parseVersion('1.2.0'));
+    const changes = changelog.getUpdatesSince(parseVersion('1.2.0'));
+    assert.deepEqual(changes[0].version.toString(), '1.3.0');
+    assert.deepEqual(changes[0].changeText, '* foo\n* bar');
+  });
 });

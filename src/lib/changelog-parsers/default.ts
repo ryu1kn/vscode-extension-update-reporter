@@ -18,12 +18,12 @@ export default class DefaultChangelogParser implements ChangelogParser {
   }
 
   private findVersionHeading (changelog: string, knownVersion: Version) {
-    const match = changelog.match(new RegExp(`^(#+ *)${knownVersion}`, 'm'));
+    const match = changelog.match(new RegExp(`^(#+ +.*)${knownVersion}`, 'm'));
     return match && match[1];
   }
 
   private splitIntoVersions (changelog: string, versionHeading: string): Change[] {
-    const versionHeadingPattern = new RegExp(`^${versionHeading}(.*)`, 'm');
+    const versionHeadingPattern = new RegExp(`^${this.escapeRegExp(versionHeading)}(.*)`, 'm');
     const [, ...match] = changelog.split(versionHeadingPattern);
     const tuples = toTuples(match);
     const changes = [];
@@ -43,5 +43,9 @@ export default class DefaultChangelogParser implements ChangelogParser {
       }
     }
     return changes;
+  }
+
+  private escapeRegExp (text: string): string {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
   }
 }
