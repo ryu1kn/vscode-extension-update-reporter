@@ -1,34 +1,34 @@
 import * as assert from 'assert';
-const td = require('testdouble');
-
 import ContentProvider from '../../lib/content-provider';
 import ExtensionStore from '../../lib/extension-store';
-const multiline = require('multiline-string')();
+import {PreloadedExtension} from '../../lib/entities/extension';
+import {parseVersion} from '../../lib/entities/version';
+import * as vscode from 'vscode';
+import {DefaultChangelog} from '../../lib/entities/changelog';
+
+const td = require('testdouble');
+
+const multiline = require('multiline-string')({ marginMark: '|' });
 
 describe('ContentProvider', () => {
-  const extensionStore = td.object('persistLoadedExtensions') as ExtensionStore;
+  const extensionRaw = { packageJSON: { displayName: 'EXT_NAME' } } as vscode.Extension<any>;
+  const extension = new PreloadedExtension(extensionRaw, parseVersion('0.1.0'));
+  const extensionStore = td.object(['getUpdatedExtensions', 'persistLoadedExtensions']) as ExtensionStore;
+  td.when(extensionStore.getUpdatedExtensions()).thenReturn([extension]);
   const changelogAssigner = td.object('assign');
-  td
-    .when(changelogAssigner.assign())
-    .thenResolve('MARKDOWN_STRING');
+  td.when(changelogAssigner.assign([extension]))
+    .thenResolve([extension.withHistory(new DefaultChangelog({versions: []}))]);
   const contentProvider = new ContentProvider(changelogAssigner, extensionStore);
 
-  it.skip('returns HTML with extension updates in it', async () => {
+  it('returns HTML with extension updates in it', async () => {
     const html = await contentProvider.provideTextDocumentContent();
-    assert.equal(
-      html,
-      multiline(`
-      <html>
-        <head>
-          <style>
-            h2 { margin-top: 3em; }
-          </style>
-        </head>
-        <body>
-          <p>MARKDOWN_STRING</p>
-
-        </body>
-      </html>`)
-    );
+    const expectation = multiline(`
+        |  <body>
+        |    <h1>Extension Updates</h1>
+        |<h2>EXT_NAME</h2>
+        |<p>Changelog not found or cannot be parsed.</p>
+        |
+        |  </body>`);
+    assert.ok(html.includes(expectation));
   });
 });
