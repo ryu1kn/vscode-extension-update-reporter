@@ -6,7 +6,7 @@ import FileSystem from '../../lib/file-system';
 import { readFileSync as fsReadFileSync } from 'fs';
 import { join } from 'path';
 
-describe('Integration', () => {
+describe('End to End', () => {
   const vscode = {
     extensions: {
       all: [
@@ -67,6 +67,6 @@ describe('Integration', () => {
   });
 
   function readFileSync (path: string): string {
-    return fsReadFileSync(join('test-data', 'integration', path), 'utf8');
+    return fsReadFileSync(join('test-data', 'e2e', path), 'utf8');
   }
 });
