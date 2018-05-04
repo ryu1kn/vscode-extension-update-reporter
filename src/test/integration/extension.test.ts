@@ -6,7 +6,7 @@ import FileSystem from '../../lib/file-system';
 import { readFileSync as fsReadFileSync } from 'fs';
 import { join } from 'path';
 
-describe.skip('Integration', () => {
+describe('Integration', () => {
   const vscode = {
     extensions: {
       all: [
@@ -58,11 +58,12 @@ describe.skip('Integration', () => {
     .thenResolve(readFileSync('./sample-changelog-lv2-heading.md'));
   const commandFactory = new CommandFactory(fileSystem, vscode);
   const main = commandFactory.createMain();
+  const contentProvider = commandFactory.createContentProvider();
 
   it('generates a summary', async () => {
     await main.run();
-    const result = '';
-    assert.deepEqual(result, readFileSync('./sample-report.md'));
+    const html = await contentProvider.provideTextDocumentContent();
+    assert.deepEqual(html, readFileSync('./sample-report.html'));
   });
 
   function readFileSync (path: string): string {

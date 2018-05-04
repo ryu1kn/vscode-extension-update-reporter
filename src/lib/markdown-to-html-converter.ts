@@ -78,6 +78,7 @@ export default class MarkdownToHtmlConverter {
         <body>
           ${md.render(markdownReport)}
         </body>
-      </html>`);
+      </html>
+      `);
   }
 }
