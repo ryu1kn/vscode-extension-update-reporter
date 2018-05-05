@@ -1,6 +1,6 @@
 import {EXTENSION_ID} from './const';
 import * as vscode from 'vscode';
-import {mapObject, ObjectMap, PowerMap} from './utils';
+import {mapObject, ObjectMap, PowerMap} from './utils/collection';
 import {parseVersion, Version} from './entities/version';
 import {PreloadedExtension} from './entities/extension';
 

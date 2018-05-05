@@ -2,7 +2,8 @@ import { ChangelogParser } from './changelog-parser';
 import { Change } from '../types';
 import {DefaultChangelog, NullChangelog} from '../entities/changelog';
 import {isValidVersion, parseVersion, Version} from '../entities/version';
-import {toTuples} from '../utils';
+import {toTuples} from '../utils/collection';
+import {escape as escapeRegex} from '../utils/regex';
 
 export default class DefaultChangelogParser implements ChangelogParser {
   isOfType (changelog: string) {
@@ -18,12 +19,12 @@ export default class DefaultChangelogParser implements ChangelogParser {
   }
 
   private findVersionHeading (changelog: string, knownVersion: Version) {
-    const match = changelog.match(new RegExp(`^(#+ +.*)${knownVersion}`, 'm'));
+    const match = changelog.match(new RegExp(`^(#+ +.*)${escapeRegex(knownVersion.toString())}`, 'm'));
     return match && match[1];
   }
 
   private splitIntoVersions (changelog: string, versionHeading: string): Change[] {
-    const versionHeadingPattern = new RegExp(`^${this.escapeRegExp(versionHeading)}(.*)`, 'm');
+    const versionHeadingPattern = new RegExp(`^${escapeRegex(versionHeading)}(.*)`, 'm');
     const [, ...match] = changelog.split(versionHeadingPattern);
     const tuples = toTuples(match);
     const changes = [];
@@ -43,9 +44,5 @@ export default class DefaultChangelogParser implements ChangelogParser {
       }
     }
     return changes;
-  }
-
-  private escapeRegExp (text: string): string {
-    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
   }
 }
