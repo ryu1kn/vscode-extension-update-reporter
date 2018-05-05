@@ -32,8 +32,12 @@ export default class MarkdownReportBuilder {
       .map(release =>
         multiline(`
       ### [${release.version}]
-      ${release.changeText}`)
+      ${this.reviseHeadingLevel(release.changeText)}`)
       )
       .join('\n\n');
+  }
+
+  private reviseHeadingLevel (contents: string) {
+    return contents.replace(/^(#{3,} )/gm, '#$1');
   }
 }

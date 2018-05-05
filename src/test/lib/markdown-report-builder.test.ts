@@ -16,6 +16,7 @@ describe('MarkdownReportBuilder', () => {
     const extension1 = createExtension({
       id: 'EXT1',
       displayName: 'EXT_NAME_1',
+      knownVerion: parseVersion('1.0.0'),
       lastRecordedVersion: parseVersion('0.8.0'),
       changelogText: multiline(`
         The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
@@ -37,6 +38,7 @@ describe('MarkdownReportBuilder', () => {
     const extension2 = createExtension({
       id: 'EXT2',
       displayName: 'EXT_NAME_2',
+      knownVerion: parseVersion('0.1.0'),
       lastRecordedVersion: parseVersion('0.0.9'),
       changelogText: multiline(`
         The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
@@ -81,8 +83,34 @@ describe('MarkdownReportBuilder', () => {
       knownVerion: parseVersion('1.3.0'),
       lastRecordedVersion: parseVersion('0.0.1'),
       changelogText: multiline(`
-        ### 26 Jan 2018 - 1.3.0
+        ### 1-3-0
         * foo
+        `)
+    });
+
+    assert.deepEqual(
+      builder.build([extension]),
+      multiline(`
+      # Extension Updates
+
+      ## EXT_NAME_3
+      Changelog not found or cannot be parsed.
+      `)
+    );
+  });
+
+  it('increases an indent level of each header in the change description', () => {
+    const extension = createExtension({
+      id: 'EXT3',
+      displayName: 'EXT_NAME_3',
+      knownVerion: parseVersion('1.3.0'),
+      lastRecordedVersion: parseVersion('0.0.1'),
+      changelogText: multiline(`
+        ### 1.3.0
+        * foo
+        
+        ### Fixes:
+        * bar
         `)
     });
 
@@ -94,6 +122,9 @@ describe('MarkdownReportBuilder', () => {
       ## EXT_NAME_3
       ### [1.3.0]
       * foo
+      
+      #### Fixes:
+      * bar
       `)
     );
   });

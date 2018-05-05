@@ -6,7 +6,8 @@ import {parseVersion} from '../../lib/entities/version';
 const multiline = require('multiline-string')();
 
 describe('ChangelogParser', () => {
-  const dummyVer = parseVersion('0.0.0');
+  const previousVer = parseVersion('1.2.0');
+  const currentVer = parseVersion('1.3.0');
   const changelogParser = new ChangelogParser();
   const CHANGELOG_WITH_RELEASES = multiline(`
     # Change Log
@@ -16,47 +17,47 @@ describe('ChangelogParser', () => {
     The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
     and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-    ## [1.0.0] - 2018-04-21
+    ## [1.3.0] - 2018-04-21
     ### Added
     - foo
 
-    ## [0.0.1] - 2018-04-11
+    ## [1.2.0] - 2018-04-11
     ### Added
     * Initial release of My Extension
     `);
 
   it('gives only the unchecked changelog', async () => {
-    const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, dummyVer);
-    const changes = changelog!.getUpdatesSince(parseVersion('0.0.1'));
-    assert.deepEqual(changes[0].version.toString(), '1.0.0');
+    const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, currentVer);
+    const changes = changelog.getUpdatesSince(previousVer);
+    assert.deepEqual(changes[0].version.toString(), '1.3.0');
   });
 
   it('gives the contents of the change', async () => {
-    const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, dummyVer);
-    const changes = changelog.getUpdatesSince(parseVersion('0.0.1'));
-    assert.deepEqual(changes[0].changeText, '#### Added\n- foo');
+    const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, currentVer);
+    const changes = changelog.getUpdatesSince(previousVer);
+    assert.deepEqual(changes[0].changeText, '### Added\n- foo');
   });
 
   it('parses the changelog of the format that each version have level 2 header', () => {
     const changelogText = multiline(`
-        ## 1.0.0
+        ## 1.3.0
         - foo
         `);
-    const changelog = changelogParser.parse(changelogText, parseVersion('1.0.0'));
-    const changes = changelog.getUpdatesSince(parseVersion('0.0.1'));
+    const changelog = changelogParser.parse(changelogText, currentVer);
+    const changes = changelog.getUpdatesSince(previousVer);
     assert.deepEqual(changes[0].changeText, '- foo');
   });
 
   it('treats as if it were just a normal text if version is malformed', () => {
     const changelogText = multiline(`
-        ### 1.0.0
+        ### 1.3.0
 
         ### Fixes:
         - foo
         `);
-    const changelog = changelogParser.parse(changelogText, parseVersion('1.0.0'));
-    const changes = changelog.getUpdatesSince(parseVersion('0.0.1'));
-    assert.deepEqual(changes[0].version.toString(), '1.0.0');
+    const changelog = changelogParser.parse(changelogText, currentVer);
+    const changes = changelog.getUpdatesSince(previousVer);
+    assert.deepEqual(changes[0].version.toString(), '1.3.0');
     assert.deepEqual(changes[0].changeText, '### Fixes:\n- foo');
   });
 
@@ -71,8 +72,8 @@ describe('ChangelogParser', () => {
         
         * baz
         `);
-    const changelog = changelogParser.parse(changelogText, parseVersion('1.2.0'));
-    const changes = changelog.getUpdatesSince(parseVersion('1.2.0'));
+    const changelog = changelogParser.parse(changelogText, currentVer);
+    const changes = changelog.getUpdatesSince(previousVer);
     assert.deepEqual(changes[0].version.toString(), '1.3.0');
     assert.deepEqual(changes[0].changeText, '* foo\n* bar');
   });
@@ -88,8 +89,8 @@ describe('ChangelogParser', () => {
         
         * baz
         `);
-    const changelog = changelogParser.parse(changelogText, parseVersion('1.2.0'));
-    const changes = changelog.getUpdatesSince(parseVersion('1.2.0'));
+    const changelog = changelogParser.parse(changelogText, currentVer);
+    const changes = changelog.getUpdatesSince(previousVer);
     assert.deepEqual(changes[0].version.toString(), '1.3.0');
     assert.deepEqual(changes[0].changeText, '* foo\n* bar');
   });
@@ -107,13 +108,13 @@ describe('ChangelogParser', () => {
         
         * baz
         `);
-    const changelog = changelogParser.parse(changelogText, parseVersion('1.2.0'));
-    const changes = changelog.getUpdatesSince(parseVersion('1.2.0'));
+    const changelog = changelogParser.parse(changelogText, currentVer);
+    const changes = changelog.getUpdatesSince(previousVer);
     assert.deepEqual(changes[0].version.toString(), '1.3.0');
     assert.deepEqual(changes[0].changeText, '* foo\n* bar');
   });
 
-  it.skip('parses a changelog who claims it follows keep-a-changelog but actually not', () => {
+  it('parses a changelog who claims it follows keep-a-changelog but actually not', () => {
     const changelogText = multiline(`
         The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
@@ -128,8 +129,8 @@ describe('ChangelogParser', () => {
         ### Added
         * baz
         `);
-    const changelog = changelogParser.parse(changelogText, parseVersion('1.2.0'));
-    const changes = changelog.getUpdatesSince(parseVersion('1.2.0'));
+    const changelog = changelogParser.parse(changelogText, currentVer);
+    const changes = changelog.getUpdatesSince(previousVer);
     assert.deepEqual(changes[0].version.toString(), '1.3.0');
     assert.deepEqual(changes[0].changeText, '### Added\n* foo\n* bar');
   });
@@ -145,8 +146,8 @@ describe('ChangelogParser', () => {
 
         * baz
         `);
-    const changelog = changelogParser.parse(changelogText, parseVersion('1.2.0'));
-    const changes = changelog.getUpdatesSince(parseVersion('1.2.0'));
+    const changelog = changelogParser.parse(changelogText, currentVer);
+    const changes = changelog.getUpdatesSince(previousVer);
     assert.deepEqual(changes.length, 0);
   });
 });
