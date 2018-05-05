@@ -22,7 +22,7 @@ export default class Main {
       'vscode.previewHtml',
       this.vscode.Uri.parse(`${EXTENSION_NAME}:show-updates-summary`),
       undefined,
-      'Exntension Update Report'
+      'Exntension Updates'
     );
   }
 
