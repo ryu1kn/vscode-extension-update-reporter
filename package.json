@@ -1,7 +1,7 @@
 {
   "name": "extension-update-reporter",
   "displayName": "Extension Update Reporter",
-  "description": "Check changelogs of installed extensions and report their updates",
+  "description": "Present you the summary of all the changes of the installed extensions",
   "version": "0.1.0",
   "publisher": "ryu1kn",
   "license": "SEE LICENSE IN LICENSE.txt",

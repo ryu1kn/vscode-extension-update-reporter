@@ -22,6 +22,6 @@ __*
 /test-data
 /tslint.json
 /yarn.lock
-jsconfig.json
+/tslint.json
 tsconfig.json
 yarn-error.log

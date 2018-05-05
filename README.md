@@ -2,8 +2,8 @@
 
 # Extension Update Reporter
 
-Find all the updated extensions, collect their change information and present as a report.
-With this extension, you don't have to go and check the changelog of each individual extension.
+Present you the summary of all the changes of the installed extensions by checking their changelogs.
+With this extension, you don't need to go and check the changelog of each individual extension.
 
 ![Report updates on startup](https://raw.githubusercontent.com/ryu1kn/vscode-extension-update-reporter/master/images/public.gif)
 
