@@ -24,16 +24,6 @@ describe('ChangelogParser', () => {
     ### Added
     * Initial release of My Extension
     `);
-  const CHANGELOG_LV2_HEADERS = multiline(`
-    ## 1.0.0
-    - foo
-    `);
-  const CHANGELOG_WRONG_SUBSECTION_LEVEL = multiline(`
-    ### 1.0.0
-
-    ### Fixes:
-    - foo
-    `);
 
   it('gives only the unchecked changelog', async () => {
     const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, dummyVer);
@@ -48,13 +38,23 @@ describe('ChangelogParser', () => {
   });
 
   it('parses the changelog of the format that each version have level 2 header', () => {
-    const changelog = changelogParser.parse(CHANGELOG_LV2_HEADERS, parseVersion('1.0.0'));
+    const changelogText = multiline(`
+        ## 1.0.0
+        - foo
+        `);
+    const changelog = changelogParser.parse(changelogText, parseVersion('1.0.0'));
     const changes = changelog.getUpdatesSince(parseVersion('0.0.1'));
     assert.deepEqual(changes[0].changeText, '- foo');
   });
 
   it('treats as if it were just a normal text if version is malformed', () => {
-    const changelog = changelogParser.parse(CHANGELOG_WRONG_SUBSECTION_LEVEL, parseVersion('1.0.0'));
+    const changelogText = multiline(`
+        ### 1.0.0
+
+        ### Fixes:
+        - foo
+        `);
+    const changelog = changelogParser.parse(changelogText, parseVersion('1.0.0'));
     const changes = changelog.getUpdatesSince(parseVersion('0.0.1'));
     assert.deepEqual(changes[0].version.toString(), '1.0.0');
     assert.deepEqual(changes[0].changeText, '### Fixes:\n- foo');
@@ -92,5 +92,61 @@ describe('ChangelogParser', () => {
     const changes = changelog.getUpdatesSince(parseVersion('1.2.0'));
     assert.deepEqual(changes[0].version.toString(), '1.3.0');
     assert.deepEqual(changes[0].changeText, '* foo\n* bar');
+  });
+
+  it.skip('parses a changelog whose header uses equal signs', () => {
+    const changelogText = multiline(`
+        1.3.0
+        =====
+        
+        * foo
+        * bar
+        
+        1.2.0
+        =====
+        
+        * baz
+        `);
+    const changelog = changelogParser.parse(changelogText, parseVersion('1.2.0'));
+    const changes = changelog.getUpdatesSince(parseVersion('1.2.0'));
+    assert.deepEqual(changes[0].version.toString(), '1.3.0');
+    assert.deepEqual(changes[0].changeText, '* foo\n* bar');
+  });
+
+  it.skip('parses a changelog who claims it follows keep-a-changelog but actually not', () => {
+    const changelogText = multiline(`
+        The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+
+        ## 1.3.0 - 2018-03-29
+
+        ### Added
+        * foo
+        * bar
+
+        ## 1.2.0 - 2018-03-28
+
+        ### Added
+        * baz
+        `);
+    const changelog = changelogParser.parse(changelogText, parseVersion('1.2.0'));
+    const changes = changelog.getUpdatesSince(parseVersion('1.2.0'));
+    assert.deepEqual(changes[0].version.toString(), '1.3.0');
+    assert.deepEqual(changes[0].changeText, '### Added\n* foo\n* bar');
+  });
+
+  it("doesn't parse a changelog whose version is missing patch number", () => {
+    const changelogText = multiline(`
+        ## 1.3
+
+        * foo
+        * bar
+
+        ## 1.2
+
+        * baz
+        `);
+    const changelog = changelogParser.parse(changelogText, parseVersion('1.2.0'));
+    const changes = changelog.getUpdatesSince(parseVersion('1.2.0'));
+    assert.deepEqual(changes.length, 0);
   });
 });
