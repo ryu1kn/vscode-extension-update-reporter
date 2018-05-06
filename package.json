@@ -42,6 +42,7 @@
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
+    "vscode:postpublish": "./tag-release.sh",
     "compile": "tsc -p ./",
     "coverage": "nyc yarn test",
     "lint": "tslint -p tslint.json",
