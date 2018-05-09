@@ -7,11 +7,12 @@ export default class MarkdownToHtmlConverter {
       <html lang="en">
         <head>
           <meta http-equiv="Content-Security-Policy"
-              content="default-src 'none'; img-src *; style-src 'sha256-WfeEgJ1vUKDPEVQf8Wp4SY90PGXZ3IJBfeBANM0l2QE='; script-src 'none';">
+              content="default-src 'none'; img-src *; style-src 'sha256-mrvBJuuIaunUTUXs9gkJORlPQIuC3dCSip++3h+rsRc='; script-src 'none';">
           <style>
             html {
               font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
             }
+
             body {
               line-height: 1.5;
               color: #24292e;
@@ -19,31 +20,34 @@ export default class MarkdownToHtmlConverter {
               word-wrap: break-word;
             }
 
-            h1 {
+            body.vscode-dark {
+              color: #d4d4d4;
+            }
+
+            h1, h2, h3 {
               margin-top: 24px;
               margin-bottom: 16px;
               font-weight: 600;
               line-height: 1.25;
+            }
+
+            h1 {
               padding-bottom: 0.3em;
               font-size: 2em;
               border-bottom: 1px solid #eaecef;
             }
 
             h2 {
-              margin-top: 24px;
-              margin-bottom: 16px;
-              font-weight: 600;
-              line-height: 1.25;
               padding-bottom: 0.3em;
               font-size: 1.5em;
               border-bottom: 1px solid #eaecef;
             }
 
+            .vscode-dark h1, .vscode-dark h2 {
+              border-bottom: 1px solid #4b4b4b;
+            }
+
             h3 {
-              margin-top: 24px;
-              margin-bottom: 16px;
-              font-weight: 600;
-              line-height: 1.25;
               font-size: 1.25em;
             }
 
