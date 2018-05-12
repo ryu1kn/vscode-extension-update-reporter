@@ -1,8 +1,9 @@
 import { join } from 'path';
 import ChangelogParser from './changelog-parser';
 import FileSystem from './file-system';
-import {Changelog, NullChangelog} from './entities/changelog';
+import {Changelog} from './entities/changelog';
 import {Version} from './entities/version';
+import {Either, left, right} from 'fp-ts/lib/Either';
 
 export default class ChangelogLoader {
   private fileSystem: FileSystem;
@@ -13,14 +14,14 @@ export default class ChangelogLoader {
     this.changelogParser = parser;
   }
 
-  async load (extensionPath: string, knownVersion: Version): Promise<Changelog> {
+  async load (extensionPath: string, knownVersion: Version): Promise<Either<string, Changelog>> {
     const files = await this.fileSystem.readDirectory(extensionPath);
     const changelog = files.find(file => file === 'CHANGELOG.md');
-    if (!changelog) { return new NullChangelog(); }
+    if (!changelog) return left('CHANGELOG.md not found');
 
     const changelogContents = await this.fileSystem.readFile(
       join(extensionPath, changelog)
     );
-    return this.changelogParser.parse(changelogContents, knownVersion);
+    return right(this.changelogParser.parse(changelogContents, knownVersion));
   }
 }

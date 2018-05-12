@@ -2,6 +2,7 @@ import * as assert from 'assert';
 import ChangelogLoader from '../../lib/changelog-loader';
 import ChangelogParser from '../../lib/changelog-parser';
 import {parseVersion} from '../../lib/entities/version';
+import {right} from 'fp-ts/lib/Either';
 
 const td = require('testdouble');
 
@@ -20,6 +21,6 @@ describe('ChangelogLoader', () => {
 
   it('loads changelog', async () => {
     const changelog = await changelogLoader.load('EXTENSION_PATH', dummyVer);
-    assert.deepEqual(changelog, 'PARSED_CHANGELOG_CONTENTS');
+    assert.deepEqual(changelog, right('PARSED_CHANGELOG_CONTENTS'));
   });
 });

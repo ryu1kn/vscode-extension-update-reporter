@@ -5,6 +5,7 @@ import { LoadedExtension } from '../../lib/entities/extension';
 import ChangelogParser from '../../lib/changelog-parser';
 import * as vscode from 'vscode';
 import {parseVersion} from '../../lib/entities/version';
+import {left, right} from 'fp-ts/lib/Either';
 
 const multiline = require('multiline-string')();
 
@@ -99,6 +100,26 @@ describe('MarkdownReportBuilder', () => {
     );
   });
 
+  it('shows a message that changelog is not found', () => {
+    const extension = createExtension({
+      id: 'EXT3',
+      displayName: 'EXT_NAME_3',
+      knownVerion: parseVersion('1.3.0'),
+      lastRecordedVersion: parseVersion('0.0.1'),
+      errorMessage: 'ERROR_MESSAGE'
+    });
+
+    assert.deepEqual(
+      builder.build([extension]),
+      multiline(`
+      # Extension Updates
+
+      ## EXT_NAME_3
+      ERROR_MESSAGE
+      `)
+    );
+  });
+
   it('increases an indent level of each header in the change description', () => {
     const extension = createExtension({
       id: 'EXT3',
@@ -129,9 +150,11 @@ describe('MarkdownReportBuilder', () => {
     );
   });
 
-  function createExtension ({ id, displayName, changelogText, knownVerion, lastRecordedVersion }: any) {
+  function createExtension ({ id, displayName, changelogText, knownVerion, lastRecordedVersion, errorMessage }: any) {
     const extensionRaw = { id, packageJSON: { displayName } } as vscode.Extension<any>;
+    if (errorMessage) return new LoadedExtension(extensionRaw, lastRecordedVersion, left(errorMessage));
+
     const changelog = changelogParser.parse(changelogText, knownVerion);
-    return new LoadedExtension(extensionRaw, lastRecordedVersion, changelog);
+    return new LoadedExtension(extensionRaw, lastRecordedVersion, right(changelog));
   }
 });

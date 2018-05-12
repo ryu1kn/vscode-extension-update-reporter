@@ -1,5 +1,6 @@
 import { LoadedExtension } from './entities/extension';
 import { Change } from './types';
+import {identity} from 'fp-ts/lib/function';
 
 const multiline = require('multiline-string')();
 
@@ -23,8 +24,10 @@ export default class MarkdownReportBuilder {
   }
 
   private buildChangelog (extension: LoadedExtension) {
-    const changes = extension.getUpdates();
-    return changes.length > 0 ? this.buildVersion(changes) : 'Changelog not found or cannot be parsed.';
+    return extension.getUpdates().fold(
+      identity,
+      changes => changes.length > 0 ? this.buildVersion(changes) : 'Changelog not found or cannot be parsed.'
+    );
   }
 
   private buildVersion (changes: Change[]) {

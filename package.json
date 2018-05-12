@@ -21,7 +21,10 @@
     "Other"
   ],
   "keywords": [
-    "changelog", "update", "report", "summary"
+    "changelog",
+    "update",
+    "report",
+    "summary"
   ],
   "activationEvents": [
     "*"
@@ -51,6 +54,7 @@
     "test": "yarn run compile && mocha --recursive out/test"
   },
   "dependencies": {
+    "fp-ts": "1.4.1",
     "markdown-it": "8.4.1",
     "multiline-string": "0.2.0"
   },

@@ -5,6 +5,7 @@ import {PreloadedExtension} from '../../lib/entities/extension';
 import {parseVersion} from '../../lib/entities/version';
 import * as vscode from 'vscode';
 import {DefaultChangelog} from '../../lib/entities/changelog';
+import {right} from 'fp-ts/lib/Either';
 
 const td = require('testdouble');
 
@@ -17,7 +18,7 @@ describe('ContentProvider', () => {
   td.when(extensionStore.getUpdatedExtensions()).thenReturn([extension]);
   const changelogAssigner = td.object('assign');
   td.when(changelogAssigner.assign([extension]))
-    .thenResolve([extension.withHistory(new DefaultChangelog({versions: []}))]);
+    .thenResolve([extension.withHistory(right(new DefaultChangelog({versions: []})))]);
   const contentProvider = new ContentProvider(changelogAssigner, extensionStore);
 
   it('returns HTML with extension updates in it', async () => {
