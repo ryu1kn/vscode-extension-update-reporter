@@ -4,8 +4,7 @@ import ExtensionStore from '../../lib/extension-store';
 import {PreloadedExtension} from '../../lib/entities/extension';
 import {parseVersion} from '../../lib/entities/version';
 import * as vscode from 'vscode';
-import {DefaultChangelog} from '../../lib/entities/changelog';
-import {right} from 'fp-ts/lib/Either';
+import {left} from 'fp-ts/lib/Either';
 
 const td = require('testdouble');
 
@@ -18,7 +17,7 @@ describe('ContentProvider', () => {
   td.when(extensionStore.getUpdatedExtensions()).thenReturn([extension]);
   const changelogAssigner = td.object('assign');
   td.when(changelogAssigner.assign([extension]))
-    .thenResolve([extension.withHistory(right(new DefaultChangelog({versions: []})))]);
+    .thenResolve([extension.withHistory(left('ERROR_MESSAGE'))]);
   const contentProvider = new ContentProvider(changelogAssigner, extensionStore);
 
   it('returns HTML with extension updates in it', async () => {
@@ -27,7 +26,7 @@ describe('ContentProvider', () => {
         |  <body>
         |    <h1>Extension Updates</h1>
         |<h2>EXT_NAME</h2>
-        |<p>Changelog not found or cannot be parsed.</p>
+        |<p>ERROR_MESSAGE</p>
         |
         |  </body>`);
     assert.ok(html.includes(expectation));

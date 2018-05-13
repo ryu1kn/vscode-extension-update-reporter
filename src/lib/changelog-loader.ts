@@ -3,7 +3,7 @@ import ChangelogParser from './changelog-parser';
 import FileSystem from './file-system';
 import {Changelog} from './entities/changelog';
 import {Version} from './entities/version';
-import {Either, left, right} from 'fp-ts/lib/Either';
+import {Either, left} from 'fp-ts/lib/Either';
 
 export default class ChangelogLoader {
   private fileSystem: FileSystem;
@@ -22,6 +22,6 @@ export default class ChangelogLoader {
     const changelogContents = await this.fileSystem.readFile(
       join(extensionPath, changelog)
     );
-    return right(this.changelogParser.parse(changelogContents, knownVersion));
+    return this.changelogParser.parse(changelogContents, knownVersion);
   }
 }

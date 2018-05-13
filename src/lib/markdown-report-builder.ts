@@ -24,10 +24,7 @@ export default class MarkdownReportBuilder {
   }
 
   private buildChangelog (extension: LoadedExtension) {
-    return extension.getUpdates().fold(
-      identity,
-      changes => changes.length > 0 ? this.buildVersion(changes) : 'Changelog not found or cannot be parsed.'
-    );
+    return extension.getUpdates().fold(identity, changes => this.buildVersion(changes));
   }
 
   private buildVersion (changes: Change[]) {

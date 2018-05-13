@@ -5,7 +5,7 @@ import { LoadedExtension } from '../../lib/entities/extension';
 import ChangelogParser from '../../lib/changelog-parser';
 import * as vscode from 'vscode';
 import {parseVersion} from '../../lib/entities/version';
-import {left, right} from 'fp-ts/lib/Either';
+import {left} from 'fp-ts/lib/Either';
 
 const multiline = require('multiline-string')();
 
@@ -95,7 +95,7 @@ describe('MarkdownReportBuilder', () => {
       # Extension Updates
 
       ## EXT_NAME_3
-      Changelog not found or cannot be parsed.
+      Failed to parse the changelog file.
       `)
     );
   });
@@ -155,6 +155,6 @@ describe('MarkdownReportBuilder', () => {
     if (errorMessage) return new LoadedExtension(extensionRaw, lastRecordedVersion, left(errorMessage));
 
     const changelog = changelogParser.parse(changelogText, knownVerion);
-    return new LoadedExtension(extensionRaw, lastRecordedVersion, right(changelog));
+    return new LoadedExtension(extensionRaw, lastRecordedVersion, changelog);
   }
 });
