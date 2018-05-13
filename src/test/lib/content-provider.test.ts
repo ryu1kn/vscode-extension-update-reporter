@@ -11,7 +11,7 @@ const td = require('testdouble');
 const multiline = require('multiline-string')({ marginMark: '|' });
 
 describe('ContentProvider', () => {
-  const extensionRaw = { packageJSON: { displayName: 'EXT_NAME' } } as vscode.Extension<any>;
+  const extensionRaw = { id: 'ID', packageJSON: { displayName: 'EXT_NAME' } } as vscode.Extension<any>;
   const extension = new PreloadedExtension(extensionRaw, parseVersion('0.1.0'));
   const extensionStore = td.object(['getUpdatedExtensions', 'persistLoadedExtensions']) as ExtensionStore;
   td.when(extensionStore.getUpdatedExtensions()).thenReturn([extension]);
@@ -25,7 +25,7 @@ describe('ContentProvider', () => {
     const expectation = multiline(`
         |  <body>
         |    <h1>Extension Updates</h1>
-        |<h2>EXT_NAME</h2>
+        |<h2>EXT_NAME <code>ID</code></h2>
         |<p>ERROR_MESSAGE</p>
         |
         |  </body>`);

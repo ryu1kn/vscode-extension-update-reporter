@@ -59,7 +59,7 @@ describe('MarkdownReportBuilder', () => {
       multiline(`
       # Extension Updates
 
-      ## EXT_NAME_1
+      ## EXT_NAME_1 \`EXT1\`
       ### [1.0.0]
       #### Added
       - foo2
@@ -69,7 +69,7 @@ describe('MarkdownReportBuilder', () => {
       #### Added
       - foo
 
-      ## EXT_NAME_2
+      ## EXT_NAME_2 \`EXT2\`
       ### [0.1.0]
       #### Removed
       - baz
@@ -94,7 +94,7 @@ describe('MarkdownReportBuilder', () => {
       multiline(`
       # Extension Updates
 
-      ## EXT_NAME_3
+      ## EXT_NAME_3 \`EXT3\`
       Failed to parse the changelog file.
       `)
     );
@@ -114,7 +114,7 @@ describe('MarkdownReportBuilder', () => {
       multiline(`
       # Extension Updates
 
-      ## EXT_NAME_3
+      ## EXT_NAME_3 \`EXT3\`
       ERROR_MESSAGE
       `)
     );
@@ -140,7 +140,7 @@ describe('MarkdownReportBuilder', () => {
       multiline(`
       # Extension Updates
 
-      ## EXT_NAME_3
+      ## EXT_NAME_3 \`EXT3\`
       ### [1.3.0]
       * foo
       

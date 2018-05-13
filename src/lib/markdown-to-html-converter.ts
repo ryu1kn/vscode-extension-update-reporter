@@ -7,7 +7,7 @@ export default class MarkdownToHtmlConverter {
       <html lang="en">
         <head>
           <meta http-equiv="Content-Security-Policy"
-              content="default-src 'none'; img-src *; style-src 'sha256-mrvBJuuIaunUTUXs9gkJORlPQIuC3dCSip++3h+rsRc='; script-src 'none';">
+              content="default-src 'none'; img-src *; style-src 'sha256-cAWJpTizP2D7+19DP5Fc9XNkH3mSkp6VcpSqGNtMXbE='; script-src 'none';">
           <style>
             html {
               font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
@@ -47,6 +47,14 @@ export default class MarkdownToHtmlConverter {
               border-bottom: 1px solid #4b4b4b;
             }
 
+            h2 > code {
+              font-size: .5em;
+              font-weight: normal;
+              color: #888;
+              vertical-align: middle;
+              margin-left: 1em;
+            }
+
             h3 {
               font-size: 1.25em;
             }
@@ -74,8 +82,11 @@ export default class MarkdownToHtmlConverter {
               padding: 0.2em 0.4em;
               margin: 0;
               font-size: 85%;
-              background-color: rgba(27,31,35,0.05);
+              background-color: #f6f8fa;
               border-radius: 3px;
+            }
+            .vscode-dark code {
+              background-color: #4b4b4b;
             }
           </style>
         </head>

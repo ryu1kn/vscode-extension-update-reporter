@@ -17,7 +17,7 @@ export default class MarkdownReportBuilder {
     return extensions
       .map(extension =>
         multiline(`
-        ## ${extension.displayName}
+        ## ${extension.displayName} \`${extension.id}\`
         ${this.buildChangelog(extension)}`)
       )
       .join('\n\n');
