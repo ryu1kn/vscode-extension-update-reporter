@@ -1,6 +1,7 @@
-import { LoadedExtension } from './entities/extension';
-import { Change } from './types';
-import {identity} from 'fp-ts/lib/function';
+import {LoadedExtension} from './entities/extension';
+import {Change} from './types';
+import {Changelog} from './entities/changelog';
+import {Version} from './entities/version';
 
 const multiline = require('multiline-string')();
 
@@ -24,7 +25,12 @@ export default class MarkdownReportBuilder {
   }
 
   private buildChangelog (extension: LoadedExtension) {
-    return extension.getUpdates().fold(identity, changes => this.buildVersion(changes));
+    return extension.changelog.map(this.buildUpdates(extension.previousVersion)).getOrElse('CHANGELOG.md not found');
+  }
+
+  private buildUpdates (version: Version) {
+    return (changelog: Changelog) =>
+      changelog.isValid ? this.buildVersion(changelog.getUpdatesSince(version)) : 'Failed to parse the changelog file.';
   }
 
   private buildVersion (changes: Change[]) {

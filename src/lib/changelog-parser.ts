@@ -1,16 +1,15 @@
-import {Changelog, createChangelog} from './entities/changelog';
+import {Changelog, createInvalidChangelog, createValidChangelog} from './entities/changelog';
 import {Change} from './types';
 import {isValidVersion, parseVersion, Version} from './entities/version';
 import {toTuples} from './utils/collection';
 import {escape as escapeRegex} from './utils/regex';
-import {Either, left, right} from 'fp-ts/lib/Either';
 
 export default class ChangelogParser {
-  parse (changelog: string, knownVersion: Version): Either<string, Changelog> {
+  parse (changelog: string, knownVersion: Version): Changelog {
     const heading = this.findVersionHeading(changelog, knownVersion);
-    if (!heading) return left('Failed to parse the changelog file.');
+    if (!heading) return createInvalidChangelog();
 
-    return right(createChangelog(this.splitIntoVersions(changelog, heading)));
+    return createValidChangelog(this.splitIntoVersions(changelog, heading));
   }
 
   private findVersionHeading (changelog: string, knownVersion: Version) {

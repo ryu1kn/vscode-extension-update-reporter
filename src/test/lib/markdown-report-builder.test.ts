@@ -1,11 +1,11 @@
 import * as assert from 'assert';
 
 import MarkdownReportBuilder from '../../lib/markdown-report-builder';
-import { LoadedExtension } from '../../lib/entities/extension';
+import {LoadedExtension} from '../../lib/entities/extension';
 import ChangelogParser from '../../lib/changelog-parser';
 import * as vscode from 'vscode';
 import {parseVersion} from '../../lib/entities/version';
-import {left} from 'fp-ts/lib/Either';
+import {none, some} from 'fp-ts/lib/Option';
 
 const multiline = require('multiline-string')();
 
@@ -106,7 +106,7 @@ describe('MarkdownReportBuilder', () => {
       displayName: 'EXT_NAME_3',
       knownVerion: parseVersion('1.3.0'),
       lastRecordedVersion: parseVersion('0.0.1'),
-      errorMessage: 'ERROR_MESSAGE'
+      existsChangelog: false
     });
 
     assert.deepEqual(
@@ -115,7 +115,7 @@ describe('MarkdownReportBuilder', () => {
       # Extension Updates
 
       ## EXT_NAME_3 \`EXT3\`
-      ERROR_MESSAGE
+      CHANGELOG.md not found
       `)
     );
   });
@@ -150,11 +150,11 @@ describe('MarkdownReportBuilder', () => {
     );
   });
 
-  function createExtension ({ id, displayName, changelogText, knownVerion, lastRecordedVersion, errorMessage }: any) {
+  function createExtension ({ id, displayName, changelogText, knownVerion, lastRecordedVersion, existsChangelog = true }: any) {
     const extensionRaw = { id, packageJSON: { displayName } } as vscode.Extension<any>;
-    if (errorMessage) return new LoadedExtension(extensionRaw, lastRecordedVersion, left(errorMessage));
+    if (!existsChangelog) return new LoadedExtension(extensionRaw, lastRecordedVersion, none);
 
     const changelog = changelogParser.parse(changelogText, knownVerion);
-    return new LoadedExtension(extensionRaw, lastRecordedVersion, changelog);
+    return new LoadedExtension(extensionRaw, lastRecordedVersion, some(changelog));
   }
 });

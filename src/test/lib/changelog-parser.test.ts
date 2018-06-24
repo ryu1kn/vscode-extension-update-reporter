@@ -2,8 +2,6 @@ import * as assert from 'assert';
 
 import ChangelogParser from '../../lib/changelog-parser';
 import {parseVersion} from '../../lib/entities/version';
-import {Either} from 'fp-ts/lib/Either';
-import {Changelog} from '../../lib/entities/changelog';
 
 const multiline = require('multiline-string')();
 
@@ -30,18 +28,14 @@ describe('ChangelogParser', () => {
 
   it('gives only the unchecked changelog', async () => {
     const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, currentVer);
-    assertRight(changelog, changelog => {
-      const changes = changelog.getUpdatesSince(previousVer);
-      assert.deepEqual(changes[0].version.toString(), '1.3.0');
-    });
+    const changes = changelog.getUpdatesSince(previousVer);
+    assert.deepEqual(changes[0].version.toString(), '1.3.0');
   });
 
   it('gives the contents of the change', async () => {
     const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, currentVer);
-    assertRight(changelog, changelog => {
-      const changes = changelog.getUpdatesSince(previousVer);
-      assert.deepEqual(changes[0].changeText, '### Added\n- foo');
-    });
+    const changes = changelog.getUpdatesSince(previousVer);
+    assert.deepEqual(changes[0].changeText, '### Added\n- foo');
   });
 
   it('parses the changelog of the format that each version have level 2 header', () => {
@@ -50,10 +44,8 @@ describe('ChangelogParser', () => {
         - foo
         `);
     const changelog = changelogParser.parse(changelogText, currentVer);
-    assertRight(changelog, changelog => {
-      const changes = changelog.getUpdatesSince(previousVer);
-      assert.deepEqual(changes[0].changeText, '- foo');
-    });
+    const changes = changelog.getUpdatesSince(previousVer);
+    assert.deepEqual(changes[0].changeText, '- foo');
   });
 
   it('treats as if it were just a normal text if version is malformed', () => {
@@ -64,11 +56,9 @@ describe('ChangelogParser', () => {
         - foo
         `);
     const changelog = changelogParser.parse(changelogText, currentVer);
-    assertRight(changelog, changelog => {
-      const changes = changelog.getUpdatesSince(previousVer);
-      assert.deepEqual(changes[0].version.toString(), '1.3.0');
-      assert.deepEqual(changes[0].changeText, '### Fixes:\n- foo');
-    });
+    const changes = changelog.getUpdatesSince(previousVer);
+    assert.deepEqual(changes[0].version.toString(), '1.3.0');
+    assert.deepEqual(changes[0].changeText, '### Fixes:\n- foo');
   });
 
   it('parses the changelog with version section not starting with version number', () => {
@@ -83,11 +73,9 @@ describe('ChangelogParser', () => {
         * baz
         `);
     const changelog = changelogParser.parse(changelogText, currentVer);
-    assertRight(changelog, changelog => {
-      const changes = changelog.getUpdatesSince(previousVer);
-      assert.deepEqual(changes[0].version.toString(), '1.3.0');
-      assert.deepEqual(changes[0].changeText, '* foo\n* bar');
-    });
+    const changes = changelog.getUpdatesSince(previousVer);
+    assert.deepEqual(changes[0].version.toString(), '1.3.0');
+    assert.deepEqual(changes[0].changeText, '* foo\n* bar');
   });
 
   it('parses Keep-a-changelog like changelog without reference to it', () => {
@@ -102,11 +90,9 @@ describe('ChangelogParser', () => {
         * baz
         `);
     const changelog = changelogParser.parse(changelogText, currentVer);
-    assertRight(changelog, changelog => {
-      const changes = changelog.getUpdatesSince(previousVer);
-      assert.deepEqual(changes[0].version.toString(), '1.3.0');
-      assert.deepEqual(changes[0].changeText, '* foo\n* bar');
-    });
+    const changes = changelog.getUpdatesSince(previousVer);
+    assert.deepEqual(changes[0].version.toString(), '1.3.0');
+    assert.deepEqual(changes[0].changeText, '* foo\n* bar');
   });
 
   it.skip('parses a changelog whose header uses equal signs', () => {
@@ -123,11 +109,9 @@ describe('ChangelogParser', () => {
         * baz
         `);
     const changelog = changelogParser.parse(changelogText, currentVer);
-    assertRight(changelog, changelog => {
-      const changes = changelog.getUpdatesSince(previousVer);
-      assert.deepEqual(changes[0].version.toString(), '1.3.0');
-      assert.deepEqual(changes[0].changeText, '* foo\n* bar');
-    });
+    const changes = changelog.getUpdatesSince(previousVer);
+    assert.deepEqual(changes[0].version.toString(), '1.3.0');
+    assert.deepEqual(changes[0].changeText, '* foo\n* bar');
   });
 
   it('parses a changelog who claims it follows keep-a-changelog but actually not', () => {
@@ -146,11 +130,9 @@ describe('ChangelogParser', () => {
         * baz
         `);
     const changelog = changelogParser.parse(changelogText, currentVer);
-    assertRight(changelog, changelog => {
-      const changes = changelog.getUpdatesSince(previousVer);
-      assert.deepEqual(changes[0].version.toString(), '1.3.0');
-      assert.deepEqual(changes[0].changeText, '### Added\n* foo\n* bar');
-    });
+    const changes = changelog.getUpdatesSince(previousVer);
+    assert.deepEqual(changes[0].version.toString(), '1.3.0');
+    assert.deepEqual(changes[0].changeText, '### Added\n* foo\n* bar');
   });
 
   it("doesn't parse a changelog whose version is missing patch number", () => {
@@ -165,22 +147,6 @@ describe('ChangelogParser', () => {
         * baz
         `);
     const changelog = changelogParser.parse(changelogText, currentVer);
-    assertLeft(changelog, message => {
-      assert.deepEqual(message, 'Failed to parse the changelog file.');
-    });
+    assert.equal(changelog.isValid, false);
   });
-
-  function assertLeft(either: Either<string, Changelog>, callback: (cl: string) => void) {
-    either.fold(
-      callback,
-      () => { throw new Error('Supposed to be failed'); }
-    );
-  }
-
-  function assertRight(either: Either<string, Changelog>, callback: (cl: Changelog) => void) {
-    either.fold(
-      errorMessage => { throw new Error(errorMessage); },
-      callback
-    );
-  }
 });

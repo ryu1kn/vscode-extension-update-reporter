@@ -1,8 +1,7 @@
 import * as vscode from 'vscode';
 import {Changelog} from './changelog';
 import {parseVersion, Version} from './version';
-import {Change} from '../types';
-import {Either} from 'fp-ts/lib/Either';
+import {Option} from 'fp-ts/lib/Option';
 
 abstract class Extension {
   protected raw: vscode.Extension<any>;
@@ -54,26 +53,26 @@ export class PreloadedExtension extends Extension {
     return this.version.isHigherThan(this.prevInstalled);
   }
 
-  withHistory (changelog: Either<string, Changelog>): LoadedExtension {
+  withHistory (changelog: Option<Changelog>): LoadedExtension {
     return new LoadedExtension(this.raw, this.prevInstalled, changelog);
   }
 }
 
 export class LoadedExtension extends Extension {
-  private changelog: Either<string, Changelog>;
+  private _changelog: Option<Changelog>;
   private prevInstalled: Version;
 
-  constructor(raw: vscode.Extension<any>, prevInstalled: Version, changelog: Either<string, Changelog>) {
+  constructor(raw: vscode.Extension<any>, prevInstalled: Version, changelog: Option<Changelog>) {
     super(raw);
-    this.changelog = changelog;
+    this._changelog = changelog;
     this.prevInstalled = prevInstalled;
   }
 
-  hasBeenUpdated() {
-    return this.version.isHigherThan(this.prevInstalled);
+  get changelog(): Option<Changelog> {
+    return this._changelog;
   }
 
-  getUpdates(): Either<string, Change[]> {
-    return this.changelog.map(changelog => changelog.getUpdatesSince(this.prevInstalled));
+  get previousVersion () {
+    return this.prevInstalled;
   }
 }
