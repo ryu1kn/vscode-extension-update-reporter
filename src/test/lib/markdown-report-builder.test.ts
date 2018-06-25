@@ -95,7 +95,7 @@ describe('MarkdownReportBuilder', () => {
       # Extension Updates
 
       ## EXT_NAME_3 \`EXT3\`
-      Failed to parse the changelog file.
+      Couldn't parse the changelog. [View it on Marketplace](https://marketplace.visualstudio.com/items/EXT3/changelog).
       `)
     );
   });
