@@ -2,7 +2,7 @@
   "name": "extension-update-reporter",
   "displayName": "Extension Update Reporter",
   "description": "Present you the summary of all the changes of the installed extensions",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "publisher": "ryu1kn",
   "license": "SEE LICENSE IN LICENSE.txt",
   "icon": "images/logo.png",
