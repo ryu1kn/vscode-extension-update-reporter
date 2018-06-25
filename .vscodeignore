@@ -1,5 +1,6 @@
-**/__*
-**/.DS_Store
+__*
+__*/**/*
+.DS_Store
 .editorconfig
 .git/**/*
 .gitignore
