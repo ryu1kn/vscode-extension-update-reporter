@@ -7,6 +7,13 @@ With this extension, you don't need to go and check the changelog of each indivi
 
 ![Report updates on startup](https://raw.githubusercontent.com/ryu1kn/vscode-extension-update-reporter/master/images/public.gif)
 
+### How it works
+
+On the editor startup, it finds all the updated extensions by comparing the current versions of the
+installed extensions and their last recorded versions. Once it finds the updated extensions,
+it then checks their changelogs, collecting their updates made after their last recorded versions.
+Finally, it shows the gathered information as a report.
+
 ## Configurations
 
 * `extensionUpdateReporter.lastCheckedVersions`: Last checked version of all extensions.
