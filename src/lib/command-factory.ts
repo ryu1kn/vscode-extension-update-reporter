@@ -12,32 +12,32 @@ export default class CommandFactory {
   private vscode: any;
   private cache: Map<string, any>;
 
-  constructor (fs: FileSystem, vscode: any) {
+  constructor(fs: FileSystem, vscode: any) {
     this.fileSystem = fs;
     this.vscode = vscode;
 
     this.cache = new Map();
   }
 
-  createMain () {
+  createMain() {
     return new Main(this.getExtensionStore(), this.vscode);
   }
 
-  createContentProvider () {
+  createContentProvider() {
     const changelogParser = new ChangelogParser();
     const changelogLoader = new ChangelogLoader(this.fileSystem, changelogParser);
     const changelogAssigner = new ChangelogAssigner(changelogLoader);
     return new ContentProvider(changelogAssigner, this.getExtensionStore());
   }
 
-  private getExtensionStore () {
+  private getExtensionStore() {
     return this.getCached(
       'extensionStore',
       () => new ExtensionStore(new ConfigStore(this.vscode.workspace))
     );
   }
 
-  private getCached (key: string, createFunction: any) {
+  private getCached(key: string, createFunction: any) {
     if (!this.cache.has(key)) {
       this.cache.set(key, createFunction());
     }

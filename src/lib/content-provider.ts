@@ -11,12 +11,12 @@ export default class ContentProvider implements vscode.TextDocumentContentProvid
   private changelogAssigner: ChangelogAssigner;
   private extensionStore: ExtensionStore;
 
-  constructor (changelogAssigner: ChangelogAssigner, extensionStore: ExtensionStore) {
+  constructor(changelogAssigner: ChangelogAssigner, extensionStore: ExtensionStore) {
     this.changelogAssigner = changelogAssigner;
     this.extensionStore = extensionStore;
   }
 
-  async provideTextDocumentContent () {
+  async provideTextDocumentContent() {
     const updatedExtensions = this.extensionStore.getUpdatedExtensions();
     const extensions = await this.changelogAssigner.assign(updatedExtensions);
     const markdownReport = markdownReportBuilder.build(extensions);

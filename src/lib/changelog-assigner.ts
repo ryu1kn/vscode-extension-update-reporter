@@ -4,11 +4,11 @@ import {LoadedExtension, PreloadedExtension} from './entities/extension';
 export default class ChangelogAssigner {
   private changelogLoader: ChangelogLoader;
 
-  constructor (changelogLoader: ChangelogLoader) {
+  constructor(changelogLoader: ChangelogLoader) {
     this.changelogLoader = changelogLoader;
   }
 
-  assign (updatedExtensions: PreloadedExtension[]): Promise<LoadedExtension[]> {
+  assign(updatedExtensions: PreloadedExtension[]): Promise<LoadedExtension[]> {
     return Promise.all(
       updatedExtensions.map(async extension => {
         const changelog = await this.changelogLoader.load(

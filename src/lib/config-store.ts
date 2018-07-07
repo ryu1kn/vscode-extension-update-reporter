@@ -27,7 +27,7 @@ export default class ConfigStore {
     return this.extensionConfig.update(EXTENSION_VERSION_MAP, versionMap, true);
   }
 
-  private getExtensionVersionMap (extensions: PreloadedExtension[]): ObjectMap<string> {
+  private getExtensionVersionMap(extensions: PreloadedExtension[]): ObjectMap<string> {
     return extensions.reduce(
       (map, extension) =>
         Object.assign({}, map, { [extension.id]: extension.version.toString() }),

@@ -2,7 +2,7 @@ const md = require('markdown-it')();
 const multiline = require('multiline-string')();
 
 export default class MarkdownToHtmlConverter {
-  convert (markdownReport: string): string {
+  convert(markdownReport: string): string {
     return multiline(`
       <html lang="en">
         <head>

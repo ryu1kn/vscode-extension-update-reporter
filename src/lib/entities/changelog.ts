@@ -3,7 +3,7 @@ import {Version} from './version';
 
 export interface Changelog {
   isValid: boolean;
-  getUpdatesSince (baseVersion: Version): Change[];
+  getUpdatesSince(baseVersion: Version): Change[];
 }
 
 export function createValidChangelog(changes: Change[]) {
@@ -17,15 +17,15 @@ export function createInvalidChangelog() {
 export class ValidChangelog implements Changelog {
   private raw: {versions: Change[]};
 
-  constructor (raw: {versions: Change[]}) {
+  constructor(raw: {versions: Change[]}) {
     this.raw = raw;
   }
 
-  get isValid () {
+  get isValid() {
     return true;
   }
 
-  getUpdatesSince (baseVersion: Version) {
+  getUpdatesSince(baseVersion: Version) {
     return this.raw.versions.filter(
       version => version.version.isHigherThan(baseVersion)
     );
@@ -33,11 +33,11 @@ export class ValidChangelog implements Changelog {
 }
 
 export class InvalidChangelog implements Changelog {
-  get isValid () {
+  get isValid() {
     return false;
   }
 
-  getUpdatesSince () {
+  getUpdatesSince() {
     return [];
   }
 }

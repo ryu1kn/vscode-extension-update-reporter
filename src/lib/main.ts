@@ -7,12 +7,12 @@ export default class Main {
   private vscode: any;
   private extensionStore: ExtensionStore;
 
-  constructor (extensionStore: ExtensionStore, vscode: any) {
+  constructor(extensionStore: ExtensionStore, vscode: any) {
     this.vscode = vscode;
     this.extensionStore = extensionStore;
   }
 
-  async run (): Promise<void> {
+  async run(): Promise<void> {
     this.extensionStore.memoLoadedExtensions(this.getExtensions());
 
     if (!this.extensionStore.hasUpdatedExtensions()) {
@@ -26,7 +26,7 @@ export default class Main {
     );
   }
 
-  private getExtensions (): RawExtension[] {
+  private getExtensions(): RawExtension[] {
     return this.vscode.extensions.all
       .map((extension: vscode.Extension<any>) => new RawExtension(extension))
       .filter((extension: PreloadedExtension) => !extension.isVscodeBundled);

@@ -5,7 +5,7 @@ import {Changelog} from './entities/changelog';
 const multiline = require('multiline-string')();
 
 export default class MarkdownReportBuilder {
-  build (extensions: LoadedExtension[]): string {
+  build(extensions: LoadedExtension[]): string {
     return multiline(`
       # Extension Updates
 
@@ -13,7 +13,7 @@ export default class MarkdownReportBuilder {
       `);
   }
 
-  private buildExtension (extensions: LoadedExtension[]) {
+  private buildExtension(extensions: LoadedExtension[]) {
     return extensions
       .map(extension =>
         multiline(`
@@ -23,17 +23,17 @@ export default class MarkdownReportBuilder {
       .join('\n\n');
   }
 
-  private buildChangelog (extension: LoadedExtension) {
+  private buildChangelog(extension: LoadedExtension) {
     return extension.changelog.map(this.buildUpdates(extension)).getOrElse('CHANGELOG.md not found');
   }
 
-  private buildUpdates (extension: LoadedExtension) {
+  private buildUpdates(extension: LoadedExtension) {
     return (changelog: Changelog) => changelog.isValid
       ? this.buildVersion(changelog.getUpdatesSince(extension.previousVersion))
       : this.buildParseFailedMessage(extension.id);
   }
 
-  private buildVersion (changes: Change[]) {
+  private buildVersion(changes: Change[]) {
     return changes
       .map(release =>
         multiline(`
@@ -43,11 +43,11 @@ export default class MarkdownReportBuilder {
       .join('\n\n');
   }
 
-  private buildParseFailedMessage (extensionId: string) {
+  private buildParseFailedMessage(extensionId: string) {
     return `Couldn't parse the changelog. [View it on Marketplace](https://marketplace.visualstudio.com/items/${extensionId}/changelog).`;
   }
 
-  private reviseHeadingLevel (contents: string) {
+  private reviseHeadingLevel(contents: string) {
     return contents.replace(/^(#{3,} )/gm, '#$1');
   }
 }

@@ -36,7 +36,7 @@ abstract class Extension {
 }
 
 export class RawExtension extends Extension {
-  withPrevInstalledVersion (prevInstalled: Version) {
+  withPrevInstalledVersion(prevInstalled: Version) {
     return new PreloadedExtension(this.raw, prevInstalled);
   }
 }
@@ -44,7 +44,7 @@ export class RawExtension extends Extension {
 export class PreloadedExtension extends Extension {
   private prevInstalled: Version;
 
-  constructor (raw: vscode.Extension<any>, prevInstalled: Version) {
+  constructor(raw: vscode.Extension<any>, prevInstalled: Version) {
     super(raw);
     this.prevInstalled = prevInstalled;
   }
@@ -53,7 +53,7 @@ export class PreloadedExtension extends Extension {
     return this.version.isHigherThan(this.prevInstalled);
   }
 
-  withHistory (changelog: Option<Changelog>): LoadedExtension {
+  withHistory(changelog: Option<Changelog>): LoadedExtension {
     return new LoadedExtension(this.raw, this.prevInstalled, changelog);
   }
 }
@@ -72,7 +72,7 @@ export class LoadedExtension extends Extension {
     return this._changelog;
   }
 
-  get previousVersion () {
+  get previousVersion() {
     return this.prevInstalled;
   }
 }

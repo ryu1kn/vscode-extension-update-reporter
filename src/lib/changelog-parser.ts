@@ -5,19 +5,19 @@ import {toTuples} from './utils/collection';
 import {escape as escapeRegex} from './utils/regex';
 
 export default class ChangelogParser {
-  parse (changelog: string, knownVersion: Version): Changelog {
+  parse(changelog: string, knownVersion: Version): Changelog {
     const heading = this.findVersionHeading(changelog, knownVersion);
     if (!heading) return createInvalidChangelog();
 
     return createValidChangelog(this.splitIntoVersions(changelog, heading));
   }
 
-  private findVersionHeading (changelog: string, knownVersion: Version) {
+  private findVersionHeading(changelog: string, knownVersion: Version) {
     const match = changelog.match(new RegExp(`^(#+ +.*)${escapeRegex(knownVersion.toString())}`, 'm'));
     return match && match[1];
   }
 
-  private splitIntoVersions (changelog: string, versionHeading: string): Change[] {
+  private splitIntoVersions(changelog: string, versionHeading: string): Change[] {
     const versionHeadingPattern = new RegExp(`^${escapeRegex(versionHeading)}(.*)`, 'm');
     const [, ...match] = changelog.split(versionHeadingPattern);
     const tuples = toTuples(match);

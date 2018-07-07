@@ -5,11 +5,11 @@ export type ObjectMap<T> = {
 export class PowerMap<T> {
   private map: Map<string, T>;
 
-  constructor (object: ObjectMap<T>) {
+  constructor(object: ObjectMap<T>) {
     this.map = toMap(object);
   }
 
-  get (key: string, defaultValue: T): T {
+  get(key: string, defaultValue: T): T {
     return this.map.get(key) || defaultValue;
   }
 }

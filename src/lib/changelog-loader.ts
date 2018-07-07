@@ -9,12 +9,12 @@ export default class ChangelogLoader {
   private fileSystem: FileSystem;
   private changelogParser: ChangelogParser;
 
-  constructor (fs: FileSystem, parser: ChangelogParser) {
+  constructor(fs: FileSystem, parser: ChangelogParser) {
     this.fileSystem = fs;
     this.changelogParser = parser;
   }
 
-  async load (extensionPath: string, knownVersion: Version): Promise<Option<Changelog>> {
+  async load(extensionPath: string, knownVersion: Version): Promise<Option<Changelog>> {
     const files = await this.fileSystem.readDirectory(extensionPath);
     const changelog = files.find(file => file === 'CHANGELOG.md');
     if (!changelog) return none;

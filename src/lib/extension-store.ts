@@ -10,18 +10,18 @@ export default class ExtensionStore {
     this.configStore = configStore;
   }
 
-  memoLoadedExtensions (extensions: RawExtension[]): void {
+  memoLoadedExtensions(extensions: RawExtension[]): void {
     const versionMap = this.configStore.lastCheckedVersions;
     this.loadedExtensions = extensions.map(
       extension => extension.withPrevInstalledVersion(versionMap.get(extension.id, createNullVersion()))
     );
   }
 
-  hasUpdatedExtensions () {
+  hasUpdatedExtensions() {
     return this.getUpdatedExtensions().length !== 0;
   }
 
-  getUpdatedExtensions (): PreloadedExtension[] {
+  getUpdatedExtensions(): PreloadedExtension[] {
     return this.loadedExtensions.filter(extension => extension.hasBeenUpdated());
   }
 
