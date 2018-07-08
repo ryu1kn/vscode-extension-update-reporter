@@ -1,22 +1,23 @@
 import * as assert from 'assert';
+import {mock, when} from '../helper';
+
 import ContentProvider from '../../lib/content-provider';
 import ExtensionStore from '../../lib/extension-store';
 import {PreloadedExtension} from '../../lib/entities/extension';
 import {parseVersion} from '../../lib/entities/version';
 import * as vscode from 'vscode';
 import {none} from 'fp-ts/lib/Option';
-
-const td = require('testdouble');
+import ChangelogAssigner from '../../lib/changelog-assigner';
 
 const multiline = require('multiline-string')({ marginMark: '|' });
 
 describe('ContentProvider', () => {
   const extensionRaw = { id: 'ID', packageJSON: { displayName: 'EXT_NAME' } } as vscode.Extension<any>;
   const extension = new PreloadedExtension(extensionRaw, parseVersion('0.1.0'));
-  const extensionStore = td.object(['getUpdatedExtensions', 'persistLoadedExtensions']) as ExtensionStore;
-  td.when(extensionStore.getUpdatedExtensions()).thenReturn([extension]);
-  const changelogAssigner = td.object('assign');
-  td.when(changelogAssigner.assign([extension]))
+  const extensionStore = mock(ExtensionStore);
+  when(extensionStore.getUpdatedExtensions()).thenReturn([extension]);
+  const changelogAssigner = mock(ChangelogAssigner);
+  when(changelogAssigner.assign([extension]))
     .thenResolve([extension.withHistory(none)]);
   const contentProvider = new ContentProvider(changelogAssigner, extensionStore);
 
