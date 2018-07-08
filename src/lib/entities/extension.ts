@@ -4,7 +4,7 @@ import {parseVersion, Version} from './version';
 import {Option} from 'fp-ts/lib/Option';
 
 abstract class Extension {
-  protected raw: vscode.Extension<any>;
+  protected readonly raw: vscode.Extension<any>;
 
   constructor(raw: vscode.Extension<any>) {
     this.raw = raw;
@@ -42,7 +42,7 @@ export class RawExtension extends Extension {
 }
 
 export class PreloadedExtension extends Extension {
-  private prevInstalled: Version;
+  private readonly prevInstalled: Version;
 
   constructor(raw: vscode.Extension<any>, prevInstalled: Version) {
     super(raw);
@@ -59,8 +59,8 @@ export class PreloadedExtension extends Extension {
 }
 
 export class LoadedExtension extends Extension {
-  private _changelog: Option<Changelog>;
-  private prevInstalled: Version;
+  private readonly _changelog: Option<Changelog>;
+  private readonly prevInstalled: Version;
 
   constructor(raw: vscode.Extension<any>, prevInstalled: Version, changelog: Option<Changelog>) {
     super(raw);

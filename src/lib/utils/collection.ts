@@ -3,7 +3,7 @@ export type ObjectMap<T> = {
 };
 
 export class PowerMap<T> {
-  private map: Map<string, T>;
+  private readonly map: Map<string, T>;
 
   constructor(object: ObjectMap<T>) {
     this.map = toMap(object);

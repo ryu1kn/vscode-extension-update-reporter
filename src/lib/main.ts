@@ -4,8 +4,8 @@ import { EXTENSION_NAME } from './const';
 import ExtensionStore from './extension-store';
 
 export default class Main {
-  private vscode: any;
-  private extensionStore: ExtensionStore;
+  private readonly vscode: any;
+  private readonly extensionStore: ExtensionStore;
 
   constructor(extensionStore: ExtensionStore, vscode: any) {
     this.vscode = vscode;

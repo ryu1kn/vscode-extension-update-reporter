@@ -2,7 +2,7 @@ import ChangelogLoader from './changelog-loader';
 import {LoadedExtension, PreloadedExtension} from './entities/extension';
 
 export default class ChangelogAssigner {
-  private changelogLoader: ChangelogLoader;
+  private readonly changelogLoader: ChangelogLoader;
 
   constructor(changelogLoader: ChangelogLoader) {
     this.changelogLoader = changelogLoader;

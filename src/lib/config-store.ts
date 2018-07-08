@@ -7,7 +7,7 @@ import {PreloadedExtension} from './entities/extension';
 const EXTENSION_VERSION_MAP = 'lastCheckedVersions';
 
 export default class ConfigStore {
-  private vscWorkspace: any;
+  private readonly vscWorkspace: any;
 
   constructor(vscWorkspace: any) {
     this.vscWorkspace = vscWorkspace;

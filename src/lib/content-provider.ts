@@ -8,8 +8,8 @@ const htmlReportGenerator = new MarkdownToHtmlConverter();
 const markdownReportBuilder = new MarkdownReportBuilder();
 
 export default class ContentProvider implements vscode.TextDocumentContentProvider {
-  private changelogAssigner: ChangelogAssigner;
-  private extensionStore: ExtensionStore;
+  private readonly changelogAssigner: ChangelogAssigner;
+  private readonly extensionStore: ExtensionStore;
 
   constructor(changelogAssigner: ChangelogAssigner, extensionStore: ExtensionStore) {
     this.changelogAssigner = changelogAssigner;

@@ -1,5 +1,5 @@
 export default class FileSystem {
-  private fs: any;
+  private readonly fs: any;
 
   constructor(fs: any) {
     this.fs = fs;

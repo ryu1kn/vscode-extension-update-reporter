@@ -8,9 +8,9 @@ import FileSystem from './file-system';
 import ContentProvider from './content-provider';
 
 export default class CommandFactory {
-  private fileSystem: FileSystem;
-  private vscode: any;
-  private cache: Map<string, any>;
+  private readonly fileSystem: FileSystem;
+  private readonly vscode: any;
+  private readonly cache: Map<string, any>;
 
   constructor(fs: FileSystem, vscode: any) {
     this.fileSystem = fs;

@@ -6,8 +6,8 @@ import {Version} from './entities/version';
 import {none, Option, some} from 'fp-ts/lib/Option';
 
 export default class ChangelogLoader {
-  private fileSystem: FileSystem;
-  private changelogParser: ChangelogParser;
+  private readonly fileSystem: FileSystem;
+  private readonly changelogParser: ChangelogParser;
 
   constructor(fs: FileSystem, parser: ChangelogParser) {
     this.fileSystem = fs;

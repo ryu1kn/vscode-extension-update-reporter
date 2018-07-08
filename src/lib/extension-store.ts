@@ -3,7 +3,7 @@ import ConfigStore from './config-store';
 import {createNullVersion} from './entities/version';
 
 export default class ExtensionStore {
-  private configStore: ConfigStore;
+  private readonly configStore: ConfigStore;
   private loadedExtensions: PreloadedExtension[] = [];
 
   constructor(configStore: ConfigStore) {
