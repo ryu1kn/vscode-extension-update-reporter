@@ -5,12 +5,6 @@ export default class FileSystem {
     this.fs = fs;
   }
 
-  readDirectory(path: string): Promise<string[]> {
-    return new Promise((resolve, reject) =>
-      this.fs.readdir(path, (err: Error, data: string[]) => (err ? reject(err) : resolve(data)))
-    );
-  }
-
   readFile(path: string): Promise<string> {
     return new Promise((resolve, reject) =>
       this.fs.readFile(

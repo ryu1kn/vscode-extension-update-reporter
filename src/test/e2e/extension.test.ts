@@ -44,13 +44,10 @@ describe('End to End', () => {
   };
 
   const fileSystem = mock(FileSystem);
-  when(fileSystem.readDirectory('PATH_1')).thenResolve(['CHANGELOG.md']);
   when(fileSystem.readFile('PATH_1/CHANGELOG.md'))
     .thenResolve(readFileSync('./sample-changelog-1.md'));
-  when(fileSystem.readDirectory('PATH_2')).thenResolve(['CHANGELOG.md']);
   when(fileSystem.readFile('PATH_2/CHANGELOG.md'))
     .thenResolve(readFileSync('./sample-changelog-2.md'));
-  when(fileSystem.readDirectory('PATH_3')).thenResolve(['CHANGELOG.md']);
   when(fileSystem.readFile('PATH_3/CHANGELOG.md'))
     .thenResolve(readFileSync('./sample-changelog-lv2-heading.md'));
   const commandFactory = new CommandFactory(fileSystem, vscode);
