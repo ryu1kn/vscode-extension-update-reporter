@@ -1,5 +1,5 @@
 const assert = require('assert');
-import {mockObject, when} from '../helper';
+import {mockObject, when} from '../helpers/helper';
 
 import FileSystem from '../../lib/file-system';
 

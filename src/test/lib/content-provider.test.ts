@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import {mock, when} from '../helper';
+import {mock, when} from '../helpers/helper';
 
 import ContentProvider from '../../lib/content-provider';
 import ExtensionStore from '../../lib/extension-store';

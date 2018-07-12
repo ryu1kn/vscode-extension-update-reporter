@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import {mock, when} from '../helper';
+import {mock, when} from '../helpers/helper';
 
 import ChangelogLoader from '../../lib/changelog-loader';
 import ChangelogParser from '../../lib/changelog-parser';
