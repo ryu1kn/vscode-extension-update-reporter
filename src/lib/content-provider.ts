@@ -1,26 +1,23 @@
 import MarkdownToHtmlConverter from './markdown-to-html-converter';
-import ChangelogAssigner from './changelog-assigner';
 import * as vscode from 'vscode';
 import ExtensionStore from './extension-store';
-import MarkdownReportBuilder from './markdown-report-builder';
+import MarkdownReportGenerator from './markdown-report-generator';
 
-const htmlReportGenerator = new MarkdownToHtmlConverter();
-const markdownReportBuilder = new MarkdownReportBuilder();
+const markdownToHtmlConverter = new MarkdownToHtmlConverter();
 
 export default class ContentProvider implements vscode.TextDocumentContentProvider {
-  private readonly changelogAssigner: ChangelogAssigner;
+  private readonly markdownReportGenerator: MarkdownReportGenerator;
   private readonly extensionStore: ExtensionStore;
 
-  constructor(changelogAssigner: ChangelogAssigner, extensionStore: ExtensionStore) {
-    this.changelogAssigner = changelogAssigner;
+  constructor(markdownReportGenerator: MarkdownReportGenerator, extensionStore: ExtensionStore) {
+    this.markdownReportGenerator = markdownReportGenerator;
     this.extensionStore = extensionStore;
   }
 
   async provideTextDocumentContent() {
     const updatedExtensions = this.extensionStore.getUpdatedExtensions();
-    const extensions = await this.changelogAssigner.assign(updatedExtensions);
-    const markdownReport = markdownReportBuilder.build(extensions);
-    const htmlReport = htmlReportGenerator.convert(markdownReport);
+    const markdownReport = await this.markdownReportGenerator.generate(updatedExtensions);
+    const htmlReport = markdownToHtmlConverter.convert(markdownReport);
     await this.extensionStore.persistLoadedExtensions();
     return htmlReport;
   }

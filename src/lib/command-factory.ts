@@ -1,11 +1,9 @@
-import ChangelogLoader from './changelog-loader';
-import ChangelogParser from './changelog-parser';
 import ConfigStore from './config-store';
 import ExtensionStore from './extension-store';
-import ChangelogAssigner from './changelog-assigner';
 import Main from './main';
 import FileSystem from './file-system';
 import ContentProvider from './content-provider';
+import MarkdownReportGeneratorFactory from './markdown-report-generator-factory';
 
 export default class CommandFactory {
   private readonly fileSystem: FileSystem;
@@ -24,10 +22,8 @@ export default class CommandFactory {
   }
 
   createContentProvider() {
-    const changelogParser = new ChangelogParser();
-    const changelogLoader = new ChangelogLoader(this.fileSystem, changelogParser);
-    const changelogAssigner = new ChangelogAssigner(changelogLoader);
-    return new ContentProvider(changelogAssigner, this.getExtensionStore());
+    const markdownReportGenerator = new MarkdownReportGeneratorFactory(this.fileSystem).create();
+    return new ContentProvider(markdownReportGenerator, this.getExtensionStore());
   }
 
   private getExtensionStore() {

@@ -1,0 +1,21 @@
+import ChangelogAssigner from './changelog-assigner';
+import ChangelogLoader from './changelog-loader';
+import ChangelogParser from './changelog-parser';
+import FileSystem from './file-system';
+import MarkdownReportGenerator from './markdown-report-generator';
+
+export default class MarkdownReportGeneratorFactory {
+  private readonly fileSystem: FileSystem;
+
+  constructor(fileSystem: FileSystem) {
+    this.fileSystem = fileSystem;
+  }
+
+  create() {
+    const changelogParser = new ChangelogParser();
+    const changelogLoader = new ChangelogLoader(this.fileSystem, changelogParser);
+    const changelogAssigner = new ChangelogAssigner(changelogLoader);
+    return new MarkdownReportGenerator(changelogAssigner);
+  }
+
+}
