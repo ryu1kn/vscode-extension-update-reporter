@@ -54,19 +54,19 @@
     "test": "yarn run compile && mocha --recursive out/test"
   },
   "dependencies": {
-    "fp-ts": "1.4.1",
-    "markdown-it": "8.4.1",
+    "fp-ts": "1.7.1",
+    "markdown-it": "8.4.2",
     "multiline-string": "0.2.0"
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.0",
-    "@types/node": "^7.0.43",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^7.0.67",
     "mocha": "^5.2.0",
-    "nyc": "^12.0.1",
+    "nyc": "^12.0.2",
     "testdouble": "^3.8.1",
-    "ts-node": "^6.0.5",
-    "tslint": "^5.10.0",
-    "typescript": "^2.9.1",
+    "ts-node": "^7.0.0",
+    "tslint": "^5.11.0",
+    "typescript": "^2.9.2",
     "vscode": "^1.1.18"
   }
 }
