@@ -50,6 +50,7 @@ describe('Markdown Report', () => {
         ### 1-3-0
         * foo
         `));
+  when(fileSystem.readFile('PATH4/CHANGELOG.md')).thenReject(new Error('FILE_NOT_FOUND'));
   when(fileSystem.readFile('PATH5/CHANGELOG.md')).thenResolve(multiline(`
         ### 1.3.0
         * foo

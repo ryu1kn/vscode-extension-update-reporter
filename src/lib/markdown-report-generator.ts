@@ -1,18 +1,19 @@
 import {PreloadedExtension} from './entities/extension';
-import ChangelogAssigner from './changelog-assigner';
+import ChangelogLoader from './changelog-loader';
 import MarkdownReportBuilder from './markdown-report-builder';
 
 const markdownReportBuilder = new MarkdownReportBuilder();
 
 export default class MarkdownReportGenerator {
-  private readonly changelogAssigner: ChangelogAssigner;
+  private readonly changelogLoader: ChangelogLoader;
 
-  constructor(changelogAssigner: ChangelogAssigner) {
-    this.changelogAssigner = changelogAssigner;
+  constructor(changelogLoader: ChangelogLoader) {
+    this.changelogLoader = changelogLoader;
   }
 
   async generate(extensions: PreloadedExtension[]): Promise<string> {
-    const loadedExtensions = await this.changelogAssigner.assign(extensions);
+    const promiseOfLoadedExtensions = extensions.map(extension => this.changelogLoader.load(extension));
+    const loadedExtensions = await Promise.all(promiseOfLoadedExtensions);
     return markdownReportBuilder.build(loadedExtensions);
   }
 
