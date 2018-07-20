@@ -1,9 +1,19 @@
 import {EXTENSION_NAME} from '../../lib/const';
 import ContentProvider from '../../lib/content-provider';
+import * as vscode from 'vscode';
+import {EXTENSION_METADATA, LAST_RECORDED_VERSIONS} from './extension-data';
+import {ObjectMap} from '../../lib/utils/collection';
 
 class VsCode {
+  private readonly extensionMetaData: vscode.Extension<any>[];
+  private readonly lastRecordedVersions: ObjectMap<string>;
   private contentProvider?: ContentProvider;
   private providedContent?: string;
+
+  constructor(extensionMetaData?: vscode.Extension<any>[], lastRecordedVersions?: ObjectMap<string>) {
+    this.extensionMetaData = extensionMetaData || EXTENSION_METADATA;
+    this.lastRecordedVersions = lastRecordedVersions || LAST_RECORDED_VERSIONS;
+  }
 
   get _providedContent() {
     return this.providedContent;
@@ -11,23 +21,7 @@ class VsCode {
 
   get extensions() {
     return {
-      all: [
-        {
-          id: 'ID_1',
-          extensionPath: 'PATH_1',
-          packageJSON: {displayName: 'My Extension 1', version: '1.0.0'}
-        },
-        {
-          id: 'ID_2',
-          extensionPath: 'PATH_2',
-          packageJSON: {displayName: 'My Extension 2', version: '1.0.0'}
-        },
-        {
-          id: 'ID_3',
-          extensionPath: 'PATH_3',
-          packageJSON: {displayName: 'My Extension 3', version: '0.12.1'}
-        }
-      ]
+      all: this.extensionMetaData
     };
   }
 
@@ -35,12 +29,7 @@ class VsCode {
     return {
       getConfiguration: (key: string) =>
         key === 'extensionUpdateReporter' && {
-          get: (key: string) =>
-            key === 'lastCheckedVersions' && {
-              ID_1: '0.8.0',
-              ID_2: '0.1.0',
-              ID_3: '0.1.0'
-            },
+          get: (key: string) => key === 'lastCheckedVersions' && this.lastRecordedVersions,
           update: () => {
           }
         },
@@ -66,4 +55,6 @@ class VsCode {
   }
 }
 
-export const vscode = new VsCode();
+export function createVsCode(extensionMetaData?: vscode.Extension<any>[], lastRecordedVersions?: ObjectMap<string>) {
+  return new VsCode(extensionMetaData, lastRecordedVersions);
+}

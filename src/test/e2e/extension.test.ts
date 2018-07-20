@@ -4,7 +4,7 @@ import {EXT1_CHANGELOG, EXT2_CHANGELOG, EXT3_CHANGELOG, readTestDataFile} from '
 
 import CommandFactory from '../../lib/command-factory';
 import FileSystem from '../../lib/file-system';
-import {vscode} from '../helpers/vscode';
+import {createVsCode} from '../helpers/vscode';
 import {EXTENSION_NAME} from '../../lib/const';
 
 describe('End to End', () => {
@@ -13,6 +13,8 @@ describe('End to End', () => {
   when(fileSystem.readFile('PATH_1/CHANGELOG.md')).thenResolve(EXT1_CHANGELOG);
   when(fileSystem.readFile('PATH_2/CHANGELOG.md')).thenResolve(EXT2_CHANGELOG);
   when(fileSystem.readFile('PATH_3/CHANGELOG.md')).thenResolve(EXT3_CHANGELOG);
+
+  const vscode = createVsCode();
 
   const commandFactory = new CommandFactory(fileSystem, vscode);
   const main = commandFactory.createMain();
