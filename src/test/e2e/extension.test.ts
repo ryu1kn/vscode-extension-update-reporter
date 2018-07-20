@@ -4,8 +4,8 @@ import {EXT1_CHANGELOG, EXT2_CHANGELOG, EXT3_CHANGELOG, readTestDataFile} from '
 
 import CommandFactory from '../../lib/command-factory';
 import FileSystem from '../../lib/file-system';
-import {vscode} from "../helpers/vscode";
-import {EXTENSION_NAME} from "../../lib/const";
+import {vscode} from '../helpers/vscode';
+import {EXTENSION_NAME} from '../../lib/const';
 
 describe('End to End', () => {
 

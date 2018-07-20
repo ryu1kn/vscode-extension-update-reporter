@@ -1,5 +1,5 @@
-import {EXTENSION_NAME} from "../../lib/const";
-import ContentProvider from "../../lib/content-provider";
+import {EXTENSION_NAME} from '../../lib/const';
+import ContentProvider from '../../lib/content-provider';
 
 class VsCode {
   private contentProvider?: ContentProvider;
