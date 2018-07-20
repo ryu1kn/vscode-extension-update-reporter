@@ -1,17 +1,17 @@
 import {EXTENSION_NAME} from '../../lib/const';
 import ContentProvider from '../../lib/content-provider';
-import * as vscode from 'vscode';
 import {EXTENSION_METADATA, LAST_RECORDED_VERSIONS} from './extension-data';
 import {ObjectMap} from '../../lib/utils/collection';
 
+type ConfigUpdateCall = [string, ObjectMap<string>, boolean];
+
 class VsCode {
-  private readonly extensionMetaData: vscode.Extension<any>[];
   private readonly lastRecordedVersions: ObjectMap<string>;
   private contentProvider?: ContentProvider;
   private providedContent?: string;
+  private configUpdateCall?: ConfigUpdateCall;
 
-  constructor(extensionMetaData?: vscode.Extension<any>[], lastRecordedVersions?: ObjectMap<string>) {
-    this.extensionMetaData = extensionMetaData || EXTENSION_METADATA;
+  constructor(lastRecordedVersions?: ObjectMap<string>) {
     this.lastRecordedVersions = lastRecordedVersions || LAST_RECORDED_VERSIONS;
   }
 
@@ -19,10 +19,12 @@ class VsCode {
     return this.providedContent;
   }
 
+  get _configUpdateCall() {
+    return this.configUpdateCall;
+  }
+
   get extensions() {
-    return {
-      all: this.extensionMetaData
-    };
+    return {all: EXTENSION_METADATA};
   }
 
   get workspace() {
@@ -30,7 +32,8 @@ class VsCode {
       getConfiguration: (key: string) =>
         key === 'extensionUpdateReporter' && {
           get: (key: string) => key === 'lastCheckedVersions' && this.lastRecordedVersions,
-          update: () => {
+          update: (...args: any[]) => {
+            this.configUpdateCall = args as ConfigUpdateCall;
           }
         },
 
@@ -55,6 +58,6 @@ class VsCode {
   }
 }
 
-export function createVsCode(extensionMetaData?: vscode.Extension<any>[], lastRecordedVersions?: ObjectMap<string>) {
-  return new VsCode(extensionMetaData, lastRecordedVersions);
+export function createVsCode(lastRecordedVersions?: ObjectMap<string>) {
+  return new VsCode(lastRecordedVersions);
 }

@@ -7,7 +7,7 @@ import FileSystem from '../../lib/file-system';
 import {createVsCode} from '../helpers/vscode';
 import {EXTENSION_NAME} from '../../lib/const';
 
-describe('End to End', () => {
+describe('Happy path', () => {
 
   const fileSystem = mock(FileSystem);
   when(fileSystem.readFile('PATH_1/CHANGELOG.md')).thenResolve(EXT1_CHANGELOG);
