@@ -15,7 +15,7 @@ export default class ConfigStore {
 
   get lastCheckedVersions(): PowerMap<Version> {
     const versionMap = this.extensionConfig.get(EXTENSION_VERSION_MAP) || {};
-    return new PowerMap(mapObject(versionMap as {[key: string]: string}, parseVersion));
+    return new PowerMap(mapObject(versionMap as ObjectMap<string>, parseVersion));
   }
 
   private get extensionConfig(): vscode.WorkspaceConfiguration {
@@ -30,7 +30,7 @@ export default class ConfigStore {
   private getExtensionVersionMap(extensions: PreloadedExtension[]): ObjectMap<string> {
     return extensions.reduce(
       (map, extension) =>
-        Object.assign({}, map, { [extension.id]: extension.version.toString() }),
+        Object.assign({}, map, {[extension.id]: extension.version.toString()}),
       {}
     );
   }

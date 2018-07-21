@@ -4,7 +4,7 @@ import {createNullVersion} from './entities/version';
 
 export default class ExtensionStore {
   private readonly configStore: ConfigStore;
-  private loadedExtensions: PreloadedExtension[] = [];
+  private extensions: PreloadedExtension[] = [];
 
   constructor(configStore: ConfigStore) {
     this.configStore = configStore;
@@ -12,7 +12,7 @@ export default class ExtensionStore {
 
   memoLoadedExtensions(extensions: RawExtension[]): void {
     const versionMap = this.configStore.lastCheckedVersions;
-    this.loadedExtensions = extensions.map(
+    this.extensions = extensions.map(
       extension => extension.withPrevInstalledVersion(versionMap.get(extension.id, createNullVersion()))
     );
   }
@@ -22,10 +22,10 @@ export default class ExtensionStore {
   }
 
   getUpdatedExtensions(): PreloadedExtension[] {
-    return this.loadedExtensions.filter(extension => extension.hasBeenUpdated());
+    return this.extensions.filter(extension => extension.hasBeenUpdated());
   }
 
   async persistLoadedExtensions(): Promise<void> {
-    await this.configStore.updateLastCheckedVersions(this.loadedExtensions);
+    await this.configStore.updateLastCheckedVersions(this.extensions);
   }
 }

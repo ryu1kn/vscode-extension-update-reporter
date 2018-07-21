@@ -1,5 +1,5 @@
 export type ObjectMap<T> = {
-  [key: string]: T
+  [key: string]: T;
 };
 
 export class PowerMap<T> {
