@@ -1,13 +1,12 @@
 import * as assert from 'assert';
 import {mock, when} from '../helpers/helper';
-import {EXT1_CHANGELOG, EXT2_CHANGELOG, EXT3_CHANGELOG, readTestDataFile} from '../helpers/extension-data';
+import {EXT1_CHANGELOG, EXT2_CHANGELOG, EXT3_CHANGELOG, createExtensionContext, readTestDataFile} from '../helpers/extension-data';
 
-import CommandFactory from '../../lib/command-factory';
 import FileSystem from '../../lib/file-system';
 import {createVsCode} from '../helpers/vscode';
-import {EXTENSION_NAME} from '../../lib/const';
+import ExtensionStarter from '../../lib/extension-starter';
 
-describe('Happy path', () => {
+describe('Presents the report', () => {
 
   const fileSystem = mock(FileSystem);
   when(fileSystem.readFile('PATH_1/CHANGELOG.md')).thenResolve(EXT1_CHANGELOG);
@@ -16,13 +15,10 @@ describe('Happy path', () => {
 
   const vscode = createVsCode();
 
-  const commandFactory = new CommandFactory(fileSystem, vscode);
-  const main = commandFactory.createMain();
-
-  vscode.workspace.registerTextDocumentContentProvider(EXTENSION_NAME, commandFactory.createContentProvider());
+  const extensionStarter = new ExtensionStarter(vscode, fileSystem);
 
   it('generates a summary', async () => {
-    await main.run();
+    await extensionStarter.start(createExtensionContext());
     assert.deepEqual(vscode._providedContent, readTestDataFile('./sample-report.html'));
   });
 });

@@ -1,21 +1,11 @@
 import * as fs from 'fs';
 import * as vscode from 'vscode';
-import CommandFactory from './lib/command-factory';
 import FileSystem from './lib/file-system';
-import { EXTENSION_NAME } from './lib/const';
+import ExtensionStarter from './lib/extension-starter';
 
 const fileSystem = new FileSystem(fs);
-const commandFactory = new CommandFactory(fileSystem, vscode);
-const main = commandFactory.createMain();
+const integrator = new ExtensionStarter(vscode, fileSystem);
 
-exports.activate = async (context: vscode.ExtensionContext) => {
-  const disposable = vscode.workspace.registerTextDocumentContentProvider(
-    EXTENSION_NAME,
-    commandFactory.createContentProvider()
-  );
-  context.subscriptions.push(disposable);
+export const activate = async (context: vscode.ExtensionContext) => integrator.start(context);
 
-  await main.run();
-};
-
-exports.deactivate = () => {};
+export const deactivate = () => {};
