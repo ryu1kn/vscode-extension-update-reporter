@@ -1,4 +1,4 @@
-const assert = require('assert');
+import * as assert from 'assert';
 import {mockObject, when} from '../helpers/helper';
 
 import FileSystem from '../../lib/file-system';
