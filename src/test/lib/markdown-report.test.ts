@@ -6,6 +6,7 @@ import {parseVersion} from '../../lib/entities/version';
 import MarkdownReportGeneratorFactory from '../../lib/markdown-report-generator-factory';
 import {mock, when} from '../helpers/helper';
 import FileSystem from '../../lib/file-system';
+import {INVALID_HEADING, INVALID_VERSION_FORMAT, VALID_1, VALID_2} from '../helpers/changelog-data';
 
 const multiline = require('multiline-string')();
 
@@ -19,45 +20,11 @@ type ExtensionSource = {
 
 describe('Markdown Report', () => {
   const fileSystem = mock(FileSystem);
-  when(fileSystem.readFile('PATH1/CHANGELOG.md')).thenResolve(multiline(`
-        The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-
-        ## [1.0.0] - 2018-04-21
-        ### Added
-        - foo2
-        - bar
-
-        ## [0.9.0] - 2018-04-20
-        ### Added
-        - foo
-
-        ## [0.8.0] - 2018-04-19
-        ### Added
-        - baz
-        `));
-  when(fileSystem.readFile('PATH2/CHANGELOG.md')).thenResolve(multiline(`
-        The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-
-        ## [0.1.0] - 2018-04-22
-        ### Removed
-        - baz
-
-        ## [0.0.9] - 2018-04-21
-        ### Removed
-        - foo
-        `));
-  when(fileSystem.readFile('PATH3/CHANGELOG.md')).thenResolve(multiline(`
-        ### 1-3-0
-        * foo
-        `));
+  when(fileSystem.readFile('PATH1/CHANGELOG.md')).thenResolve(VALID_1);
+  when(fileSystem.readFile('PATH2/CHANGELOG.md')).thenResolve(VALID_2);
+  when(fileSystem.readFile('PATH3/CHANGELOG.md')).thenResolve(INVALID_VERSION_FORMAT);
   when(fileSystem.readFile('PATH4/CHANGELOG.md')).thenReject(new Error('FILE_NOT_FOUND'));
-  when(fileSystem.readFile('PATH5/CHANGELOG.md')).thenResolve(multiline(`
-        ### 1.3.0
-        * foo
-        
-        ### Fixes:
-        * bar
-        `));
+  when(fileSystem.readFile('PATH5/CHANGELOG.md')).thenResolve(INVALID_HEADING);
 
   const markdownReportGenerator = new MarkdownReportGeneratorFactory(fileSystem).create();
 
