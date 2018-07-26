@@ -14,7 +14,7 @@ type ExtensionSource = {
   id: string;
   displayName: string;
   extensionPath: string;
-  knownVersion: string;
+  currentVersion: string;
   lastRecordedVersion: string;
 };
 
@@ -33,14 +33,14 @@ describe('Markdown Report', () => {
       id: 'EXT1',
       displayName: 'EXT_NAME_1',
       extensionPath: 'PATH1',
-      knownVersion: '1.0.0',
+      currentVersion: '1.0.0',
       lastRecordedVersion: '0.8.0'
     });
     const extension2 = createExtension({
       id: 'EXT2',
       displayName: 'EXT_NAME_2',
       extensionPath: 'PATH2',
-      knownVersion: '0.1.0',
+      currentVersion: '0.1.0',
       lastRecordedVersion: '0.0.9'
     });
 
@@ -70,7 +70,7 @@ describe('Markdown Report', () => {
       id: 'EXT3',
       displayName: 'EXT_NAME_3',
       extensionPath: 'PATH3',
-      knownVersion: '1.3.0',
+      currentVersion: '1.3.0',
       lastRecordedVersion: '0.0.1'
     });
 
@@ -88,7 +88,7 @@ describe('Markdown Report', () => {
       id: 'EXT4',
       displayName: 'EXT_NAME_4',
       extensionPath: 'PATH4',
-      knownVersion: '1.3.0',
+      currentVersion: '1.3.0',
       lastRecordedVersion: '0.0.1'
     });
 
@@ -106,7 +106,7 @@ describe('Markdown Report', () => {
       id: 'EXT5',
       displayName: 'EXT_NAME_5',
       extensionPath: 'PATH5',
-      knownVersion: '1.3.0',
+      currentVersion: '1.3.0',
       lastRecordedVersion: '0.0.1'
     });
 
@@ -130,13 +130,13 @@ describe('Markdown Report', () => {
     );
   }
 
-  function createExtension({id, displayName, extensionPath, knownVersion, lastRecordedVersion}: ExtensionSource) {
+  function createExtension({id, displayName, extensionPath, currentVersion, lastRecordedVersion}: ExtensionSource) {
     const extensionRaw = {
       id,
       extensionPath,
       packageJSON: {
         displayName,
-        version: knownVersion
+        version: currentVersion
       }
     } as vscode.Extension<any>;
     return new PreloadedExtension(extensionRaw, parseVersion(lastRecordedVersion));
