@@ -14,15 +14,20 @@ installed extensions and their last recorded versions. Once it finds the updated
 it then checks their changelogs, collecting their updates made after their last recorded versions.
 Finally, it shows the gathered information as a report.
 
+## Request Features or Report Bugs
+
+Feature requests and bug reports are very welcome: https://github.com/ryu1kn/vscode-extension-update-reporter/issues
+
+A couple of requests from me when you raise an github issue.
+
+* **Requesting a feature:** Please try to provide the context of why you want the feature. Such as, in what situation the feature could help you and how, or how the lack of the feature is causing an inconvenience to you. I can't think of introducing it until I understand how it helps you 🙂
+* **Reporting a bug:** Please include environment information (OS name/version, the editor version). Also consider providing screenshots (or even videos) where appropriate. They are often very very helpful!
+
 ## Configurations
 
 * `extensionUpdateReporter.lastCheckedVersions`: Last checked version of all extensions.
 
     This extension uses this setting to detect extension updates and the value is automatically maintained.
-
-## Request Features or Report Bugs
-
-* https://github.com/ryu1kn/vscode-extension-update-reporter/issues
 
 ## Changelog
 
