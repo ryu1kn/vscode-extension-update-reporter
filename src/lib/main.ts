@@ -18,14 +18,16 @@ export default class Main {
   async run(context: ExtensionContextLike): Promise<void> {
     this.extensionStore.memoLoadedExtensions(this.getExtensions());
 
-    if (!this.extensionStore.hasUpdatedExtensions()) {
-      return this.extensionStore.persistLoadedExtensions();
+    if (this.extensionStore.hasUpdatedExtensions()) {
+      await this.displayUpdatesReport(context);
     }
+    await this.extensionStore.persistLoadedExtensions();
+  }
 
+  private async displayUpdatesReport(context: ExtensionContextLike) {
     const panel = this.vscode.window.createWebviewPanel('extension-updates', 'Extension Updates', this.vscode.ViewColumn.One, {});
     const updatedExtensions = this.extensionStore.getUpdatedExtensions();
     panel.webview.html = await this.contentProvider.provideTextDocumentContent(updatedExtensions);
-    await this.extensionStore.persistLoadedExtensions();
     panel.onDidDispose(() => {}, null, context.subscriptions);
   }
 
