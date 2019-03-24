@@ -1,7 +1,8 @@
 import {PreloadedExtension, RawExtension} from './entities/extension';
 import * as vscode from 'vscode';
-import { EXTENSION_NAME } from './const';
 import ExtensionStore from './extension-store';
+import {ExtensionContextLike} from './types';
+import ContentProvider from './content-provider';
 
 export default class Main {
   private readonly vscode: any;
@@ -12,18 +13,16 @@ export default class Main {
     this.extensionStore = extensionStore;
   }
 
-  async run(): Promise<void> {
+  async run(context: ExtensionContextLike, contentProvider: ContentProvider): Promise<void> {
     this.extensionStore.memoLoadedExtensions(this.getExtensions());
 
     if (!this.extensionStore.hasUpdatedExtensions()) {
       return this.extensionStore.persistLoadedExtensions();
     }
-    await this.vscode.commands.executeCommand(
-      'vscode.previewHtml',
-      this.vscode.Uri.parse(`${EXTENSION_NAME}:show-updates-summary`),
-      undefined,
-      'Extension Updates'
-    );
+
+    const panel = this.vscode.window.createWebviewPanel('extension-updates', 'Extension Updates', this.vscode.ViewColumn.One, {});
+    panel.webview.html = await contentProvider.provideTextDocumentContent();
+    panel.onDidDispose(() => {}, null, context.subscriptions);
   }
 
   private getExtensions(): RawExtension[] {

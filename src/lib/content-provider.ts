@@ -1,11 +1,10 @@
 import MarkdownToHtmlConverter from './markdown-to-html-converter';
-import * as vscode from 'vscode';
 import ExtensionStore from './extension-store';
 import MarkdownReportGenerator from './markdown-report-generator';
 
 const markdownToHtmlConverter = new MarkdownToHtmlConverter();
 
-export default class ContentProvider implements vscode.TextDocumentContentProvider {
+export default class ContentProvider {
   private readonly markdownReportGenerator: MarkdownReportGenerator;
   private readonly extensionStore: ExtensionStore;
 

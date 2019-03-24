@@ -1,5 +1,3 @@
-import {EXTENSION_NAME} from '../../lib/const';
-import ContentProvider from '../../lib/content-provider';
 import {EXTENSION_METADATA, LAST_RECORDED_VERSIONS} from './extension-data';
 import {ObjectMap} from '../../lib/utils/collection';
 
@@ -7,7 +5,6 @@ type ConfigUpdateCall = [string, ObjectMap<string>, boolean];
 
 class VsCode {
   private readonly lastRecordedVersions: ObjectMap<string>;
-  private contentProvider?: ContentProvider;
   private providedContent?: string;
   private configUpdateCall?: ConfigUpdateCall;
 
@@ -35,26 +32,30 @@ class VsCode {
           update: (...args: any[]) => {
             this.configUpdateCall = args as ConfigUpdateCall;
           }
-        },
-
-      registerTextDocumentContentProvider: (extName: string, contentProvider: ContentProvider) => {
-        if (extName === EXTENSION_NAME) this.contentProvider = contentProvider;
-      }
+        }
     };
   }
 
-  get commands() {
+  get window() {
     return {
-      executeCommand: async (name: String, uri: string, something: any | undefined, title: String): Promise<string | void> => {
-        if (name === 'vscode.previewHtml' && uri === `${EXTENSION_NAME}:show-updates-summary`) {
-          this.providedContent = await this.contentProvider!.provideTextDocumentContent();
-        }
+      createWebviewPanel: (viewType: string, title: string, showOptions: any, options?: any): any => {
+        const that = this;
+        return {
+          webview: {
+            set html(html: string) { that.providedContent = html; }
+          },
+          onDidDispose: () => {}
+        };
       }
     };
   }
 
   get Uri() {
     return {parse: (raw: string) => raw};
+  }
+
+  get ViewColumn() {
+    return {One: 'ONE'};
   }
 }
 
