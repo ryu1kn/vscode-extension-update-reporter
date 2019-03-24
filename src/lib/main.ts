@@ -21,7 +21,9 @@ export default class Main {
     }
 
     const panel = this.vscode.window.createWebviewPanel('extension-updates', 'Extension Updates', this.vscode.ViewColumn.One, {});
-    panel.webview.html = await contentProvider.provideTextDocumentContent();
+    const updatedExtensions = this.extensionStore.getUpdatedExtensions();
+    panel.webview.html = await contentProvider.provideTextDocumentContent(updatedExtensions);
+    await this.extensionStore.persistLoadedExtensions();
     panel.onDidDispose(() => {}, null, context.subscriptions);
   }
 

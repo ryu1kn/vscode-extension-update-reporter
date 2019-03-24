@@ -1,23 +1,18 @@
 import MarkdownToHtmlConverter from './markdown-to-html-converter';
-import ExtensionStore from './extension-store';
 import MarkdownReportGenerator from './markdown-report-generator';
+import {PreloadedExtension} from './entities/extension';
 
 const markdownToHtmlConverter = new MarkdownToHtmlConverter();
 
 export default class ContentProvider {
   private readonly markdownReportGenerator: MarkdownReportGenerator;
-  private readonly extensionStore: ExtensionStore;
 
-  constructor(markdownReportGenerator: MarkdownReportGenerator, extensionStore: ExtensionStore) {
+  constructor(markdownReportGenerator: MarkdownReportGenerator) {
     this.markdownReportGenerator = markdownReportGenerator;
-    this.extensionStore = extensionStore;
   }
 
-  async provideTextDocumentContent() {
-    const updatedExtensions = this.extensionStore.getUpdatedExtensions();
+  async provideTextDocumentContent(updatedExtensions: PreloadedExtension[]) {
     const markdownReport = await this.markdownReportGenerator.generate(updatedExtensions);
-    const htmlReport = markdownToHtmlConverter.convert(markdownReport);
-    await this.extensionStore.persistLoadedExtensions();
-    return htmlReport;
+    return markdownToHtmlConverter.convert(markdownReport);
   }
 }
