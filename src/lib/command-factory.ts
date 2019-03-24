@@ -16,10 +16,10 @@ export default class CommandFactory {
 
   createMain() {
     const extensionStore = new ExtensionStore(new ConfigStore(this.vscode.workspace));
-    return new Main(extensionStore, this.vscode);
+    return new Main(extensionStore, this.createContentProvider(), this.vscode);
   }
 
-  createContentProvider() {
+  private createContentProvider() {
     const markdownReportGenerator = new MarkdownReportGeneratorFactory(this.fileSystem).create();
     return new ContentProvider(markdownReportGenerator);
   }

@@ -10,7 +10,6 @@ export default class ExtensionStarter {
   }
 
   async start(context: ExtensionContextLike) {
-    const contentProvider = this.commandFactory.createContentProvider();
-    await this.commandFactory.createMain().run(context, contentProvider);
+    await this.commandFactory.createMain().run(context);
   }
 }
