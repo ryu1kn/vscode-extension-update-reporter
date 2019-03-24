@@ -1,7 +1,7 @@
 sudo: false
 language: node_js
 node_js:
-  - "7.9"
+  - "10.2"
 os:
   - osx
   - linux
