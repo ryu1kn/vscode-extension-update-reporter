@@ -23,7 +23,7 @@ function toMap<T>(object: ObjectMap<T>): Map<string, T> {
 }
 
 export function mapObject<T, S>(object: ObjectMap<T>, callback: (value: T) => S): ObjectMap<S> {
-  return Object.entries(object).reduce((previous: ObjectMap<T>, [key, value]) =>
+  return Object.entries(object).reduce((previous: ObjectMap<S>, [key, value]) =>
     Object.assign({}, previous, {[key]: callback(value)}),
     {}
   );
