@@ -1,9 +1,5 @@
 export default class FileSystem {
-  private readonly fs: any;
-
-  constructor(fs: any) {
-    this.fs = fs;
-  }
+  constructor(private readonly fs: any) {}
 
   readFile(path: string): Promise<string> {
     return new Promise((resolve, reject) =>

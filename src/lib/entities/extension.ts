@@ -42,11 +42,9 @@ export class RawExtension extends Extension {
 }
 
 export class PreloadedExtension extends Extension {
-  private readonly prevInstalled: Version;
-
-  constructor(raw: vscode.Extension<any>, prevInstalled: Version) {
+  constructor(raw: vscode.Extension<any>,
+              private readonly prevInstalled: Version) {
     super(raw);
-    this.prevInstalled = prevInstalled;
   }
 
   hasBeenUpdated() {
@@ -60,12 +58,12 @@ export class PreloadedExtension extends Extension {
 
 export class LoadedExtension extends Extension {
   private readonly _changelog: Option<Changelog>;
-  private readonly prevInstalled: Version;
 
-  constructor(raw: vscode.Extension<any>, prevInstalled: Version, changelog: Option<Changelog>) {
+  constructor(raw: vscode.Extension<any>,
+              private readonly prevInstalled: Version,
+              changelog: Option<Changelog>) {
     super(raw);
     this._changelog = changelog;
-    this.prevInstalled = prevInstalled;
   }
 
   get changelog(): Option<Changelog> {

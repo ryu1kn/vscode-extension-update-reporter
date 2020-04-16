@@ -15,11 +15,7 @@ export function createInvalidChangelog() {
 }
 
 export class ValidChangelog implements Changelog {
-  private readonly raw: {versions: Change[]};
-
-  constructor(raw: {versions: Change[]}) {
-    this.raw = raw;
-  }
+  constructor(private readonly raw: { versions: Change[] }) {}
 
   get isValid() {
     return true;

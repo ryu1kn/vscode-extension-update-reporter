@@ -3,12 +3,9 @@ import ConfigStore from './config-store';
 import {createNullVersion} from './entities/version';
 
 export default class ExtensionStore {
-  private readonly configStore: ConfigStore;
   private extensions: PreloadedExtension[] = [];
 
-  constructor(configStore: ConfigStore) {
-    this.configStore = configStore;
-  }
+  constructor(private readonly configStore: ConfigStore) {}
 
   memoLoadedExtensions(extensions: RawExtension[]): void {
     const versionMap = this.configStore.lastCheckedVersions;

@@ -4,15 +4,9 @@ export interface Version {
 }
 
 class ValidVersion implements Version {
-  private readonly major: number;
-  private readonly minor: number;
-  private readonly patch: number;
-
-  constructor(major: number, minor: number, patch: number) {
-    this.major = major;
-    this.minor = minor;
-    this.patch = patch;
-  }
+  constructor(private readonly major: number,
+              private readonly minor: number,
+              private readonly patch: number) {}
 
   isHigherThan(other: Version): boolean {
     if (other instanceof ValidVersion) {

@@ -5,15 +5,9 @@ import {ExtensionContextLike} from './types';
 import ContentProvider from './content-provider';
 
 export default class Main {
-  private readonly vscode: any;
-  private readonly extensionStore: ExtensionStore;
-  private readonly contentProvider: ContentProvider;
-
-  constructor(extensionStore: ExtensionStore, contentProvider: ContentProvider, vscode: any) {
-    this.vscode = vscode;
-    this.extensionStore = extensionStore;
-    this.contentProvider = contentProvider;
-  }
+  constructor(private readonly extensionStore: ExtensionStore,
+              private readonly contentProvider: ContentProvider,
+              private readonly vscode: any) {}
 
   async run(context: ExtensionContextLike): Promise<void> {
     this.extensionStore.memoLoadedExtensions(this.getExtensions());

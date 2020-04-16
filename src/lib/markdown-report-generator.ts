@@ -5,11 +5,7 @@ import MarkdownReportBuilder from './markdown-report-builder';
 const markdownReportBuilder = new MarkdownReportBuilder();
 
 export default class MarkdownReportGenerator {
-  private readonly changelogLoader: ChangelogLoader;
-
-  constructor(changelogLoader: ChangelogLoader) {
-    this.changelogLoader = changelogLoader;
-  }
+  constructor(private readonly changelogLoader: ChangelogLoader) {}
 
   async generate(extensions: PreloadedExtension[]): Promise<string> {
     const promiseOfLoadedExtensions = extensions.map(extension => this.changelogLoader.load(extension));

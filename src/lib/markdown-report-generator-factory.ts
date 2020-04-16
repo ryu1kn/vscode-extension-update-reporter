@@ -4,11 +4,7 @@ import FileSystem from './file-system';
 import MarkdownReportGenerator from './markdown-report-generator';
 
 export default class MarkdownReportGeneratorFactory {
-  private readonly fileSystem: FileSystem;
-
-  constructor(fileSystem: FileSystem) {
-    this.fileSystem = fileSystem;
-  }
+  constructor(private readonly fileSystem: FileSystem) {}
 
   create() {
     const changelogParser = new ChangelogParser();
