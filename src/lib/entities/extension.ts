@@ -57,17 +57,10 @@ export class PreloadedExtension extends Extension {
 }
 
 export class LoadedExtension extends Extension {
-  private readonly _changelog: Option<Changelog>;
-
   constructor(raw: vscode.Extension<any>,
               private readonly prevInstalled: Version,
-              changelog: Option<Changelog>) {
+              public readonly changelog: Option<Changelog>) {
     super(raw);
-    this._changelog = changelog;
-  }
-
-  get changelog(): Option<Changelog> {
-    return this._changelog;
   }
 
   get previousVersion() {
