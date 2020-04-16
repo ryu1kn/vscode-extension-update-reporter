@@ -7,11 +7,7 @@ import {PreloadedExtension} from './entities/extension';
 const EXTENSION_VERSION_MAP = 'lastCheckedVersions';
 
 export default class ConfigStore {
-  private readonly vscWorkspace: any;
-
-  constructor(vscWorkspace: any) {
-    this.vscWorkspace = vscWorkspace;
-  }
+  constructor(private readonly vscWorkspace: any) {}
 
   get lastCheckedVersions(): PowerMap<Version> {
     const versionMap = this.extensionConfig.get(EXTENSION_VERSION_MAP) || {};

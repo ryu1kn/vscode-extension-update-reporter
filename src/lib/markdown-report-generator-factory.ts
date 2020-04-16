@@ -11,5 +11,4 @@ export default class MarkdownReportGeneratorFactory {
     const changelogLoader = new ChangelogLoader(this.fileSystem, changelogParser);
     return new MarkdownReportGenerator(changelogLoader);
   }
-
 }

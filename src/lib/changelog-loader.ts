@@ -6,13 +6,8 @@ import * as O from 'fp-ts/lib/Option';
 import {pipe} from 'fp-ts/lib/pipeable';
 
 export default class ChangelogLoader {
-  private readonly fileSystem: FileSystem;
-  private readonly changelogParser: ChangelogParser;
-
-  constructor(fs: FileSystem, parser: ChangelogParser) {
-    this.fileSystem = fs;
-    this.changelogParser = parser;
-  }
+  constructor(private readonly fileSystem: FileSystem,
+              private readonly changelogParser: ChangelogParser) {}
 
   async load(extension: PreloadedExtension): Promise<LoadedExtension> {
     const changelog = pipe(

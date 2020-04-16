@@ -6,13 +6,8 @@ import ContentProvider from './content-provider';
 import MarkdownReportGeneratorFactory from './markdown-report-generator-factory';
 
 export default class CommandFactory {
-  private readonly fileSystem: FileSystem;
-  private readonly vscode: any;
-
-  constructor(fs: FileSystem, vscode: any) {
-    this.fileSystem = fs;
-    this.vscode = vscode;
-  }
+  constructor(private readonly fileSystem: FileSystem,
+              private readonly vscode: any) {}
 
   createMain() {
     const extensionStore = new ExtensionStore(new ConfigStore(this.vscode.workspace));

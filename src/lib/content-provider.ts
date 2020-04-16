@@ -5,11 +5,7 @@ import {PreloadedExtension} from './entities/extension';
 const markdownToHtmlConverter = new MarkdownToHtmlConverter();
 
 export default class ContentProvider {
-  private readonly markdownReportGenerator: MarkdownReportGenerator;
-
-  constructor(markdownReportGenerator: MarkdownReportGenerator) {
-    this.markdownReportGenerator = markdownReportGenerator;
-  }
+  constructor(private readonly markdownReportGenerator: MarkdownReportGenerator) {}
 
   async provideTextDocumentContent(updatedExtensions: PreloadedExtension[]) {
     const markdownReport = await this.markdownReportGenerator.generate(updatedExtensions);

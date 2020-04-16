@@ -12,5 +12,4 @@ export default class MarkdownReportGenerator {
     const loadedExtensions = await Promise.all(promiseOfLoadedExtensions);
     return markdownReportBuilder.build(loadedExtensions);
   }
-
 }

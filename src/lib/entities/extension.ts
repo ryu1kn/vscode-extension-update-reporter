@@ -4,11 +4,7 @@ import {parseVersion, Version} from './version';
 import {Option} from 'fp-ts/lib/Option';
 
 abstract class Extension {
-  protected readonly raw: vscode.Extension<any>;
-
-  constructor(raw: vscode.Extension<any>) {
-    this.raw = raw;
-  }
+  constructor(protected readonly raw: vscode.Extension<any>) {}
 
   get id() {
     return this.raw.id;
