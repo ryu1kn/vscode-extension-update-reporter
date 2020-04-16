@@ -1,6 +1,8 @@
 import {LoadedExtension} from './entities/extension';
 import {Change} from './types';
 import {Changelog} from './entities/changelog';
+import {pipe} from 'fp-ts/lib/pipeable';
+import * as O from 'fp-ts/lib/Option';
 
 const multiline = require('multiline-string')();
 
@@ -24,7 +26,11 @@ export default class MarkdownReportBuilder {
   }
 
   private buildChangelog(extension: LoadedExtension) {
-    return extension.changelog.map(this.buildUpdates(extension)).getOrElse('CHANGELOG.md not found');
+    return pipe(
+      extension.changelog,
+      O.map(this.buildUpdates(extension)),
+      O.getOrElse(() => 'CHANGELOG.md not found')
+    );
   }
 
   private buildUpdates(extension: LoadedExtension) {

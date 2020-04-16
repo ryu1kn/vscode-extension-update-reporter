@@ -2,7 +2,8 @@ import {join} from 'path';
 import ChangelogParser from './changelog-parser';
 import FileSystem from './file-system';
 import {LoadedExtension, PreloadedExtension} from './entities/extension';
-import {none, Option, some} from 'fp-ts/lib/Option';
+import * as O from 'fp-ts/lib/Option';
+import {pipe} from 'fp-ts/lib/pipeable';
 
 export default class ChangelogLoader {
   private readonly fileSystem: FileSystem;
@@ -14,13 +15,14 @@ export default class ChangelogLoader {
   }
 
   async load(extension: PreloadedExtension): Promise<LoadedExtension> {
-    const changelogContents = await this.toOptional(this.fileSystem.readFile(join(extension.extensionPath, 'CHANGELOG.md')));
-    const changelog = changelogContents.map(changelog => this.changelogParser.parse(changelog, extension.version));
+    const changelog = pipe(
+      await this.toOptional(this.fileSystem.readFile(join(extension.extensionPath, 'CHANGELOG.md'))),
+      O.map(changelog => this.changelogParser.parse(changelog, extension.version))
+    );
     return extension.withHistory(changelog);
   }
 
-  private toOptional<T>(promise: Promise<T>): Promise<Option<T>> {
-    return promise.then(some, () => none);
+  private toOptional<T>(promise: Promise<T>): Promise<O.Option<T>> {
+    return promise.then(O.some, () => O.none);
   }
-
 }
