@@ -54,7 +54,7 @@
     "test": "mocha --opts cli-test-mocha.opts"
   },
   "dependencies": {
-    "fp-ts": "1.19.5",
+    "fp-ts": "2.5.3",
     "markdown-it": "10.0.0",
     "multiline-string": "0.2.0"
   },
