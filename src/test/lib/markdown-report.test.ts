@@ -116,7 +116,7 @@ describe('Markdown Report', () => {
       ## EXT_NAME_5 \`EXT5\`
       ### [1.3.0]
       * foo
-      
+
       #### Fixes:
       * bar
       `)
@@ -124,7 +124,7 @@ describe('Markdown Report', () => {
   });
 
   async function assertMarkdownReports(extensions: PreloadedExtension[], expectedReport: string) {
-    assert.deepEqual(
+    assert.strictEqual(
       await markdownReportGenerator.generate(extensions),
       expectedReport
     );

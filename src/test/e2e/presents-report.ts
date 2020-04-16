@@ -19,6 +19,6 @@ describe('Presents the report', () => {
 
   it('generates a summary', async () => {
     await extensionStarter.start(createExtensionContext());
-    assert.deepEqual(vscode._providedContent, readTestDataFile('./sample-report.html'));
+    assert.strictEqual(vscode._providedContent, readTestDataFile('./sample-report.html'));
   });
 });

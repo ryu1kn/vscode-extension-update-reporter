@@ -29,13 +29,13 @@ describe('ChangelogParser', () => {
   it('gives only the unchecked changelog', async () => {
     const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, currentVer);
     const changes = changelog.getUpdatesSince(previousVer);
-    assert.deepEqual(changes[0].version.toString(), '1.3.0');
+    assert.strictEqual(changes[0].version.toString(), '1.3.0');
   });
 
   it('gives the contents of the change', async () => {
     const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, currentVer);
     const changes = changelog.getUpdatesSince(previousVer);
-    assert.deepEqual(changes[0].changeText, '### Added\n- foo');
+    assert.strictEqual(changes[0].changeText, '### Added\n- foo');
   });
 
   it('parses the changelog of the format that each version have level 2 header', () => {
@@ -45,7 +45,7 @@ describe('ChangelogParser', () => {
         `);
     const changelog = changelogParser.parse(changelogText, currentVer);
     const changes = changelog.getUpdatesSince(previousVer);
-    assert.deepEqual(changes[0].changeText, '- foo');
+    assert.strictEqual(changes[0].changeText, '- foo');
   });
 
   it('treats as if it were just a normal text if version is malformed', () => {
@@ -57,61 +57,61 @@ describe('ChangelogParser', () => {
         `);
     const changelog = changelogParser.parse(changelogText, currentVer);
     const changes = changelog.getUpdatesSince(previousVer);
-    assert.deepEqual(changes[0].version.toString(), '1.3.0');
-    assert.deepEqual(changes[0].changeText, '### Fixes:\n- foo');
+    assert.strictEqual(changes[0].version.toString(), '1.3.0');
+    assert.strictEqual(changes[0].changeText, '### Fixes:\n- foo');
   });
 
   it('parses the changelog with version section not starting with version number', () => {
     const changelogText = multiline(`
         ## Release 1.3.0
-        
+
         * foo
         * bar
-        
+
         ## Release 1.2.0
-        
+
         * baz
         `);
     const changelog = changelogParser.parse(changelogText, currentVer);
     const changes = changelog.getUpdatesSince(previousVer);
-    assert.deepEqual(changes[0].version.toString(), '1.3.0');
-    assert.deepEqual(changes[0].changeText, '* foo\n* bar');
+    assert.strictEqual(changes[0].version.toString(), '1.3.0');
+    assert.strictEqual(changes[0].changeText, '* foo\n* bar');
   });
 
   it('parses Keep-a-changelog like changelog without reference to it', () => {
     const changelogText = multiline(`
         ## [1.3.0]
-        
+
         * foo
         * bar
-        
+
         ## [1.2.0]
-        
+
         * baz
         `);
     const changelog = changelogParser.parse(changelogText, currentVer);
     const changes = changelog.getUpdatesSince(previousVer);
-    assert.deepEqual(changes[0].version.toString(), '1.3.0');
-    assert.deepEqual(changes[0].changeText, '* foo\n* bar');
+    assert.strictEqual(changes[0].version.toString(), '1.3.0');
+    assert.strictEqual(changes[0].changeText, '* foo\n* bar');
   });
 
   it.skip('parses a changelog whose header uses equal signs', () => {
     const changelogText = multiline(`
         1.3.0
         =====
-        
+
         * foo
         * bar
-        
+
         1.2.0
         =====
-        
+
         * baz
         `);
     const changelog = changelogParser.parse(changelogText, currentVer);
     const changes = changelog.getUpdatesSince(previousVer);
-    assert.deepEqual(changes[0].version.toString(), '1.3.0');
-    assert.deepEqual(changes[0].changeText, '* foo\n* bar');
+    assert.strictEqual(changes[0].version.toString(), '1.3.0');
+    assert.strictEqual(changes[0].changeText, '* foo\n* bar');
   });
 
   it('parses a changelog who claims it follows keep-a-changelog but actually not', () => {
@@ -131,8 +131,8 @@ describe('ChangelogParser', () => {
         `);
     const changelog = changelogParser.parse(changelogText, currentVer);
     const changes = changelog.getUpdatesSince(previousVer);
-    assert.deepEqual(changes[0].version.toString(), '1.3.0');
-    assert.deepEqual(changes[0].changeText, '### Added\n* foo\n* bar');
+    assert.strictEqual(changes[0].version.toString(), '1.3.0');
+    assert.strictEqual(changes[0].changeText, '### Added\n* foo\n* bar');
   });
 
   it("doesn't parse a changelog whose version is missing patch number", () => {

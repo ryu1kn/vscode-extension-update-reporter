@@ -6,12 +6,12 @@ import * as vscode from 'vscode';
 describe('Extension', () => {
   it('uses displayName as its name', async () => {
     const extension = createExtension({ displayName: 'foo', name: 'bar' });
-    assert.deepEqual(extension.displayName, 'foo');
+    assert.strictEqual(extension.displayName, 'foo');
   });
 
   it('uses name as its name if displayName is not available', async () => {
     const extension = createExtension({ name: 'bar' });
-    assert.deepEqual(extension.displayName, 'bar');
+    assert.strictEqual(extension.displayName, 'bar');
   });
 
   function createExtension (packageJson: {name: string, displayName?: string}) {

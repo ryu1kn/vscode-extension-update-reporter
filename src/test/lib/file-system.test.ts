@@ -11,7 +11,7 @@ describe('FileSystem', () => {
 
   it('reads a file', async () => {
     const fileContents = await fileSystem.readFile('FILE_PATH');
-    assert.deepEqual(fileContents, 'FILE_CONTENTS');
+    assert.strictEqual(fileContents, 'FILE_CONTENTS');
   });
 
   it('fails to read non-existing file', () =>
