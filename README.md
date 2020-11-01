@@ -32,3 +32,7 @@ A couple of requests from me when you raise an github issue.
 ## Changelog
 
 * https://github.com/ryu1kn/vscode-extension-update-reporter/blob/master/CHANGELOG.md
+
+## How to contribute
+
+Thank you for considering a contribution. Please check [CONTRIBUTING.md](./CONTRIBUTING.md).
