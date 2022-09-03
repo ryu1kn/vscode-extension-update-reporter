@@ -1,3 +1,4 @@
+import {join} from 'path';
 import * as assert from 'assert';
 import {mock, when} from '../helpers/helper';
 
@@ -15,7 +16,7 @@ describe('ContentProvider', () => {
   const updatedExtensions = [new PreloadedExtension(extensionRaw, parseVersion('0.1.0'))];
 
   const fileSystem = mock(FileSystem);
-  when(fileSystem.readFile('PATH1/CHANGELOG.md')).thenReject(new Error('FILE_NOT_FOUND'));
+  when(fileSystem.readFile(join('PATH1', 'CHANGELOG.md'))).thenReject(new Error('FILE_NOT_FOUND'));
 
   const markdownReportGenerator = new MarkdownReportGeneratorFactory(fileSystem).create();
 

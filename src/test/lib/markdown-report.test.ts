@@ -1,3 +1,4 @@
+import {join} from 'path';
 import * as assert from 'assert';
 
 import {PreloadedExtension} from '../../lib/entities/extension';
@@ -20,11 +21,11 @@ type ExtensionSource = {
 
 describe('Markdown Report', () => {
   const fileSystem = mock(FileSystem);
-  when(fileSystem.readFile('PATH1/CHANGELOG.md')).thenResolve(VALID_1);
-  when(fileSystem.readFile('PATH2/CHANGELOG.md')).thenResolve(VALID_2);
-  when(fileSystem.readFile('PATH3/CHANGELOG.md')).thenResolve(INVALID_VERSION_FORMAT);
-  when(fileSystem.readFile('PATH4/CHANGELOG.md')).thenReject(new Error('FILE_NOT_FOUND'));
-  when(fileSystem.readFile('PATH5/CHANGELOG.md')).thenResolve(INVALID_HEADING);
+  when(fileSystem.readFile(join('PATH1','CHANGELOG.md'))).thenResolve(VALID_1);
+  when(fileSystem.readFile(join('PATH2','CHANGELOG.md'))).thenResolve(VALID_2);
+  when(fileSystem.readFile(join('PATH3','CHANGELOG.md'))).thenResolve(INVALID_VERSION_FORMAT);
+  when(fileSystem.readFile(join('PATH4','CHANGELOG.md'))).thenReject(new Error('FILE_NOT_FOUND'));
+  when(fileSystem.readFile(join('PATH5','CHANGELOG.md'))).thenResolve(INVALID_HEADING);
 
   const markdownReportGenerator = new MarkdownReportGeneratorFactory(fileSystem).create();
 
