@@ -13,7 +13,7 @@ export default class ChangelogParser {
   }
 
   private findVersionHeading(changelog: string, knownVersion: Version) {
-    const match = changelog.match(new RegExp(`^(#+ +.*)${escapeRegex(knownVersion.toString())}`, 'm'));
+    const match = changelog.match(new RegExp(`^(#+ +.*?)${escapeRegex(knownVersion.toString())}`, 'm'));
     return match && match[1];
   }
 
