@@ -149,4 +149,47 @@ describe('ChangelogParser', () => {
     const changelog = changelogParser.parse(changelogText, currentVer);
     assert.equal(changelog.isValid, false);
   });
+
+  it('correctly parses even when a version string appears more than once', () => {
+    const changelogText = multiline(`
+        ## 1.3.0 - Upgrading Node.js to 11.3.0
+
+        * foo
+        * bar
+
+        ## 1.2.0
+
+        * baz
+        `);
+    const changelog = changelogParser.parse(changelogText, currentVer);
+    const changes = changelog.getUpdatesSince(previousVer);
+    assert.strictEqual(changes[0].version.toString(), '1.3.0');
+    assert.strictEqual(changes[0].changeText, '* foo\n* bar');
+  });
+
+  it('parses a changelog that follows Conventional Commits convention', () => {
+    const changelogText = multiline(`
+        # Change Log
+
+        All notable changes to this project will be documented in this file.
+        See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+        ## [1.3.0](https://github.com/user/repo/compare/v1.2.0...v1.3.0) (2022-09-07)
+
+        ### Bug Fixes
+
+        * foo
+        * bar
+
+        ## [1.2.0](https://github.com/user/repo/compare/v1.1.0...v1.2.0) (2022-09-06)
+
+        ### Bug Fixes
+
+        * baz
+        `);
+    const changelog = changelogParser.parse(changelogText, currentVer);
+    const changes = changelog.getUpdatesSince(previousVer);
+    assert.strictEqual(changes[0].version.toString(), '1.3.0');
+    assert.strictEqual(changes[0].changeText, '### Bug Fixes\n\n* foo\n* bar');
+  });
 });
