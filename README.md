@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ryu1kn/vscode-extension-update-reporter.svg?branch=master)](https://travis-ci.org/ryu1kn/vscode-extension-update-reporter)
+[![CI Build](https://github.com/ryu1kn/vscode-extension-update-reporter/actions/workflows/ci-build.yml/badge.svg?branch=master)](https://github.com/ryu1kn/vscode-extension-update-reporter/actions/workflows/ci-build.yml)
 
 # Extension Update Reporter
 
