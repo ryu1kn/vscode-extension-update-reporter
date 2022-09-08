@@ -8,7 +8,6 @@ __*/**/*
 .nvmrc
 .nycrc
 .nyc_output/**/*
-.travis.yml
 .vscode/**/*
 .vscode-test/**/*
 *.vsix

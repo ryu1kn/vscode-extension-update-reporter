@@ -20,4 +20,4 @@ I'd love to see that tests are written to confirm the new behaviours.
 
 ## Build
 
-You can check what CI is checking at [.travis.yml](./.travis.yml).
+You can check what CI is checking at [.github/workflows](./.github/workflows/).
