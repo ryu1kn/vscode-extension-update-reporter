@@ -1,7 +1,7 @@
 import {LoadedExtension} from './entities/extension';
 import {Change} from './types';
 import {Changelog} from './entities/changelog';
-import {pipe} from 'fp-ts/lib/pipeable';
+import {pipe} from 'fp-ts/lib/function';
 import * as O from 'fp-ts/lib/Option';
 
 const multiline = require('multiline-string')();

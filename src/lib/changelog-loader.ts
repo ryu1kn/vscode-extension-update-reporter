@@ -3,7 +3,7 @@ import ChangelogParser from './changelog-parser';
 import FileSystem from './file-system';
 import {LoadedExtension, PreloadedExtension} from './entities/extension';
 import * as O from 'fp-ts/lib/Option';
-import {pipe} from 'fp-ts/lib/pipeable';
+import {pipe} from 'fp-ts/lib/function';
 
 export default class ChangelogLoader {
   constructor(private readonly fileSystem: FileSystem,
