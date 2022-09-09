@@ -6,7 +6,7 @@ import FileSystem from '../../lib/file-system';
 describe('FileSystem', () => {
   const fs = mockObject('readFile');
   when(fs.readFile('FILE_PATH', 'utf8')).thenCallback(null, 'FILE_CONTENTS');
-  when(fs.readFile('WRONG_FILE_PATH', 'utf8')).thenCallback(new Error('ERROR'));
+  when(fs.readFile('WRONG_FILE_PATH', 'utf8')).thenCallback(new Error('ERROR'), null);
   const fileSystem = new FileSystem(fs);
 
   it('reads a file', async () => {
