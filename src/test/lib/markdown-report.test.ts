@@ -17,6 +17,7 @@ type ExtensionSource = {
   extensionPath: string;
   currentVersion: string;
   lastRecordedVersion: string;
+  homepage?: string;
 };
 
 describe('Markdown Report', () => {
@@ -40,6 +41,7 @@ describe('Markdown Report', () => {
     const extension2 = createExtension({
       id: 'EXT2',
       displayName: 'EXT_NAME_2',
+      homepage: 'https://github.com/ryu1kn/vscode-extension-update-reporter',
       extensionPath: 'PATH2',
       currentVersion: '0.1.0',
       lastRecordedVersion: '0.0.9'
@@ -67,7 +69,7 @@ describe('Markdown Report', () => {
       <details open>
         <summary>
 
-        ## EXT_NAME_2 \`EXT2\`
+        ## EXT_NAME_2 \`EXT2\` [🏠](https://github.com/ryu1kn/vscode-extension-update-reporter)
         </summary>
 
         ### [0.1.0]
@@ -161,13 +163,14 @@ describe('Markdown Report', () => {
     );
   }
 
-  function createExtension({id, displayName, extensionPath, currentVersion, lastRecordedVersion}: ExtensionSource) {
+  function createExtension({id, displayName, extensionPath, currentVersion, lastRecordedVersion, homepage}: ExtensionSource) {
     const extensionRaw = {
       id,
       extensionPath,
       packageJSON: {
         displayName,
-        version: currentVersion
+        version: currentVersion,
+        homepage
       }
     } as vscode.Extension<any>;
     return new PreloadedExtension(extensionRaw, parseVersion(lastRecordedVersion));
