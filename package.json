@@ -55,7 +55,7 @@
   "dependencies": {
     "fp-ts": "2.5.3",
     "markdown-it": "13.0.1",
-    "multiline-string": "0.2.0"
+    "multiline-string": "1.1.0"
   },
   "devDependencies": {
     "@types/mocha": "^9.1.1",
