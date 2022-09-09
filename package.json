@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "@types/mocha": "^7.0.2",
-    "@types/node": "^10.11.0",
+    "@types/node": "^16.11.58",
     "@types/vscode": "1.54.0",
     "mocha": "^7.1.1",
     "nyc": "^15.0.1",
