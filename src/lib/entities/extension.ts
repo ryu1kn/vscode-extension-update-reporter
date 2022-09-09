@@ -19,6 +19,11 @@ abstract class Extension {
     return parseVersion(this.raw.packageJSON.version);
   }
 
+  get homepage(): string | undefined {
+    const packageJson = this.raw.packageJSON;
+    return packageJson.homepage;
+  }
+
   get isVscodeBundled() {
     return (
       this.id.startsWith('vscode.') ||

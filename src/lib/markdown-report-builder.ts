@@ -22,13 +22,20 @@ export default class MarkdownReportBuilder {
         <details open>
           <summary>
 
-          ## ${extension.displayName} \`${extension.id}\`
+          ## ${extension.displayName} \`${extension.id}\`${this.buildHomepageLink(extension)}
           </summary>
 
           ${this.buildChangelog(extension)}
         </details>`)
       )
       .join('\n\n');
+  }
+
+  private buildHomepageLink(extension: LoadedExtension): string {
+    if(extension.homepage) {
+      return ` [🏠](${extension.homepage})`;
+    }
+    return '';
   }
 
   private buildChangelog(extension: LoadedExtension) {
