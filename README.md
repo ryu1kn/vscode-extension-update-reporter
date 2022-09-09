@@ -1,4 +1,3 @@
-[![CI Build](https://github.com/ryu1kn/vscode-extension-update-reporter/actions/workflows/ci-build.yml/badge.svg?branch=master)](https://github.com/ryu1kn/vscode-extension-update-reporter/actions/workflows/ci-build.yml)
 
 # Extension Update Reporter
 
