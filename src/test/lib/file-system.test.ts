@@ -14,8 +14,8 @@ describe('FileSystem', () => {
     assert.strictEqual(fileContents, 'FILE_CONTENTS');
   });
 
-  it('fails to read non-existing file', () =>
-    fileSystem.readFile('WRONG_FILE_PATH')
+  it('fails to read non-existing file', async () =>
+    await fileSystem.readFile('WRONG_FILE_PATH')
       .then(
         () => { throw new Error('Should have rejected'); },
         e => { assert.equal(e.message, 'ERROR'); }
