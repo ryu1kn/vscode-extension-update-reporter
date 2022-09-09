@@ -47,10 +47,10 @@
     "vscode:prepublish": "yarn run compile",
     "vscode:postpublish": "./tag-release.sh",
     "compile": "tsc -p ./",
-    "coverage": "nyc mocha --opts cli-test-mocha.opts",
+    "coverage": "nyc mocha",
     "lint": "tslint -p tslint.json",
     "watch": "tsc -watch -p ./",
-    "test": "mocha --opts cli-test-mocha.opts"
+    "test": "mocha"
   },
   "dependencies": {
     "fp-ts": "2.5.3",
