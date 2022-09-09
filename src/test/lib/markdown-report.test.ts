@@ -45,7 +45,7 @@ describe('Markdown Report', () => {
       lastRecordedVersion: '0.0.9'
     });
 
-    assertMarkdownReports([extension1, extension2], multiline(`
+    await assertMarkdownReports([extension1, extension2], multiline(`
       # Extension Updates
 
       ## EXT_NAME_1 \`EXT1\`
@@ -75,7 +75,7 @@ describe('Markdown Report', () => {
       lastRecordedVersion: '0.0.1'
     });
 
-    assertMarkdownReports([extension], multiline(`
+    await assertMarkdownReports([extension], multiline(`
       # Extension Updates
 
       ## EXT_NAME_3 \`EXT3\`
@@ -93,7 +93,7 @@ describe('Markdown Report', () => {
       lastRecordedVersion: '0.0.1'
     });
 
-    assertMarkdownReports([extension], multiline(`
+    await assertMarkdownReports([extension], multiline(`
       # Extension Updates
 
       ## EXT_NAME_4 \`EXT4\`
@@ -111,7 +111,7 @@ describe('Markdown Report', () => {
       lastRecordedVersion: '0.0.1'
     });
 
-    assertMarkdownReports([extension], multiline(`
+    await assertMarkdownReports([extension], multiline(`
       # Extension Updates
 
       ## EXT_NAME_5 \`EXT5\`
