@@ -4,12 +4,12 @@ import {RawExtension} from '../../lib/entities/extension';
 import * as vscode from 'vscode';
 
 describe('Extension', () => {
-  it('uses displayName as its name', async () => {
+  it('uses displayName as its name', () => {
     const extension = createExtension({ displayName: 'foo', name: 'bar' });
     assert.strictEqual(extension.displayName, 'foo');
   });
 
-  it('uses name as its name if displayName is not available', async () => {
+  it('uses name as its name if displayName is not available', () => {
     const extension = createExtension({ name: 'bar' });
     assert.strictEqual(extension.displayName, 'bar');
   });

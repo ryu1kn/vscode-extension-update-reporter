@@ -26,13 +26,13 @@ describe('ChangelogParser', () => {
     * Initial release of My Extension
     `);
 
-  it('gives only the unchecked changelog', async () => {
+  it('gives only the unchecked changelog', () => {
     const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, currentVer);
     const changes = changelog.getUpdatesSince(previousVer);
     assert.strictEqual(changes[0].version.toString(), '1.3.0');
   });
 
-  it('gives the contents of the change', async () => {
+  it('gives the contents of the change', () => {
     const changelog = changelogParser.parse(CHANGELOG_WITH_RELEASES, currentVer);
     const changes = changelog.getUpdatesSince(previousVer);
     assert.strictEqual(changes[0].changeText, '### Added\n- foo');
