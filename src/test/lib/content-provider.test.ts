@@ -27,8 +27,12 @@ describe('ContentProvider', () => {
     const expectation = multiline(`
         |  <body>
         |    <h1>Extension Updates</h1>
+        |<details open>
+        |  <summary>
         |<h2>EXT_NAME <code>ID</code></h2>
+        |  </summary>
         |<p>CHANGELOG.md not found</p>
+        |</details>
         |
         |  </body>`);
     assert.ok(html.includes(expectation));

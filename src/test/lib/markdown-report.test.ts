@@ -48,8 +48,13 @@ describe('Markdown Report', () => {
     await assertMarkdownReports([extension1, extension2], multiline(`
       # Extension Updates
 
-      ## EXT_NAME_1 \`EXT1\`
-      ### [1.0.0]
+      <details open>
+        <summary>
+
+        ## EXT_NAME_1 \`EXT1\`
+        </summary>
+
+        ### [1.0.0]
       #### Added
       - foo2
       - bar
@@ -57,11 +62,18 @@ describe('Markdown Report', () => {
       ### [0.9.0]
       #### Added
       - foo
+      </details>
 
-      ## EXT_NAME_2 \`EXT2\`
-      ### [0.1.0]
+      <details open>
+        <summary>
+
+        ## EXT_NAME_2 \`EXT2\`
+        </summary>
+
+        ### [0.1.0]
       #### Removed
       - baz
+      </details>
       `)
     );
   });
@@ -78,8 +90,14 @@ describe('Markdown Report', () => {
     await assertMarkdownReports([extension], multiline(`
       # Extension Updates
 
-      ## EXT_NAME_3 \`EXT3\`
-      Couldn't parse the changelog. [View it on Marketplace](https://marketplace.visualstudio.com/items/EXT3/changelog).
+      <details open>
+        <summary>
+
+        ## EXT_NAME_3 \`EXT3\`
+        </summary>
+
+        Couldn't parse the changelog. [View it on Marketplace](https://marketplace.visualstudio.com/items/EXT3/changelog).
+      </details>
       `)
     );
   });
@@ -96,8 +114,14 @@ describe('Markdown Report', () => {
     await assertMarkdownReports([extension], multiline(`
       # Extension Updates
 
-      ## EXT_NAME_4 \`EXT4\`
-      CHANGELOG.md not found
+      <details open>
+        <summary>
+
+        ## EXT_NAME_4 \`EXT4\`
+        </summary>
+
+        CHANGELOG.md not found
+      </details>
       `)
     );
   });
@@ -114,12 +138,18 @@ describe('Markdown Report', () => {
     await assertMarkdownReports([extension], multiline(`
       # Extension Updates
 
-      ## EXT_NAME_5 \`EXT5\`
-      ### [1.3.0]
+      <details open>
+        <summary>
+
+        ## EXT_NAME_5 \`EXT5\`
+        </summary>
+
+        ### [1.3.0]
       * foo
 
       #### Fixes:
       * bar
+      </details>
       `)
     );
   });
