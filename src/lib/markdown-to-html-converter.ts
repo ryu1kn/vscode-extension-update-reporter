@@ -1,4 +1,4 @@
-const md = require('markdown-it')();
+const md = require('markdown-it')('commonmark');
 const multiline = require('multiline-string')();
 
 export default class MarkdownToHtmlConverter {
@@ -7,7 +7,7 @@ export default class MarkdownToHtmlConverter {
       <html lang="en">
         <head>
           <meta http-equiv="Content-Security-Policy"
-              content="default-src 'none'; img-src *; style-src 'sha256-cAWJpTizP2D7+19DP5Fc9XNkH3mSkp6VcpSqGNtMXbE='; script-src 'none';">
+              content="default-src 'none'; img-src *; style-src 'sha256-bBr7BPyvfaIoQLDEpYYF6kpvYqEjw2fHBHaVFrC7x1I='; script-src 'none';">
           <style>
             html {
               font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
@@ -87,6 +87,29 @@ export default class MarkdownToHtmlConverter {
             }
             .vscode-dark code {
               background-color: #4b4b4b;
+            }
+
+            details > summary {
+              list-style: none;
+              position: relative;
+              cursor: pointer;
+            }
+            details > summary::marker {
+              display: none;
+            }
+            details > summary::before {
+              content: "▼";
+              font-family: serif;
+              position: absolute;
+              left: 0;
+              top: 40%;
+              transform: translate(0, -50%) rotate(-90deg);
+            }
+            details[open] > summary:before {
+              transform: translate(0, -50%) rotate(0);
+            }
+            details > summary > * {
+              padding-left: 1.5rem;
             }
           </style>
         </head>
