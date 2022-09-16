@@ -1,0 +1,12 @@
+.DS_Store
+/.idea
+/.nyc_output
+/.vscode-test
+/.vscode/settings.json
+/.vsix
+/coverage
+/out
+node_modules
+yarn-error.log
+__*
+*.vsix

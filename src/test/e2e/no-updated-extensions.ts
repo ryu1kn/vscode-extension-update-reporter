@@ -11,8 +11,8 @@ describe('No updated extensions', () => {
   const fileSystem = mock(FileSystem);
 
   const lastRecordedVersions = {
-    ID_1: '1.0.0',
-    ID_2: '1.0.0'
+    extensionId1: '1.0.0',
+    extensionId2: '1.0.0'
   };
   const vscode = createVsCode(lastRecordedVersions);
 
@@ -22,7 +22,7 @@ describe('No updated extensions', () => {
     await extensionStarter.start(createExtensionContext());
     assert.deepStrictEqual(vscode._configUpdateCall, [
       'lastCheckedVersions',
-      { ID_1: '1.0.0', ID_2: '1.0.0', ID_3: '0.12.1' },
+      { extensionId1: '1.0.0', extensionId2: '1.0.0', extensionId3: '0.12.1' },
       true
     ]);
   });
