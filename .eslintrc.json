@@ -1,0 +1,36 @@
+{
+  "root": true,
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module"
+  },
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "@typescript-eslint/naming-convention": "error",
+
+    // Require semicolons.
+    "semi": "off",
+    "@typescript-eslint/semi": "error",
+
+    // Disallow unused variables.
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": "error",
+
+    "@typescript-eslint/no-var-requires": "off",
+
+    "curly": "error",
+
+    "eqeqeq": "error",
+
+    "no-throw-literal": "error"
+  }
+}

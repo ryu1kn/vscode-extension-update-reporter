@@ -8,4 +8,5 @@ const integrator = new ExtensionStarter(vscode, fileSystem);
 
 export const activate = async (context: vscode.ExtensionContext) => integrator.start(context);
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 export const deactivate = () => {};

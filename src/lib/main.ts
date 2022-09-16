@@ -22,6 +22,7 @@ export default class Main {
     const panel = this.vscode.window.createWebviewPanel('extension-updates', 'Extension Updates', this.vscode.ViewColumn.One, {});
     const updatedExtensions = this.extensionStore.getUpdatedExtensions();
     panel.webview.html = await this.contentProvider.provideTextDocumentContent(updatedExtensions);
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     panel.onDidDispose(() => {}, null, context.subscriptions);
   }
 
