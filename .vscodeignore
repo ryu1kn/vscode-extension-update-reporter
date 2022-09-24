@@ -3,8 +3,10 @@ __*/**/*
 .DS_Store
 .editorconfig
 .git/**/*
+.github/**/*
 .gitignore
 .idea/**/*
+.mocharc.json
 .nvmrc
 .nycrc
 .nyc_output/**/*
