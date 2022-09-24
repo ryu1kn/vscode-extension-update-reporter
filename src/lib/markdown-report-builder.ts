@@ -22,8 +22,10 @@ export default class MarkdownReportBuilder {
         <details open>
           <summary>
 
-          ## ${extension.displayName} \`${extension.id}\`${this.buildHomepageLink(extension)}
+          ## ${extension.displayName} \`${extension.id}\`
           </summary>
+
+          ${this.buildExtensionLinks(extension)}
 
           ${this.buildChangelog(extension)}
         </details>`)
@@ -31,11 +33,12 @@ export default class MarkdownReportBuilder {
       .join('\n\n');
   }
 
-  private buildHomepageLink(extension: LoadedExtension): string {
-    if(extension.homepage) {
-      return ` [🏠](${extension.homepage})`;
-    }
-    return '';
+  private buildExtensionLinks(extension: LoadedExtension): string {
+    const links: string[] = [];
+    links.push(`[Marketplace](https://marketplace.visualstudio.com/items/${extension.id})`);
+    links.push(`[Changelog](https://marketplace.visualstudio.com/items/${extension.id}/changelog)`);
+    if(extension.homepage) links.push(`[Homepage](${extension.homepage})`);
+    return links.join(' ● ');
   }
 
   private buildChangelog(extension: LoadedExtension) {
