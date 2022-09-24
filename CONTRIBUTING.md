@@ -16,7 +16,16 @@ yarn install
 
 ## Development
 
-I'd love to see that tests are written to confirm the new behaviours.
+### Debug
+
+1. Open the project in VSCode.
+2. Press <kbd>F5</kbd> ("Start Debugging"). Make sure launch configuration "Run Extension" is active.
+3. This will open another VSCode instance.
+
+### Tests
+
+I'd love to see that tests are written to confirm the new behaviors.
+Existing tests should be updated when needed.
 
 ## Trying out your changes
 
