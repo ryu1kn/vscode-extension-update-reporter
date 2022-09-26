@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-this-alias */
 /* eslint-disable @typescript-eslint/naming-convention */
 import {EXTENSION_METADATA, LAST_RECORDED_VERSIONS} from './extension-data';
@@ -41,7 +40,7 @@ class VsCode {
 
   get window() {
     return {
-      createWebviewPanel: (viewType: string, title: string, showOptions: any, options?: any): any => {
+      createWebviewPanel: (_viewType: string, _title: string, _showOptions: any, _options?: any): any => {
         const that = this;
         return {
           webview: {
