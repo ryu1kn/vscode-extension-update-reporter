@@ -5,26 +5,26 @@ import {ExtensionContextLike} from '../../lib/types';
 
 export const EXTENSION_METADATA = [
   {
-    id: 'extensionId1',
+    id: 'ID_1',
     extensionPath: 'PATH_1',
     packageJSON: {displayName: 'My Extension 1', version: '1.0.0'}
   },
   {
-    id: 'extensionId2',
+    id: 'ID_2',
     extensionPath: 'PATH_2',
     packageJSON: {displayName: 'My Extension 2', version: '1.0.0'}
   },
   {
-    id: 'extensionId3',
+    id: 'ID_3',
     extensionPath: 'PATH_3',
     packageJSON: {displayName: 'My Extension 3', version: '0.12.1'}
   }
 ] as vscode.Extension<any>[];
 
 export const LAST_RECORDED_VERSIONS = {
-  extensionId1: '0.8.0',
-  extensionId2: '0.1.0',
-  extensionId3: '0.1.0'
+  ID_1: '0.8.0',
+  ID_2: '0.1.0',
+  ID_3: '0.1.0'
 };
 
 export function createExtensionContext(): ExtensionContextLike {
