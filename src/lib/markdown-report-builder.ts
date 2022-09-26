@@ -11,8 +11,28 @@ export default class MarkdownReportBuilder {
     return multiline(`
       # Extension Updates
 
+      ${this.buildToc(extensions)}
       ${this.buildExtension(extensions)}
       `);
+  }
+
+  private buildToc(extensions: LoadedExtension[]): string {
+    if (extensions.length < 2) return '';
+    return multiline(`
+      <details>
+        <summary>There are ${extensions.length} extensions updated.</summary>
+
+        ${this.buildTocLink(extensions)}
+      </details>
+    `);
+  }
+
+  private buildTocLink(extensions: LoadedExtension[]): string {
+    return extensions
+      .map((extension: LoadedExtension, index: number): string =>
+        `${index+1}. [${extension.displayName}](#${extension.id})`
+      )
+      .join('\n');
   }
 
   private buildExtension(extensions: LoadedExtension[]) {
@@ -21,8 +41,7 @@ export default class MarkdownReportBuilder {
         multiline(`
         <details open>
           <summary>
-
-          ## ${extension.displayName} \`${extension.id}\`
+            <h2 id="${extension.id}">${extension.displayName} <code>${extension.id}</code></h2>
           </summary>
 
           ${this.buildExtensionLinks(extension)}
