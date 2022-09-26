@@ -36,8 +36,10 @@ export default class MarkdownReportBuilder {
   private buildExtensionLinks(extension: LoadedExtension): string {
     const links: string[] = [];
     links.push(`[Marketplace](https://marketplace.visualstudio.com/items/${extension.id})`);
-    links.push(`[Changelog](https://marketplace.visualstudio.com/items/${extension.id}/changelog)`);
-    if(extension.homepage) links.push(`[Homepage](${extension.homepage})`);
+    if(O.isSome(extension.changelog))
+      links.push(`[Changelog](https://marketplace.visualstudio.com/items/${extension.id}/changelog)`);
+    if(extension.homepage)
+      links.push(`[Homepage](${extension.homepage})`);
     return links.join(' ● ');
   }
 
