@@ -27,7 +27,7 @@
 
     "@typescript-eslint/no-var-requires": "off",
 
-    "curly": "error",
+    "curly": ["error", "multi-line"],
 
     "eqeqeq": "error",
 
