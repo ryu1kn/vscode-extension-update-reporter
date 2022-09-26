@@ -1,7 +1,6 @@
 import {readFileSync} from 'fs';
 import {join} from 'path';
 import * as vscode from 'vscode';
-import {ExtensionContextLike} from '../../lib/types';
 
 export const EXTENSION_METADATA = [
   {
@@ -26,10 +25,6 @@ export const LAST_RECORDED_VERSIONS = {
   ID_2: '0.1.0',
   ID_3: '0.1.0'
 };
-
-export function createExtensionContext(): ExtensionContextLike {
-  return {subscriptions: []};
-}
 
 export const EXT1_CHANGELOG = readTestDataFile('sample-changelog-1.md');
 export const EXT2_CHANGELOG = readTestDataFile('sample-changelog-2.md');

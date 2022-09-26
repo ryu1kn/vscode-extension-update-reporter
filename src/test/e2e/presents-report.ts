@@ -1,7 +1,7 @@
 import {join} from 'path';
 import * as assert from 'assert';
 import {mock, when} from '../helpers/helper';
-import {EXT1_CHANGELOG, EXT2_CHANGELOG, EXT3_CHANGELOG, createExtensionContext, readTestDataFile} from '../helpers/extension-data';
+import {EXT1_CHANGELOG, EXT2_CHANGELOG, EXT3_CHANGELOG, readTestDataFile} from '../helpers/extension-data';
 
 import FileSystem from '../../lib/file-system';
 import {createVsCode} from '../helpers/vscode';
@@ -19,7 +19,7 @@ describe('Presents the report', () => {
   const extensionStarter = new ExtensionStarter(vscode, fileSystem);
 
   it('generates a summary', async () => {
-    await extensionStarter.start(createExtensionContext());
+    await extensionStarter.start();
     assert.strictEqual(vscode._providedContent, readTestDataFile('./sample-report.html'));
   });
 });
