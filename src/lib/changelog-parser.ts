@@ -7,7 +7,7 @@ import {escape as escapeRegex} from './utils/regex';
 export default class ChangelogParser {
   parse(changelog: string, knownVersion: Version): Changelog {
     const heading = this.findVersionHeading(changelog, knownVersion);
-    if (!heading) {return createInvalidChangelog();}
+    if (!heading) return createInvalidChangelog();
 
     return createValidChangelog(this.splitIntoVersions(changelog, heading));
   }

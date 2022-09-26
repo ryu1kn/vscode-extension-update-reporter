@@ -35,7 +35,7 @@ export function createNullVersion(): NullVersion {
 
 export function parseVersion(version: string): Version {
   const match = /(\d+)\.(\d+)\.(\d+)/.exec(version);
-  if (!match) {return createNullVersion();}
+  if (!match) return createNullVersion();
   return new ValidVersion(parseInt(match[1]), parseInt(match[2]), parseInt(match[3]));
 }
 
