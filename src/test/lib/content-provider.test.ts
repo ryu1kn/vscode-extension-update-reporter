@@ -31,6 +31,7 @@ describe('ContentProvider', () => {
         |  <summary>
         |<h2>EXT_NAME <code>ID</code></h2>
         |  </summary>
+        |<p><a href="https://marketplace.visualstudio.com/items/ID">Marketplace</a></p>
         |<p>CHANGELOG.md not found</p>
         |</details>
         |
