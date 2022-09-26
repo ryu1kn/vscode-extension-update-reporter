@@ -22,6 +22,13 @@
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",
 
+    // Note: you must disable the base rule as it can report incorrect errors
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": [
+      "error",
+      { "allow": ["arrowFunctions"] }
+    ],
+
     "no-unused-expressions": "off",
     "@typescript-eslint/no-unused-expressions": "error",
 
