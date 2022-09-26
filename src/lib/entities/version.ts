@@ -23,8 +23,7 @@ class ValidVersion implements Version {
 }
 
 class NullVersion implements Version {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  isHigherThan(other: Version) {
+  isHigherThan(_other: Version) {
     return false;
   }
 }
