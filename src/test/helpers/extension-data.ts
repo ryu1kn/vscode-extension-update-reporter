@@ -7,7 +7,7 @@ export const EXTENSION_METADATA = [
   {
     id: 'ID_1',
     extensionPath: 'PATH_1',
-    packageJSON: {displayName: 'My Extension 1', version: '1.0.0'}
+    packageJSON: {displayName: 'My Extension 1', version: '1.0.0', homepage: 'https://github.com/ryu1kn/vscode-extension-update-reporter'}
   },
   {
     id: 'ID_2',

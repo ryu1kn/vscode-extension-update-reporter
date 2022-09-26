@@ -56,6 +56,8 @@ describe('Markdown Report', () => {
         ## EXT_NAME_1 \`EXT1\`
         </summary>
 
+        [Marketplace](https://marketplace.visualstudio.com/items/EXT1) ● [Changelog](https://marketplace.visualstudio.com/items/EXT1/changelog)
+
         ### [1.0.0]
       #### Added
       - foo2
@@ -69,8 +71,10 @@ describe('Markdown Report', () => {
       <details open>
         <summary>
 
-        ## EXT_NAME_2 \`EXT2\` [🏠](https://github.com/ryu1kn/vscode-extension-update-reporter)
+        ## EXT_NAME_2 \`EXT2\`
         </summary>
+
+        [Marketplace](https://marketplace.visualstudio.com/items/EXT2) ● [Changelog](https://marketplace.visualstudio.com/items/EXT2/changelog) ● [Homepage](https://github.com/ryu1kn/vscode-extension-update-reporter)
 
         ### [0.1.0]
       #### Removed
@@ -80,7 +84,7 @@ describe('Markdown Report', () => {
     );
   });
 
-  it('shows a message that changelog is not available', async () => {
+  it('shows a message that changelog is not parsable', async () => {
     const extension = createExtension({
       id: 'EXT3',
       displayName: 'EXT_NAME_3',
@@ -97,6 +101,8 @@ describe('Markdown Report', () => {
 
         ## EXT_NAME_3 \`EXT3\`
         </summary>
+
+        [Marketplace](https://marketplace.visualstudio.com/items/EXT3) ● [Changelog](https://marketplace.visualstudio.com/items/EXT3/changelog)
 
         Couldn't parse the changelog. [View it on Marketplace](https://marketplace.visualstudio.com/items/EXT3/changelog).
       </details>
@@ -122,6 +128,8 @@ describe('Markdown Report', () => {
         ## EXT_NAME_4 \`EXT4\`
         </summary>
 
+        [Marketplace](https://marketplace.visualstudio.com/items/EXT4)
+
         CHANGELOG.md not found
       </details>
       `)
@@ -145,6 +153,8 @@ describe('Markdown Report', () => {
 
         ## EXT_NAME_5 \`EXT5\`
         </summary>
+
+        [Marketplace](https://marketplace.visualstudio.com/items/EXT5) ● [Changelog](https://marketplace.visualstudio.com/items/EXT5/changelog)
 
         ### [1.3.0]
       * foo
