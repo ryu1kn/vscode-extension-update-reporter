@@ -44,5 +44,24 @@
     "eqeqeq": "error",
 
     "no-throw-literal": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/test/**/*.ts"],
+      "rules": {
+        "@typescript-eslint/naming-convention": [
+          "error",
+          // Exclude `ID_1` property names.
+          {
+            "selector": "objectLiteralProperty",
+            "format": ["camelCase"],
+            "filter": {
+              "regex": "^(ID_\\d)$",
+              "match": false
+            }
+          }
+        ]
+      }
+    }
+  ]
 }
