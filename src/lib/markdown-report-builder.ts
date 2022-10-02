@@ -24,7 +24,7 @@ export default class MarkdownReportBuilder {
 
         ${this.buildTocLink(extensions)}
       </details>
-    `);
+      `);
   }
 
   private buildTocLink(extensions: LoadedExtension[]): string {
