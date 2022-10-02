@@ -104,7 +104,7 @@ describe('Markdown Report', () => {
 
         [Marketplace](https://marketplace.visualstudio.com/items/EXT3) ● [Changelog](https://marketplace.visualstudio.com/items/EXT3/changelog)
 
-        Couldn't parse the changelog. [View it on Marketplace](https://marketplace.visualstudio.com/items/EXT3/changelog).
+        Couldn't parse the changelog. Please view it on Marketplace by following the Changelog link above.
       </details>
       `)
     );
