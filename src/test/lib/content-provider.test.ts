@@ -29,7 +29,7 @@ describe('ContentProvider', () => {
         |    <h1>Extension Updates</h1>
         |<details open>
         |  <summary>
-        |<h2>EXT_NAME <code>ID</code></h2>
+        |    <h2 id="ID">EXT_NAME <code>ID</code></h2>
         |  </summary>
         |<p><a href="https://marketplace.visualstudio.com/items/ID">Marketplace</a></p>
         |<p>CHANGELOG.md not found</p>

@@ -50,10 +50,16 @@ describe('Markdown Report', () => {
     await assertMarkdownReports([extension1, extension2], multiline(`
       # Extension Updates
 
+      <details>
+        <summary>There are 2 extensions updated.</summary>
+
+        1. [EXT_NAME_1](#EXT1)
+      2. [EXT_NAME_2](#EXT2)
+      </details>
+
       <details open>
         <summary>
-
-        ## EXT_NAME_1 \`EXT1\`
+          <h2 id="EXT1">EXT_NAME_1 <code>EXT1</code></h2>
         </summary>
 
         [Marketplace](https://marketplace.visualstudio.com/items/EXT1) ● [Changelog](https://marketplace.visualstudio.com/items/EXT1/changelog)
@@ -70,8 +76,7 @@ describe('Markdown Report', () => {
 
       <details open>
         <summary>
-
-        ## EXT_NAME_2 \`EXT2\`
+          <h2 id="EXT2">EXT_NAME_2 <code>EXT2</code></h2>
         </summary>
 
         [Marketplace](https://marketplace.visualstudio.com/items/EXT2) ● [Changelog](https://marketplace.visualstudio.com/items/EXT2/changelog) ● [Homepage](https://github.com/ryu1kn/vscode-extension-update-reporter)
@@ -96,10 +101,10 @@ describe('Markdown Report', () => {
     await assertMarkdownReports([extension], multiline(`
       # Extension Updates
 
+
       <details open>
         <summary>
-
-        ## EXT_NAME_3 \`EXT3\`
+          <h2 id="EXT3">EXT_NAME_3 <code>EXT3</code></h2>
         </summary>
 
         [Marketplace](https://marketplace.visualstudio.com/items/EXT3) ● [Changelog](https://marketplace.visualstudio.com/items/EXT3/changelog)
@@ -122,10 +127,10 @@ describe('Markdown Report', () => {
     await assertMarkdownReports([extension], multiline(`
       # Extension Updates
 
+
       <details open>
         <summary>
-
-        ## EXT_NAME_4 \`EXT4\`
+          <h2 id="EXT4">EXT_NAME_4 <code>EXT4</code></h2>
         </summary>
 
         [Marketplace](https://marketplace.visualstudio.com/items/EXT4)
@@ -148,10 +153,10 @@ describe('Markdown Report', () => {
     await assertMarkdownReports([extension], multiline(`
       # Extension Updates
 
+
       <details open>
         <summary>
-
-        ## EXT_NAME_5 \`EXT5\`
+          <h2 id="EXT5">EXT_NAME_5 <code>EXT5</code></h2>
         </summary>
 
         [Marketplace](https://marketplace.visualstudio.com/items/EXT5) ● [Changelog](https://marketplace.visualstudio.com/items/EXT5/changelog)
