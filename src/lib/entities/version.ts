@@ -23,7 +23,7 @@ class ValidVersion implements Version {
 }
 
 class NullVersion implements Version {
-  isHigherThan(other: Version) {
+  isHigherThan(_other: Version) {
     return false;
   }
 }
