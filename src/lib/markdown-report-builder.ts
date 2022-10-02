@@ -56,7 +56,7 @@ export default class MarkdownReportBuilder {
   private buildUpdates(extension: LoadedExtension) {
     return (changelog: Changelog) => changelog.isValid
       ? this.buildVersion(changelog.getUpdatesSince(extension.previousVersion))
-      : this.buildParseFailedMessage(extension.id);
+      : this.buildParseFailedMessage();
   }
 
   private buildVersion(changes: Change[]) {
@@ -69,8 +69,8 @@ export default class MarkdownReportBuilder {
       .join('\n\n');
   }
 
-  private buildParseFailedMessage(extensionId: string) {
-    return `Couldn't parse the changelog. [View it on Marketplace](https://marketplace.visualstudio.com/items/${extensionId}/changelog).`;
+  private buildParseFailedMessage() {
+    return `Couldn't parse the changelog. Please view it on Marketplace by following the Changelog link above.`;
   }
 
   private reviseHeadingLevel(contents: string) {
