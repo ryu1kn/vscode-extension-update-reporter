@@ -5,6 +5,10 @@ All notable changes to "Extension Update Reporter" extension will be documented 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Added
+- Marketplace, extension homepage links are always available for easier access to the full information. (thanks to @jerone [PR #29](https://github.com/ryu1kn/vscode-extension-update-reporter/issues/29))
+
 ## [1.1.0] - 2022-09-24
 ### Added
 - Extension changelogs are now collapsible. Giving easier access to the next extension changelog, without having to scroll for long time. (thanks to @jerone [PR #31](https://github.com/ryu1kn/vscode-extension-update-reporter/issues/31))
