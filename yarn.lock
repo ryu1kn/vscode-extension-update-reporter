@@ -179,6 +179,11 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.2.tgz#26520bf09abe4a5644cd5414e37125a8954241dd"
   integrity sha512-tsAQNx32a8CoFhjhijUIhI4kccIAgmGhy8LZMZgGfmXcpMbPRUqn5LWmgRttILi6yeGmBJd2xsPkFMs0PzgPCw==
 
+"@jerone/assert-includes@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@jerone/assert-includes/-/assert-includes-0.1.1.tgz#e850bc6062262f52e2b6bec73a4b6631a85957c9"
+  integrity sha512-fh1SeqCIem6nPTaUTNGii8vdg2jLLFL/hM+T1pR8DUL5sF71h7P2b75LiS0GLacPv16Tngbtrnb7/B0rG/RBiw==
+
 "@jridgewell/resolve-uri@^3.0.3":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@jridgewell/resolve-uri/-/resolve-uri-3.1.0.tgz#2203b118c157721addfe69d47b70465463066d78"
