@@ -41,7 +41,8 @@ export default class MarkdownReportBuilder {
         multiline(`
         <details open>
           <summary>
-            <h2 id="${extension.id}">${extension.displayName} <code>${extension.id}</code></h2>
+
+          ## <a id="${extension.id}"></a> ${extension.displayName} \`${extension.id}\`
           </summary>
 
           ${this.buildExtensionLinks(extension)}
