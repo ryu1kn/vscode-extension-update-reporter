@@ -1,6 +1,5 @@
 import {join} from 'path';
-import * as assert from 'assert';
-import {mock, when} from '../helpers/helper';
+import {assertIncludes, mock, when} from '../helpers/helper';
 
 import ContentProvider from '../../lib/content-provider';
 import {PreloadedExtension} from '../../lib/entities/extension';
@@ -36,6 +35,6 @@ describe('ContentProvider', () => {
         |</details>
         |
         |  </body>`);
-    assert.ok(html.includes(expectation));
+    assertIncludes(html, expectation);
   });
 });
