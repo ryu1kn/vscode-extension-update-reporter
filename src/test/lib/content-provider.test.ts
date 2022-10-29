@@ -1,5 +1,5 @@
 import {join} from 'path';
-import assertIncludes from '@jerone/assert-includes';
+import * as assert from 'assert';
 import {mock, when} from '../helpers/helper';
 
 import ContentProvider from '../../lib/content-provider';
@@ -36,6 +36,6 @@ describe('ContentProvider', () => {
         |</details>
         |
         |  </body>`);
-    assertIncludes(html, expectation);
+    assert.ok(html.includes(expectation));
   });
 });
