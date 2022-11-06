@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Marketplace, extension homepage links are always available for easier access to the full information. (thanks to @jerone [PR #29](https://github.com/ryu1kn/vscode-extension-update-reporter/issues/29))
+- Display a table-of-contents at the top of the updates report when there are multiple extensions updated, allowing you to jump to the extension update of your interests. (thanks to @jerone [PR #36](https://github.com/ryu1kn/vscode-extension-update-reporter/issues/36))
 
 ## [1.1.0] - 2022-09-24
 ### Added
