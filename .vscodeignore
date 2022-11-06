@@ -2,6 +2,7 @@ __*
 __*/**/*
 .DS_Store
 .editorconfig
+.eslintignore
 .git/**/*
 .github/**/*
 .gitignore
@@ -22,8 +23,6 @@ src/**/*
 tag-release.sh
 test/**/*
 test-data/**/*
-tslint.json
 yarn.lock
-tslint.json
 tsconfig.json
 yarn-error.log
