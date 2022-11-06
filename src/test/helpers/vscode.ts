@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import {EXTENSION_METADATA, LAST_RECORDED_VERSIONS} from './extension-data';
 import {ObjectMap} from '../../lib/utils/collection';
+import {EXTENSION_ID} from '../../lib/const';
 
 type ConfigUpdateCall = [string, ObjectMap<string>, boolean];
 
@@ -29,7 +30,7 @@ class VsCode {
   get workspace() {
     return {
       getConfiguration: (key: string) =>
-        key === 'extensionUpdateReporter' && {
+        key === EXTENSION_ID && {
           get: (key: string) => key === 'lastCheckedVersions' && this.lastRecordedVersions,
           update: (...args: any[]) => {
             this.configUpdateCall = args as ConfigUpdateCall;
