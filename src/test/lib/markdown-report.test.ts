@@ -176,6 +176,15 @@ describe('Markdown Report', () => {
     );
   });
 
+  it('shows a message when there are no extension updates', async () => {
+    await assertMarkdownReports([], multiline(`
+      # Extension Updates
+
+      _There are no extension updates._
+      `)
+    );
+  });
+
   async function assertMarkdownReports(extensions: PreloadedExtension[], expectedReport: string) {
     assert.strictEqual(
       await markdownReportGenerator.generate(extensions),

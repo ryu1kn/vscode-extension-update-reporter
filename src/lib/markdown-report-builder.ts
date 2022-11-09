@@ -8,6 +8,13 @@ const multiline = require('multiline-string')();
 
 export default class MarkdownReportBuilder {
   build(extensions: LoadedExtension[]): string {
+    if (extensions.length === 0) {
+      return multiline(`
+        # Extension Updates
+
+        _There are no extension updates._
+        `);
+    }
     return multiline(`
       # Extension Updates
 
