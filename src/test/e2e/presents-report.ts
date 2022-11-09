@@ -1,7 +1,7 @@
 import {join} from 'path';
 import * as assert from 'assert';
 import {mock, when} from '../helpers/helper';
-import {createExtensionContext, EXT1_CHANGELOG, EXT2_CHANGELOG, EXT3_CHANGELOG, readTestDataFile} from '../helpers/extension-data';
+import {EXT1_CHANGELOG, EXT2_CHANGELOG, EXT3_CHANGELOG, createExtensionContext, readTestDataFile} from '../helpers/extension-data';
 
 import FileSystem from '../../lib/file-system';
 import {createVsCode} from '../helpers/vscode';

@@ -4,7 +4,7 @@ import {mock} from '../helpers/helper';
 import FileSystem from '../../lib/file-system';
 import {createVsCode} from '../helpers/vscode';
 import ExtensionStarter from '../../lib/extension-starter';
-import { createExtensionContext } from '../helpers/extension-data';
+import {createExtensionContext} from '../helpers/extension-data';
 
 describe('No updated extensions', () => {
 

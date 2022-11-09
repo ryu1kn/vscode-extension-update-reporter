@@ -1,7 +1,7 @@
 import {readFileSync} from 'fs';
 import {join} from 'path';
 import * as vscode from 'vscode';
-import { ExtensionContextLike } from '../../lib/types';
+import {ExtensionContextLike} from '../../lib/types';
 
 export const EXTENSION_METADATA = [
   {

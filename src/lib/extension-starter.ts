@@ -1,9 +1,9 @@
 import * as vscode from 'vscode';
 import CommandFactory from './command-factory';
-import { COMMAND } from './const';
+import {COMMAND} from './const';
 import FileSystem from './file-system';
 import Main from './main';
-import { ExtensionContextLike } from './types';
+import {ExtensionContextLike} from './types';
 
 export default class ExtensionStarter {
   private readonly commandFactory: CommandFactory;
