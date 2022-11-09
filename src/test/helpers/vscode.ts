@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-this-alias */
 /* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/no-this-alias */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {EXTENSION_METADATA, LAST_RECORDED_VERSIONS} from './extension-data';
 import {ObjectMap} from '../../lib/utils/collection';
 import {EXTENSION_ID} from '../../lib/const';
