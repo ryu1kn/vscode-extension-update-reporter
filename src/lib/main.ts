@@ -17,6 +17,10 @@ export default class Main {
     await this.extensionStore.persistLoadedExtensions();
   }
 
+  async show(): Promise<void> {
+    await this.displayUpdatesReport();
+  }
+
   private async displayUpdatesReport() {
     const panel = this.vscode.window.createWebviewPanel('extension-updates', 'Extension Updates', this.vscode.ViewColumn.One, {});
     const updatedExtensions = this.extensionStore.getUpdatedExtensions();

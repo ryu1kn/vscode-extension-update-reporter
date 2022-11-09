@@ -1,4 +1,6 @@
+import * as vscode from 'vscode';
 import CommandFactory from './command-factory';
+import { COMMAND } from './const';
 import FileSystem from './file-system';
 import Main from './main';
 
@@ -11,7 +13,15 @@ export default class ExtensionStarter {
     this.main = this.commandFactory.createMain();
   }
 
-  async start() {
+  async start(context: vscode.ExtensionContext) {
+    const commandHandler = () => {
+      this.main.show();
+    };
+
+    context.subscriptions.push(
+      vscode.commands.registerCommand(COMMAND, commandHandler)
+    );
+
     await this.main.run();
   }
 }
