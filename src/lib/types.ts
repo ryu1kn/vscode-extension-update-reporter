@@ -15,7 +15,9 @@ export type VsCodeLike = {
   extensions: any;
   workspace: any;
   window: any;
+  /* eslint-disable-next-line @typescript-eslint/naming-convention */
   Uri: any;
+  /* eslint-disable-next-line @typescript-eslint/naming-convention */
   ViewColumn: any;
   commands: any;
-}
+};
