@@ -6,8 +6,6 @@ import ExtensionStarter from './lib/extension-starter';
 const fileSystem = new FileSystem(fs);
 const integrator = new ExtensionStarter(vscode, fileSystem);
 
-export async function activate(context: vscode.ExtensionContext) {
-  return integrator.start(context);
-}
+export const activate = async (context: vscode.ExtensionContext) => integrator.start(context);
 
 export const deactivate = () => {};

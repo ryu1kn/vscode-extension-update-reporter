@@ -3,6 +3,7 @@ import CommandFactory from './command-factory';
 import { COMMAND } from './const';
 import FileSystem from './file-system';
 import Main from './main';
+import { ExtensionContextLike } from './types';
 
 export default class ExtensionStarter {
   private readonly commandFactory: CommandFactory;
@@ -13,7 +14,7 @@ export default class ExtensionStarter {
     this.main = this.commandFactory.createMain();
   }
 
-  async start(context: vscode.ExtensionContext) {
+  async start(context: ExtensionContextLike) {
     const commandHandler = () => {
       this.main.show();
     };
