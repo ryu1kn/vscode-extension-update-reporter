@@ -2,13 +2,13 @@ import CommandFactory from './command-factory';
 import {COMMAND} from './const';
 import FileSystem from './file-system';
 import Main from './main';
-import {ExtensionContextLike} from './types';
+import {ExtensionContextLike, VsCodeLike} from './types';
 
 export default class ExtensionStarter {
   private readonly commandFactory: CommandFactory;
   private readonly main: Main;
 
-  constructor(private readonly vscode: any, fileSystem: FileSystem) {
+  constructor(private readonly vscode: VsCodeLike, fileSystem: FileSystem) {
     this.commandFactory = new CommandFactory(fileSystem, vscode);
     this.main = this.commandFactory.createMain();
   }

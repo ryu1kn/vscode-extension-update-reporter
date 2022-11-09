@@ -4,10 +4,11 @@
 import {EXTENSION_METADATA, LAST_RECORDED_VERSIONS} from './extension-data';
 import {ObjectMap} from '../../lib/utils/collection';
 import {EXTENSION_ID} from '../../lib/const';
+import {VsCodeLike} from '../../lib/types';
 
 type ConfigUpdateCall = [string, ObjectMap<string>, boolean];
 
-class VsCode {
+class VsCode implements VsCodeLike {
   private readonly lastRecordedVersions: ObjectMap<string>;
   private providedContent?: string;
   private configUpdateCall?: ConfigUpdateCall;

@@ -2,11 +2,12 @@ import {PreloadedExtension, RawExtension} from './entities/extension';
 import * as vscode from 'vscode';
 import ExtensionStore from './extension-store';
 import ContentProvider from './content-provider';
+import {VsCodeLike} from './types';
 
 export default class Main {
   constructor(private readonly extensionStore: ExtensionStore,
               private readonly contentProvider: ContentProvider,
-              private readonly vscode: any) {}
+              private readonly vscode: VsCodeLike) {}
 
   async run(): Promise<void> {
     this.extensionStore.memoLoadedExtensions(this.getExtensions());
