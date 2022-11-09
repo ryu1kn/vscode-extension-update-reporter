@@ -60,6 +60,12 @@ class VsCode {
   get ViewColumn() {
     return {One: 'ONE'};
   }
+
+  get commands() {
+    return {
+      registerCommand: (command: string, callback: (...args: any[]) => any, thisArg?: any) => {}
+    };
+  }
 }
 
 export function createVsCode(lastRecordedVersions?: ObjectMap<string>) {

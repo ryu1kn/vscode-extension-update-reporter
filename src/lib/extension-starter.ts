@@ -1,4 +1,3 @@
-import * as vscode from 'vscode';
 import CommandFactory from './command-factory';
 import {COMMAND} from './const';
 import FileSystem from './file-system';
@@ -9,7 +8,7 @@ export default class ExtensionStarter {
   private readonly commandFactory: CommandFactory;
   private readonly main: Main;
 
-  constructor(vscode: any, fileSystem: FileSystem) {
+  constructor(private readonly vscode: any, fileSystem: FileSystem) {
     this.commandFactory = new CommandFactory(fileSystem, vscode);
     this.main = this.commandFactory.createMain();
   }
@@ -20,7 +19,7 @@ export default class ExtensionStarter {
     };
 
     context.subscriptions.push(
-      vscode.commands.registerCommand(COMMAND, commandHandler)
+      this.vscode.commands.registerCommand(COMMAND, commandHandler)
     );
 
     await this.main.run();
