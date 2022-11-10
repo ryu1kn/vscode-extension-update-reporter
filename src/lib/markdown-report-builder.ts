@@ -49,7 +49,7 @@ export default class MarkdownReportBuilder {
         <details open>
           <summary>
 
-          ## <a id="${extension.id}"></a> ${extension.displayName} \`${extension.id}\`
+          ## <a id="${extension.id}"></a> ${extension.displayName} <small>(${extension.previousVersion} ➡ ${extension.version})</small> \`${extension.id}\`
           </summary>
 
           ${this.buildExtensionLinks(extension)}

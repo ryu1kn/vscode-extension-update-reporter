@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## Unreleased
 ### Added
 - Add command to show report. Closes [#8](https://github.com/ryu1kn/vscode-extension-update-reporter/issues/8) by @jerone in [PR #38](https://github.com/ryu1kn/vscode-extension-update-reporter/pull/38).
+- Add before and after versions. Closes [#4](https://github.com/ryu1kn/vscode-extension-update-reporter/issues/4) by @jerone in [PR #40](https://github.com/ryu1kn/vscode-extension-update-reporter/pull/40).
 
 ## [1.2.0] - 2022-11-06
 ### Added
