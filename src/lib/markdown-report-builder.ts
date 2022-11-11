@@ -69,6 +69,9 @@ export default class MarkdownReportBuilder {
     if (extension.homepage) {
       links.push(`[Homepage](${extension.homepage})`);
     }
+    if (extension.repository) {
+      links.push(`[Repository](${extension.repository})`);
+    }
     return links.join(' ● ');
   }
 

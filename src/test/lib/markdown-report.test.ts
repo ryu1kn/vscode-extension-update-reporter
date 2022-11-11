@@ -7,7 +7,7 @@ import {parseVersion} from '../../lib/entities/version';
 import MarkdownReportGeneratorFactory from '../../lib/markdown-report-generator-factory';
 import {mock, when} from '../helpers/helper';
 import FileSystem from '../../lib/file-system';
-import {INVALID_HEADING, INVALID_VERSION_FORMAT, VALID_1, VALID_2} from '../helpers/changelog-data';
+import {INVALID_HEADING, INVALID_VERSION_FORMAT, VALID_1, VALID_2, VALID_3} from '../helpers/changelog-data';
 
 const multiline = require('multiline-string')();
 
@@ -18,6 +18,7 @@ type ExtensionSource = {
   currentVersion: string;
   lastRecordedVersion: string;
   homepage?: string;
+  repository?: string;
 };
 
 describe('Markdown Report', () => {
@@ -27,6 +28,8 @@ describe('Markdown Report', () => {
   when(fileSystem.readFile(join('PATH3','CHANGELOG.md'))).thenResolve(INVALID_VERSION_FORMAT);
   when(fileSystem.readFile(join('PATH4','CHANGELOG.md'))).thenReject(new Error('FILE_NOT_FOUND'));
   when(fileSystem.readFile(join('PATH5','CHANGELOG.md'))).thenResolve(INVALID_HEADING);
+  when(fileSystem.readFile(join('PATH6','CHANGELOG.md'))).thenResolve(VALID_3);
+  when(fileSystem.readFile(join('PATH7','CHANGELOG.md'))).thenResolve(VALID_3);
 
   const markdownReportGenerator = new MarkdownReportGeneratorFactory(fileSystem).create();
 
@@ -41,7 +44,6 @@ describe('Markdown Report', () => {
     const extension2 = createExtension({
       id: 'EXT2',
       displayName: 'EXT_NAME_2',
-      homepage: 'https://github.com/ryu1kn/vscode-extension-update-reporter',
       extensionPath: 'PATH2',
       currentVersion: '0.1.0',
       lastRecordedVersion: '0.0.9'
@@ -81,7 +83,7 @@ describe('Markdown Report', () => {
         ## <a id="EXT2"></a> EXT_NAME_2 <small>(0.0.9 ➡ 0.1.0)</small> \`EXT2\`
         </summary>
 
-        [Marketplace](https://marketplace.visualstudio.com/items/EXT2) ● [Changelog](https://marketplace.visualstudio.com/items/EXT2/changelog) ● [Homepage](https://github.com/ryu1kn/vscode-extension-update-reporter)
+        [Marketplace](https://marketplace.visualstudio.com/items/EXT2) ● [Changelog](https://marketplace.visualstudio.com/items/EXT2/changelog)
 
         ### [0.1.0]
       #### Removed
@@ -176,6 +178,64 @@ describe('Markdown Report', () => {
     );
   });
 
+  it('shows homepage link', async () => {
+    const extension = createExtension({
+      id: 'EXT6',
+      displayName: 'EXT_NAME_6',
+      extensionPath: 'PATH6',
+      currentVersion: '1.3.0',
+      lastRecordedVersion: '0.0.1',
+      homepage: 'https://github.com/ryu1kn/vscode-extension-update-reporter#readme'
+    });
+
+    await assertMarkdownReports([extension], multiline(`
+      # Extension Updates
+
+
+      <details open>
+        <summary>
+
+        ## <a id="EXT6"></a> EXT_NAME_6 <small>(0.0.1 ➡ 1.3.0)</small> \`EXT6\`
+        </summary>
+
+        [Marketplace](https://marketplace.visualstudio.com/items/EXT6) ● [Changelog](https://marketplace.visualstudio.com/items/EXT6/changelog) ● [Homepage](https://github.com/ryu1kn/vscode-extension-update-reporter#readme)
+
+        ### [1.3.0]
+      * foo
+      </details>
+      `)
+    );
+  });
+
+  it('shows repository and homepage link', async () => {
+    const extension = createExtension({
+      id: 'EXT7',
+      displayName: 'EXT_NAME_7',
+      extensionPath: 'PATH6',
+      currentVersion: '1.3.0',
+      lastRecordedVersion: '0.0.1',
+      repository: 'https://github.com/ryu1kn/vscode-extension-update-reporter.git'
+    });
+
+    await assertMarkdownReports([extension], multiline(`
+      # Extension Updates
+
+
+      <details open>
+        <summary>
+
+        ## <a id="EXT7"></a> EXT_NAME_7 <small>(0.0.1 ➡ 1.3.0)</small> \`EXT7\`
+        </summary>
+
+        [Marketplace](https://marketplace.visualstudio.com/items/EXT7) ● [Changelog](https://marketplace.visualstudio.com/items/EXT7/changelog) ● [Homepage](https://github.com/ryu1kn/vscode-extension-update-reporter#readme) ● [Repository](https://github.com/ryu1kn/vscode-extension-update-reporter.git)
+
+        ### [1.3.0]
+      * foo
+      </details>
+      `)
+    );
+  });
+
   it('shows a message when there are no extension updates', async () => {
     await assertMarkdownReports([], multiline(`
       # Extension Updates
@@ -192,14 +252,23 @@ describe('Markdown Report', () => {
     );
   }
 
-  function createExtension({id, displayName, extensionPath, currentVersion, lastRecordedVersion, homepage}: ExtensionSource) {
+  function createExtension({
+      id,
+      displayName,
+      extensionPath,
+      currentVersion,
+      lastRecordedVersion,
+      homepage,
+      repository
+    }: ExtensionSource) {
     const extensionRaw = {
       id,
       extensionPath,
       packageJSON: {
         displayName,
         version: currentVersion,
-        homepage
+        homepage,
+        repository
       }
     } as vscode.Extension<any>;
     return new PreloadedExtension(extensionRaw, parseVersion(lastRecordedVersion));

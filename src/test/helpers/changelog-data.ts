@@ -37,7 +37,12 @@ export const INVALID_VERSION_FORMAT = multiline(`
 export const INVALID_HEADING = multiline(`
     ### 1.3.0
     * foo
-    
+
     ### Fixes:
     * bar
+    `);
+
+export const VALID_3 = multiline(`
+    ### 1.3.0
+    * foo
     `);
