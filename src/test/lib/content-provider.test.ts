@@ -28,7 +28,7 @@ describe('ContentProvider', () => {
         |    <h1>Extension Updates</h1>
         |<details open>
         |  <summary>
-        |<h2><a id="ID"></a> EXT_NAME <code>ID</code></h2>
+        |<h2><a id="ID"></a> EXT_NAME <small>(0.1.0 ➡ 1.0.0)</small> <code>ID</code></h2>
         |  </summary>
         |<p><a href="https://marketplace.visualstudio.com/items/ID">Marketplace</a></p>
         |<p>CHANGELOG.md not found</p>

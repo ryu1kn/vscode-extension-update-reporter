@@ -60,7 +60,7 @@ describe('Markdown Report', () => {
       <details open>
         <summary>
 
-        ## <a id="EXT1"></a> EXT_NAME_1 \`EXT1\`
+        ## <a id="EXT1"></a> EXT_NAME_1 <small>(0.8.0 ➡ 1.0.0)</small> \`EXT1\`
         </summary>
 
         [Marketplace](https://marketplace.visualstudio.com/items/EXT1) ● [Changelog](https://marketplace.visualstudio.com/items/EXT1/changelog)
@@ -78,7 +78,7 @@ describe('Markdown Report', () => {
       <details open>
         <summary>
 
-        ## <a id="EXT2"></a> EXT_NAME_2 \`EXT2\`
+        ## <a id="EXT2"></a> EXT_NAME_2 <small>(0.0.9 ➡ 0.1.0)</small> \`EXT2\`
         </summary>
 
         [Marketplace](https://marketplace.visualstudio.com/items/EXT2) ● [Changelog](https://marketplace.visualstudio.com/items/EXT2/changelog) ● [Homepage](https://github.com/ryu1kn/vscode-extension-update-reporter)
@@ -107,7 +107,7 @@ describe('Markdown Report', () => {
       <details open>
         <summary>
 
-        ## <a id="EXT3"></a> EXT_NAME_3 \`EXT3\`
+        ## <a id="EXT3"></a> EXT_NAME_3 <small>(0.0.1 ➡ 1.3.0)</small> \`EXT3\`
         </summary>
 
         [Marketplace](https://marketplace.visualstudio.com/items/EXT3) ● [Changelog](https://marketplace.visualstudio.com/items/EXT3/changelog)
@@ -134,7 +134,7 @@ describe('Markdown Report', () => {
       <details open>
         <summary>
 
-        ## <a id="EXT4"></a> EXT_NAME_4 \`EXT4\`
+        ## <a id="EXT4"></a> EXT_NAME_4 <small>(0.0.1 ➡ 1.3.0)</small> \`EXT4\`
         </summary>
 
         [Marketplace](https://marketplace.visualstudio.com/items/EXT4)
@@ -161,7 +161,7 @@ describe('Markdown Report', () => {
       <details open>
         <summary>
 
-        ## <a id="EXT5"></a> EXT_NAME_5 \`EXT5\`
+        ## <a id="EXT5"></a> EXT_NAME_5 <small>(0.0.1 ➡ 1.3.0)</small> \`EXT5\`
         </summary>
 
         [Marketplace](https://marketplace.visualstudio.com/items/EXT5) ● [Changelog](https://marketplace.visualstudio.com/items/EXT5/changelog)
