@@ -27,7 +27,8 @@
     "summary"
   ],
   "activationEvents": [
-    "*"
+    "*",
+    "onCommand:extensionUpdateReporter.openReport"
   ],
   "main": "./out/extension",
   "contributes": {
@@ -41,7 +42,13 @@
           "default": {}
         }
       }
-    }
+    },
+    "commands": [
+      {
+        "command": "extensionUpdateReporter.openReport",
+        "title": "Extension Update Report"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",

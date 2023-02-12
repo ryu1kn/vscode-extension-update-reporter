@@ -1,11 +1,14 @@
-/* eslint-disable @typescript-eslint/no-this-alias */
 /* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/no-this-alias */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {EXTENSION_METADATA, LAST_RECORDED_VERSIONS} from './extension-data';
 import {ObjectMap} from '../../lib/utils/collection';
+import {EXTENSION_ID} from '../../lib/const';
+import {VsCodeLike} from '../../lib/types';
 
 type ConfigUpdateCall = [string, ObjectMap<string>, boolean];
 
-class VsCode {
+class VsCode implements VsCodeLike {
   private readonly lastRecordedVersions: ObjectMap<string>;
   private providedContent?: string;
   private configUpdateCall?: ConfigUpdateCall;
@@ -29,7 +32,7 @@ class VsCode {
   get workspace() {
     return {
       getConfiguration: (key: string) =>
-        key === 'extensionUpdateReporter' && {
+        key === EXTENSION_ID && {
           get: (key: string) => key === 'lastCheckedVersions' && this.lastRecordedVersions,
           update: (...args: any[]) => {
             this.configUpdateCall = args as ConfigUpdateCall;
@@ -58,6 +61,12 @@ class VsCode {
 
   get ViewColumn() {
     return {One: 'ONE'};
+  }
+
+  get commands() {
+    return {
+      registerCommand: (command: string, callback: (...args: any[]) => any, thisArg?: any) => {}
+    };
   }
 }
 

@@ -4,10 +4,11 @@ import Main from './main';
 import FileSystem from './file-system';
 import ContentProvider from './content-provider';
 import MarkdownReportGeneratorFactory from './markdown-report-generator-factory';
+import {VsCodeLike} from './types';
 
 export default class CommandFactory {
   constructor(private readonly fileSystem: FileSystem,
-              private readonly vscode: any) {}
+              private readonly vscode: VsCodeLike) {}
 
   createMain() {
     const extensionStore = new ExtensionStore(new ConfigStore(this.vscode.workspace));
