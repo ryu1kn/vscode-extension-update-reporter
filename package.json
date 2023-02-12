@@ -28,8 +28,7 @@
     "summary"
   ],
   "activationEvents": [
-    "*",
-    "onCommand:extensionUpdateReporter.openReport"
+    "onStartupFinished"
   ],
   "main": "./out/extension",
   "contributes": {

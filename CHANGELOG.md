@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - Improve homepage and add repository links. Fixes [#41](https://github.com/ryu1kn/vscode-extension-update-reporter/issues/41) by @jerone in [PR #42](https://github.com/ryu1kn/vscode-extension-update-reporter/pull/42).
+- Improve extension performance. Fixes [#39](https://github.com/ryu1kn/vscode-extension-update-reporter/issues/39) by @jerone in [PR #48](https://github.com/ryu1kn/vscode-extension-update-reporter/pull/48).
 
 ## [1.2.0] - 2022-11-06
 ### Added
