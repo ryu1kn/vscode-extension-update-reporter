@@ -1,10 +1,33 @@
 import * as vscode from 'vscode';
+import * as GitHost from 'hosted-git-info';
 import {Changelog} from './changelog';
 import {parseVersion, Version} from './version';
 import {Option} from 'fp-ts/lib/Option';
 
 abstract class Extension {
-  constructor(protected readonly raw: vscode.Extension<any>) {}
+  private _gitHost: GitHost | undefined;
+
+  constructor(protected readonly raw: vscode.Extension<any>) {
+    this._gitHost = this.getGitHost();
+  }
+
+  // Copied logic from VSCE.
+  // https://github.com/microsoft/vscode-vsce/blob/df59e0f6d35da9f0e2f6138d82534667a96527a3/src/package.ts#L198
+  private getGitHost(): GitHost | undefined {
+    const packageJson = this.raw.packageJSON;
+    if (packageJson.repository) {
+      let url: string | undefined = undefined;
+      if (typeof packageJson.repository === 'string') {
+        url = packageJson.repository;
+      } else if (typeof packageJson.repository === 'object' && packageJson.repository.url && typeof packageJson.repository.url === 'string') {
+        url = packageJson.repository.url;
+      }
+      if (url){
+        return GitHost.fromUrl(url, { noGitPlus: true });
+      }
+    }
+    return undefined;
+  }
 
   get id() {
     return this.raw.id;
@@ -21,7 +44,20 @@ abstract class Extension {
 
   get homepage(): string | undefined {
     const packageJson = this.raw.packageJSON;
-    return packageJson.homepage;
+    if (packageJson.homepage) {
+      return packageJson.homepage;
+    }
+    if (packageJson.links?.getstarted?.uri){
+      return packageJson.links.getstarted.uri;
+    }
+    if (this._gitHost){
+      return this._gitHost.docs();
+    }
+    return undefined;
+  }
+
+  get repository(): string | undefined {
+    return this._gitHost?.https();
   }
 
   get isVscodeBundled() {
