@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-## Unreleased
+## [1.3.0] - 2023-02-13
 ### Added
 - Add command to show report. Closes [#8](https://github.com/ryu1kn/vscode-extension-update-reporter/issues/8) by @jerone in [PR #38](https://github.com/ryu1kn/vscode-extension-update-reporter/pull/38).
 - Add before and after versions. Closes [#4](https://github.com/ryu1kn/vscode-extension-update-reporter/issues/4) by @jerone in [PR #40](https://github.com/ryu1kn/vscode-extension-update-reporter/pull/40).
