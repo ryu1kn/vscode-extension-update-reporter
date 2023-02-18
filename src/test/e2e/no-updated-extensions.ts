@@ -22,7 +22,7 @@ describe('No updated extensions', () => {
     await extensionStarter.start(createExtensionContext());
     assert.deepStrictEqual(vscode._configUpdateCall, [
       'lastCheckedVersions',
-      { ID_1: '1.0.0', ID_2: '1.0.0', ID_3: '0.12.1' },
+      { ID_1: '1.0.0', ID_2: '1.0.0', ID_3: '0.12.1', ID_4: '2.0.0' },
       true
     ]);
   });
