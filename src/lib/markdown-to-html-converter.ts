@@ -1,8 +1,9 @@
-const md = require('markdown-it')('commonmark');
+const md = require('markdown-it')('commonmark').enable('table');
 const multiline = require('multiline-string')();
 
 export default class MarkdownToHtmlConverter {
   convert(markdownReport: string): string {
+    const htmlReport = md.render(markdownReport);
     return multiline(`
       <html lang="en">
         <head>
@@ -117,7 +118,7 @@ export default class MarkdownToHtmlConverter {
           </style>
         </head>
         <body>
-          ${md.render(markdownReport)}
+          ${htmlReport}
         </body>
       </html>
       `);
